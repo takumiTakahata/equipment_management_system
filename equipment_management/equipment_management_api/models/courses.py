@@ -1,7 +1,5 @@
 from django.db import models
-
-# Create your models here.
-
+# 学科テーブルのマイグレーション
 class Course(models.Model):
     name = models.CharField('学科名', max_length=100)
     course_year = models.IntegerField('学科年')
