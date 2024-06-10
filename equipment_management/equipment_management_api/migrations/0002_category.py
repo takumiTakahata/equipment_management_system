@@ -10,16 +10,16 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.CreateModel(
-            name='Category',
-            fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('name', models.CharField(max_length=255)),
-            ],
-            options={
-                'verbose_name': 'Category',
-                'verbose_name_plural': 'Categories',
-                'db_table': 'categories',
-            },
-        ),
-    ]
+      migrations.CreateModel(
+        name='Category',
+          fields=[
+            ('id', models.AutoField(primary_key=True, serialize=False)),
+            ('name', models.CharField(max_length=50)),
+          ],
+          options={
+            'verbose_name': 'Category',
+            'verbose_name_plural': 'Categories',
+            'db_table': 'categories',
+          },
+      ),
+  ]
