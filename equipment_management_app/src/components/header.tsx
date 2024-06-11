@@ -1,28 +1,37 @@
-import React from "react";
+import "./header.css";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Icon from "@mdi/react";
+import { mdiHistory } from "@mdi/js"; //貸出履歴管理のicon
+import { mdiInboxMultiple } from "@mdi/js"; //棚卸管理のicon
+import { mdiFormatListBulletedSquare } from "@mdi/js"; //備品一覧のicon
+import { mdiHumanMaleBoard } from "@mdi/js"; //教員管理のicon
+import { mdiAccountSchool } from "@mdi/js"; //学生管理のicon
+import { mdiShape } from "@mdi/js"; //カテゴリー管理のicon
+import { mdiLogout } from "@mdi/js";
 
 function header() {
   return (
     <div>
-      <header>
-        <h2>備品管理システム(仮)</h2>
-        <img src="./images/loan_history.png" alt="貸出履歴管理のicon" />
+      <Toolbar className="toolbar">
+        <Typography variant="body1">
+          <div>備品管理システム（仮）</div>
+        </Typography>
+        <Icon path={mdiHistory} size={2.5} />
         <p>貸出履歴管理</p>
-        <img src="./images/equipment_management.png" alt="備品管理のicon" />
+        <Icon path={mdiFormatListBulletedSquare} size={2.5} />
         <p>備品管理</p>
-        <img src="./images/student_management.png" alt="学生管理のicon" />
+        <Icon path={mdiAccountSchool} size={2.5} />
         <p>学生管理</p>
-        <img src="./images/teacher_management.png" alt="教員管理のicon" />
+        <Icon path={mdiHumanMaleBoard} size={2.5} />
         <p>教員管理</p>
-        <img src="./images/inventory.png" alt="棚卸のicon" />
+        <Icon path={mdiInboxMultiple} size={2.5} />
         <p>棚卸</p>
-        <img
-          src="./images/category_management.png"
-          alt="カテゴリー管理のicon"
-        />
+        <Icon path={mdiShape} size={2.5} />
         <p>カテゴリー管理</p>
-        <img src="./images/logout.png" alt="ログアウトのicon" />
+        <Icon path={mdiLogout} size={2.5} />
         <p>ログアウト</p>
-      </header>
+      </Toolbar>
     </div>
   );
 }

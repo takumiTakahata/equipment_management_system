@@ -1,0 +1,22 @@
+/* p {
+  font-family: "Roboto", sans-serif;
+  color: black;
+}*/
+
+.toolbar {
+  background-color: white;
+  border-bottom: 3px solid;
+  border-color: blue;
+  height: 80px;
+}
+/* 
+.typography {
+  flex-grow: 1;
+  font-size: 20rem;
+  font-weight: bold;
+} */
+
+/* .flex {
+  display: flex;
+  flex-direction: column;
+} */
