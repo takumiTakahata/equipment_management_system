@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import FetchLogin from "./login";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -14,9 +15,8 @@ const Login: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Add your login logic here
-    console.log("Email:", email);
-    console.log("Password:", password);
+    // login.tsのhandleLogin関数を呼び出す
+    FetchLogin(email, password);
   };
 
   return (

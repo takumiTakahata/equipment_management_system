@@ -1,4 +1,4 @@
-const handleLogin = async (email: string, password: string) => {
+const fetchLogin = async (email: string, password: string) => {
   try {
     const response = await fetch("https://api.example.com/login", {
       method: "POST",
@@ -21,4 +21,4 @@ const handleLogin = async (email: string, password: string) => {
   }
 };
 
-export default handleLogin;
+export default fetchLogin;
