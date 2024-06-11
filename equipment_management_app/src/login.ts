@@ -3,8 +3,8 @@ const fetchLogin = async (email: string, password: string) => {
     const response = await fetch("https://api.example.com/login", {
       method: "POST",
       body: JSON.stringify({
-        email: "your-email",
-        password: "your-password",
+        email,
+        password,
       }),
       headers: {
         "Content-Type": "application/json",
