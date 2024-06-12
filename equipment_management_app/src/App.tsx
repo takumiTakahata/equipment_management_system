@@ -5,7 +5,7 @@ import Header from "./components/header"; // Headerコンポーネントをイ�
 const App = () => {
   return (
     <>
-      <Header />;
+      <Header />
     </>
   );
 };

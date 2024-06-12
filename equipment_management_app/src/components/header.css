@@ -1,7 +1,6 @@
-/* p {
+p {
   font-family: "Roboto", sans-serif;
-  color: black;
-}*/
+}
 
 .toolbar {
   background-color: white;
@@ -9,14 +8,27 @@
   border-color: blue;
   height: 80px;
 }
-/* 
-.typography {
-  flex-grow: 1;
-  font-size: 20rem;
-  font-weight: bold;
-} */
 
-/* .flex {
+.title {
+  /* flex-grow: 1; */
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.history,
+.equipment_management,
+.student_management,
+.teacher_management {
   display: flex;
   flex-direction: column;
-} */
+}
+
+.icon {
+  width: 56px;
+  height: 56px;
+  margin: auto;
+}
+
+.header_text {
+  margin: 0;
+}
