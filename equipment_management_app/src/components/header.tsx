@@ -1,21 +1,12 @@
 import "./header.css";
 import Toolbar from "@mui/material/Toolbar";
-import BottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import Icon from "@mdi/react";
-import { mdiHistory } from "@mdi/js"; //貸出履歴管理のicon
-import { mdiInboxMultiple } from "@mdi/js"; //棚卸管理のicon
-import { mdiFormatListBulletedSquare } from "@mdi/js"; //備品一覧のicon
-import { mdiHumanMaleBoard } from "@mdi/js"; //教員管理のicon
-import { mdiAccountSchool } from "@mdi/js"; //学生管理のicon
-import { mdiShape } from "@mdi/js"; //カテゴリー管理のicon
-import { mdiLogout } from "@mdi/js";
 
 function header() {
   return (
     <div>
       <Toolbar className="toolbar">
         <p className="title">備品管理システム（仮）</p>
+
         <div className="history">
           {/* 貸出履歴管理icon */}
           <svg
@@ -66,6 +57,44 @@ function header() {
             <path d="M20,17A2,2 0 0,0 22,15V4A2,2 0 0,0 20,2H9.46C9.81,2.61 10,3.3 10,4H20V15H11V17M15,7V9H9V22H7V16H5V22H3V14H1.5V9A2,2 0 0,1 3.5,7H15M8,4A2,2 0 0,1 6,6A2,2 0 0,1 4,4A2,2 0 0,1 6,2A2,2 0 0,1 8,4Z" />
           </svg>
           <p className="header_text">教員管理</p>
+        </div>
+
+        <div className="invetory_management">
+          {/*棚卸管理のicon*/}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            className="icon"
+          >
+            <title>棚卸管理</title>
+            <path d="M19,8V5H5V8H9A3,3 0 0,0 12,11A3,3 0 0,0 15,8H19M19,3A2,2 0 0,1 21,5V12A2,2 0 0,1 19,14H5A2,2 0 0,1 3,12V5A2,2 0 0,1 5,3H19M3,15H9A3,3 0 0,0 12,18A3,3 0 0,0 15,15H21V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V15Z" />
+          </svg>
+          <p className="header_text">棚卸管理</p>
+        </div>
+
+        <div className="category_management">
+          {/*カテゴリー管理のicon*/}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            className="icon"
+          >
+            <title>カテゴリー管理</title>
+            <path d="M11,13.5V21.5H3V13.5H11M12,2L17.5,11H6.5L12,2M17.5,13C20,13 22,15 22,17.5C22,20 20,22 17.5,22C15,22 13,20 13,17.5C13,15 15,13 17.5,13Z" />
+          </svg>
+          <p className="header_text">カテゴリー管理</p>
+        </div>
+
+        <div className="logout">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            className="icon"
+          >
+            <title>logout</title>
+            <path d="M17 7L15.59 8.41L18.17 11H8V13H18.17L15.59 15.58L17 17L22 12M4 5H12V3H4C2.9 3 2 3.9 2 5V19C2 20.1 2.9 21 4 21H12V19H4V5Z" />
+          </svg>
+          <p>ログアウト</p>
         </div>
       </Toolbar>
     </div>

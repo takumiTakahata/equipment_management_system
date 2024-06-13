@@ -18,7 +18,9 @@ p {
 .history,
 .equipment_management,
 .student_management,
-.teacher_management {
+.teacher_management,
+.invetory_management,
+.category_management {
   display: flex;
   flex-direction: column;
 }
@@ -29,6 +31,16 @@ p {
   margin: auto;
 }
 
+.category_icon {
+  width: 56px;
+  height: 56px;
+  margin: 0, 1rem;
+}
+
 .header_text {
   margin: 0;
+}
+
+.logout {
+  display: flex;
 }
