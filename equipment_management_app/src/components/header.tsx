@@ -5,8 +5,7 @@ function header() {
   return (
     <div>
       <Toolbar className="toolbar">
-        <p className="title">備品管理システム（仮）</p>
-
+        <h1 className="title">備品管理システム（仮）</h1>
         <div className="history">
           {/* 貸出履歴管理icon */}
           <svg
@@ -19,7 +18,6 @@ function header() {
           </svg>
           <p className="header_text">貸出履歴管理</p>
         </div>
-
         <div className="equipment_management">
           {/* 備品管理icon */}
           <svg
@@ -32,7 +30,6 @@ function header() {
           </svg>
           <p className="header_text">備品管理</p>
         </div>
-
         <div className="student_management">
           {/* 学生管理icon */}
           <svg
@@ -45,7 +42,6 @@ function header() {
           </svg>
           <p className="header_text">学生管理</p>
         </div>
-
         <div className="teacher_management">
           {/* 教員管理のicon */}
           <svg
@@ -58,7 +54,6 @@ function header() {
           </svg>
           <p className="header_text">教員管理</p>
         </div>
-
         <div className="invetory_management">
           {/*棚卸管理のicon*/}
           <svg
@@ -71,7 +66,6 @@ function header() {
           </svg>
           <p className="header_text">棚卸管理</p>
         </div>
-
         <div className="category_management">
           {/*カテゴリー管理のicon*/}
           <svg
@@ -84,7 +78,6 @@ function header() {
           </svg>
           <p className="header_text">カテゴリー管理</p>
         </div>
-
         <div className="logout">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +87,7 @@ function header() {
             <title>logout</title>
             <path d="M17 7L15.59 8.41L18.17 11H8V13H18.17L15.59 15.58L17 17L22 12M4 5H12V3H4C2.9 3 2 3.9 2 5V19C2 20.1 2.9 21 4 21H12V19H4V5Z" />
           </svg>
-          <p>ログアウト</p>
+          <p className="logout_text">ログアウト</p>
         </div>
       </Toolbar>
     </div>

@@ -1,18 +1,18 @@
+h1,
 p {
   font-family: "Roboto", sans-serif;
 }
 
 .toolbar {
-  background-color: white;
   border-bottom: 3px solid;
-  border-color: blue;
-  height: 80px;
+  border-color: #627cff;
+  height: 64px;
+  justify-content: space-between;
 }
 
 .title {
-  /* flex-grow: 1; */
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 28px;
+  font-weight: bolder;
 }
 
 .history,
@@ -26,19 +26,14 @@ p {
 }
 
 .icon {
-  width: 56px;
-  height: 56px;
+  width: 40px;
+  height: 40px;
   margin: auto;
-}
-
-.category_icon {
-  width: 56px;
-  height: 56px;
-  margin: 0, 1rem;
 }
 
 .header_text {
   margin: 0;
+  font-size: 16px;
 }
 
 .logout {
