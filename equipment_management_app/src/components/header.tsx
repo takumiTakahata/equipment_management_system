@@ -89,6 +89,20 @@ function header() {
           </svg>
           <p className="logout_text">ログアウト</p>
         </div>
+
+        {/* <div className="hamburger">
+          <div className="hamburger_icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div> */}
+        <div className="hamburger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <title>view-headline</title>
+            <path d="M4,5V7H21V5M4,11H21V9H4M4,19H21V17H4M4,15H21V13H4V15Z" />
+          </svg>
+        </div>
       </Toolbar>
     </div>
   );

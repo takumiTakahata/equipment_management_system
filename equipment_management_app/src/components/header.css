@@ -39,3 +39,43 @@ p {
 .logout {
   display: flex;
 }
+
+@media (max-width: 1025px) {
+  .history,
+  .equipment_management,
+  .student_management,
+  .teacher_management,
+  .invetory_management,
+  .category_management,
+  .logout {
+    display: none;
+  }
+
+  .hamburger {
+    /* background-color: transparent;
+    position: relative;
+    cursor: pointer; */
+    height: 60px;
+    width: 60px;
+  }
+
+  .hamburger_icon span {
+    position: absolute; /*親要素である#hamburgerを基準に位置を指定*/
+    left: 15px; /*#hamburger内の左がら15pxに横線を配置（幅が60pxなので右からも15px）*/
+    width: 30px; /*横線の幅が30px*/
+    height: 4px; /*横線の高さが4px*/
+    background-color: black; /*横線を白色*/
+    border-radius: 8px; /*横線の両端の角に丸みを持たせる*/
+    transition: ease 0.75s; /*変化の時間（easeは初期値）*/
+  }
+
+  .hamburger_icon span:nth-of-type(1) {
+    top: 16px;
+  }
+  .hamburger_icon span:nth-of-type(2) {
+    top: 28px;
+  }
+  .hamburger_icon span:nth-of-type(3) {
+    bottom: 16px;
+  }
+}
