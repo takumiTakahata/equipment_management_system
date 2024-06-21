@@ -1,10 +1,10 @@
-import "./header.css";
 import * as React from "react";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Toolbar from "@mui/material/Toolbar";
+import "./header.css";
 import {
   HistoryIcon,
   EquipmentIcon,
@@ -26,13 +26,12 @@ function Header() {
     "ログアウト",
   ];
 
-  const ITEM_HEIGHT = 48;
-
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -70,6 +69,7 @@ function Header() {
           <LogoutIcon /> {/* ログアウトのicon */}
           <p className="header_text">ログアウト</p>
         </div>
+
         <IconButton
           aria-label="more"
           id="long-button"
@@ -78,7 +78,13 @@ function Header() {
           aria-haspopup="true"
           onClick={handleClick}
         >
-          <MoreVertIcon />
+          <div className="hamburger">
+            <div className="hamburger_icon">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
         </IconButton>
         <Menu
           id="long-menu"
@@ -89,21 +95,18 @@ function Header() {
           open={open}
           onClose={handleClose}
         >
-          {options.map((option) => (
-            <MenuItem
-              key={option}
-              selected={option === "Pyxis"}
-              onClick={handleClose}
-            >
-              {option}
-            </MenuItem>
-          ))}
+          <div className="menu_item">
+            {options.map((option) => (
+              <MenuItem
+                key={option}
+                selected={option === "Pyxis"}
+                onClick={handleClose}
+              >
+                <div className="menu_text">{option}</div>
+              </MenuItem>
+            ))}
+          </div>
         </Menu>
-        <div className="hamburger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
       </Toolbar>
     </div>
   );
