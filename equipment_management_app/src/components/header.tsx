@@ -1,4 +1,9 @@
 import "./header.css";
+import * as React from "react";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Toolbar from "@mui/material/Toolbar";
 import {
   HistoryIcon,
@@ -11,17 +16,25 @@ import {
 } from "../images/icon";
 
 function Header() {
-  const hamburger_menu = () => {
-    const hamburger = document.getElementsByClassName("hamburger");
-    const hamburger_icons = document.getElementsByClassName("hamburger_icon");
-    const navs = document.getElementsByClassName("nav");
-    for (let i = 0; i < hamburger_icons.length; i++) {
-      hamburger_icons[i].classList.toggle("close");
-    }
+  const options = [
+    "貸出履歴管理",
+    "備品管理",
+    "学生管理",
+    "教員管理",
+    "棚卸管理",
+    "カテゴリー管理",
+    "ログアウト",
+  ];
 
-    for (let i = 0; i < navs.length; i++) {
-      hamburger_icons[i].classList.toggle("close");
-    }
+  const ITEM_HEIGHT = 48;
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   return (
@@ -57,26 +70,40 @@ function Header() {
           <LogoutIcon /> {/* ログアウトのicon */}
           <p className="header_text">ログアウト</p>
         </div>
-
-        <div className="hamburger" onClick={hamburger_menu}>
-          {/*ハンバーガーのicon */}
-          <div className="hamburger_icon">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+        <IconButton
+          aria-label="more"
+          id="long-button"
+          aria-controls={open ? "long-menu" : undefined}
+          aria-expanded={open ? "true" : undefined}
+          aria-haspopup="true"
+          onClick={handleClick}
+        >
+          <MoreVertIcon />
+        </IconButton>
+        <Menu
+          id="long-menu"
+          MenuListProps={{
+            "aria-labelledby": "long-button",
+          }}
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+        >
+          {options.map((option) => (
+            <MenuItem
+              key={option}
+              selected={option === "Pyxis"}
+              onClick={handleClose}
+            >
+              {option}
+            </MenuItem>
+          ))}
+        </Menu>
+        <div className="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
-        <nav className="nav">
-          <ul>
-            <li className="nav_item">貸出履歴管理</li>
-            <li className="nav_item">備品管理</li>
-            <li className="nav_item">学生管理</li>
-            <li className="nav_item">教員管理</li>
-            <li className="nav_item">棚卸管理</li>
-            <li className="nav_item">カテゴリー管理</li>
-            <li className="nav_item">ログアウト</li>
-          </ul>
-        </nav>
       </Toolbar>
     </div>
   );
