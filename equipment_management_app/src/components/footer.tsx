@@ -26,7 +26,18 @@ export default function Footer() {
             onChange={(event, newValue) => {
               setValue(newValue); //ナビが選択されたときに呼び出す関数を示す
             }}
-          ></BottomNavigation>
+          >
+            <BottomNavigationAction
+              className="borrow-button"
+              label="備品を借りる" //テキスト
+              icon={<Borrow path={mdiCartPlus} />} //アイコン
+            />
+            <BottomNavigationAction
+              className="list-button"
+              label="備品一覧"
+              icon={<List path={mdiFormatListBulletedSquare} />}
+            />
+          </BottomNavigation>
         </Box>
       </footer>
     </div>
