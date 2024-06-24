@@ -40,7 +40,12 @@ export default function Footer() {
             <BottomNavigationAction
               className="borrowing-button"
               label="借用品一覧"
-              icon={<List path={mdiPlaylistPlus} />}
+              icon={<Borrowing path={mdiPlaylistPlus} />}
+            />
+            <BottomNavigationAction
+              className="logout-button"
+              label="ログアウト"
+              icon={<Logout path={mdiLogout} />}
             />
           </BottomNavigation>
         </Box>
