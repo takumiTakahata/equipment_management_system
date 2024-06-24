@@ -37,6 +37,11 @@ export default function Footer() {
               label="備品一覧"
               icon={<List path={mdiFormatListBulletedSquare} />}
             />
+            <BottomNavigationAction
+              className="borrowing-button"
+              label="借用品一覧"
+              icon={<List path={mdiPlaylistPlus} />}
+            />
           </BottomNavigation>
         </Box>
       </footer>
