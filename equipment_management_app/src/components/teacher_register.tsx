@@ -10,6 +10,19 @@ function TeacherRegister() {
     <div>
       <Header />
       <h1>教員登録</h1>
+      <form>
+        <p>名前</p>
+        <TextField />
+        <p>メールアドレス</p>
+        <TextField />
+        <p>パスワード</p>
+        <TextField />
+        <p>パスワード（確認）</p>
+        <TextField />
+        <Button variant="contained" href="#">
+          登録
+        </Button>
+      </form>
     </div>
   );
 }
