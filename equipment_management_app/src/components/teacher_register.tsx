@@ -3,18 +3,34 @@ import TextField from "@mui/material/TextField";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { Button } from "@mui/material";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import IconButton from "@mui/material/IconButton";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import InputAdornment from "@mui/material/InputAdornment";
 import Header from "./header";
-import { log } from "console";
 
 interface FormInputs {
   name_error: string;
   mail_error: string;
+  password_error: string;
+  c_password_error: string; //確認パスワードのエラーメッセージ
 }
 
 function TeacherRegister() {
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
+
   const {
     register,
     handleSubmit,
+
     formState: { errors },
   } = useForm<FormInputs>();
 
@@ -34,9 +50,33 @@ function TeacherRegister() {
         />
         <ErrorMessage errors={errors} name="name_error" as="p" />
         <p>メールアドレス</p>
-        <TextField />
+        <TextField
+          {...register("mail_error", {
+            required: "メールアドレスを入力してください",
+            pattern: {
+              value: /[a-zA-Z0-9.]@morijyobi.ac.jp$/,
+              message: "盛ジョビのメールアドレスを入力してください",
+            },
+          })}
+        />
+        <ErrorMessage errors={errors} name="mail_error" as="p" />
         <p>パスワード</p>
-        <TextField />
+        <OutlinedInput
+          id="outlined-adornment-password"
+          type={showPassword ? "text" : "password"}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          }
+        />
         <p>パスワード（確認）</p>
         <TextField />
         <Button type="submit">登録</Button>
