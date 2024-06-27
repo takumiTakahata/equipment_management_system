@@ -11,9 +11,9 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Header from "./header";
 
 interface FormInputs {
-  name_error: string;
-  mail_error: string;
-  password_error: string;
+  name_error: string; //名前のエラーメッセージ
+  mail_error: string; //メールのエラーメッセージ
+  password_error: string; //パスワードのエラーメッセージ
   c_password_error: string; //確認用パスワードのエラーメッセージ
 }
 
@@ -64,13 +64,17 @@ function TeacherRegister() {
           {...register("mail_error", {
             required: "メールアドレスを入力してください",
             pattern: {
-              value: /[a-zA-Z0-9.]@morijyobi.ac.jp$/,
+              value: /^[a-zA-Z0-9.]+@morijyobi\.ac\.jp$/,
               message: "盛ジョビのメールアドレスを入力してください",
             },
           })}
         />
         <ErrorMessage errors={errors} name="mail_error" as="p" />
-        <p>パスワード</p>
+
+        <p>
+          パスワード（8文字以上16文字以内 半角英数字
+          大文字英字を入力してください）
+        </p>
         <OutlinedInput
           id="outlined-adornment-password"
           type={showPassword ? "text" : "password"}
@@ -86,7 +90,15 @@ function TeacherRegister() {
               </IconButton>
             </InputAdornment>
           }
+          {...register("password_error", {
+            required: "パスワードを入力してください",
+            pattern: {
+              value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z0-9]{8,16}$/,
+              message: "パスワードの形式が間違っています",
+            },
+          })}
         />
+        <ErrorMessage errors={errors} name="password_error" as="p" />
         <p>パスワード（確認）</p>
         <OutlinedInput
           id="outlined-adornment-password"
