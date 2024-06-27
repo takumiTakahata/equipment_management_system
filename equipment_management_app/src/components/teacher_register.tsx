@@ -9,6 +9,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import Header from "./header";
+import { getValue } from "@testing-library/user-event/dist/utils";
 
 interface FormInputs {
   name_error: string; //名前のエラーメッセージ
@@ -99,9 +100,10 @@ function TeacherRegister() {
           })}
         />
         <ErrorMessage errors={errors} name="password_error" as="p" />
+
         <p>パスワード（確認）</p>
         <OutlinedInput
-          id="outlined-adornment-password"
+          id="outlined-adornment-password_c"
           type={showPassword_C ? "text" : "password"}
           endAdornment={
             <InputAdornment position="end">
@@ -115,6 +117,12 @@ function TeacherRegister() {
               </IconButton>
             </InputAdornment>
           }
+          {...register("c_password_error", {
+            required: "パスワード（確認用）を入力してください",
+            validate: (value) => {
+              return value === getValue("password");
+            },
+          })}
         />
         <Button type="submit">登録</Button>
       </form>
