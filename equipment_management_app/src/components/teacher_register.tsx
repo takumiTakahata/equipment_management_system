@@ -12,7 +12,7 @@ import Header from "./header";
 import { getValue } from "@testing-library/user-event/dist/utils";
 
 interface FormInputs {
-  name_error: string; //名前のエラーメッセージ
+  name: string;
   mail_error: string; //メールのエラーメッセージ
   password_error: string; //パスワードのエラーメッセージ
   c_password_error: string; //確認用パスワードのエラーメッセージ
@@ -55,11 +55,11 @@ function TeacherRegister() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <p>名前</p>
         <TextField
-          {...register("name_error", {
+          {...register("name", {
             required: "名前を入力してください",
           })}
         />
-        <ErrorMessage errors={errors} name="name_error" as="p" />
+        <ErrorMessage errors={errors} name="name" as="p" />
         <p>メールアドレス</p>
         <TextField
           {...register("mail_error", {
