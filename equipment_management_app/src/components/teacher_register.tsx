@@ -41,13 +41,15 @@ function TeacherRegister() {
   const {
     register,
     handleSubmit,
-
+    watch,
     formState: { errors },
   } = useForm<FormInputs>();
 
   const onSubmit = (data: FormInputs) => {
     console.log(data);
   };
+
+  const password = watch("password");
   return (
     <div>
       <Header />
@@ -120,10 +122,11 @@ function TeacherRegister() {
           {...register("c_password", {
             required: "パスワード（確認用）を入力してください",
             validate: (value) => {
-              return value === getValue("password");
+              return value === password || "パスワードが間違がっています";
             },
           })}
         />
+        <ErrorMessage errors={errors} name="c_password" as="p" />
         <Button type="submit">登録</Button>
       </form>
     </div>
