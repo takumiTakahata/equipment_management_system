@@ -14,7 +14,7 @@ import { getValue } from "@testing-library/user-event/dist/utils";
 interface FormInputs {
   name: string;
   mail: string;
-  password_error: string; //パスワードのエラーメッセージ
+  password: string;
   c_password_error: string; //確認用パスワードのエラーメッセージ
 }
 
@@ -91,7 +91,7 @@ function TeacherRegister() {
               </IconButton>
             </InputAdornment>
           }
-          {...register("password_error", {
+          {...register("password", {
             required: "パスワードを入力してください",
             pattern: {
               value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z0-9]{8,16}$/,
@@ -99,7 +99,7 @@ function TeacherRegister() {
             },
           })}
         />
-        <ErrorMessage errors={errors} name="password_error" as="p" />
+        <ErrorMessage errors={errors} name="password" as="p" />
 
         <p>パスワード（確認）</p>
         <OutlinedInput
