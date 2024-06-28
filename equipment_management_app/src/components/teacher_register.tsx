@@ -9,13 +9,13 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import Header from "./header";
-import { getValue } from "@testing-library/user-event/dist/utils";
+import "./teacher_register.css";
 
 interface FormInputs {
   name: string;
   mail: string;
   password: string;
-  c_password: string;
+  check_password: string; //パスワード（確認用）
 }
 
 function TeacherRegister() {
@@ -51,18 +51,23 @@ function TeacherRegister() {
 
   const password = watch("password");
   return (
-    <div>
+    <div id="teacher_register">
       <Header />
-      <h1>教員登録</h1>
+      <h1 className="title">教員登録</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <p>名前</p>
+        <p className="name_title">名前</p>
+        <p className="required_txt">必須</p>
         <TextField
           {...register("name", {
             required: "名前を入力してください",
           })}
         />
-        <ErrorMessage errors={errors} name="name" as="p" />
-        <p>メールアドレス</p>
+        <ErrorMessage errors={errors} name="name" as="p" className="text_red" />
+
+        <div className="">
+          <p className="mail_title">メールアドレス</p>
+          <p className="required_txt">必須</p>
+        </div>
         <TextField
           {...register("mail", {
             required: "メールアドレスを入力してください",
@@ -72,12 +77,15 @@ function TeacherRegister() {
             },
           })}
         />
-        <ErrorMessage errors={errors} name="mail" as="p" />
+        <ErrorMessage
+          errors={errors}
+          name="mail"
+          as="p"
+          className="error_message"
+        />
 
-        <p>
-          パスワード（8文字以上16文字以内 半角英数字
-          大文字英字を入力してください）
-        </p>
+        <p>パスワード（8文字以上 半角英数字を入力してください）</p>
+        <p className="required_txt">必須</p>
         <OutlinedInput
           id="outlined-adornment-password"
           type={showPassword ? "text" : "password"}
@@ -96,14 +104,21 @@ function TeacherRegister() {
           {...register("password", {
             required: "パスワードを入力してください",
             pattern: {
-              value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z0-9]{8,16}$/,
+              value: /^(?=.*[A-Z]|[a-z])(?=.*\d)[A-Za-z0-9]{8}$/, // 入力規則 8文字以上
               message: "パスワードの形式が間違っています",
             },
           })}
+          className="pass_title"
         />
-        <ErrorMessage errors={errors} name="password" as="p" />
+        <ErrorMessage
+          errors={errors}
+          name="password"
+          as="p"
+          className="error_message"
+        />
 
         <p>パスワード（確認）</p>
+        <p className="required_txt">必須</p>
         <OutlinedInput
           id="outlined-adornment-password_c"
           type={showPassword_C ? "text" : "password"}
@@ -119,14 +134,20 @@ function TeacherRegister() {
               </IconButton>
             </InputAdornment>
           }
-          {...register("c_password", {
+          {...register("check_password", {
             required: "パスワード（確認用）を入力してください",
             validate: (value) => {
               return value === password || "パスワードが間違がっています";
             },
           })}
+          className="passch_title"
         />
-        <ErrorMessage errors={errors} name="c_password" as="p" />
+        <ErrorMessage
+          errors={errors}
+          name="check_password"
+          as="p"
+          className="error_message"
+        />
         <Button type="submit">登録</Button>
       </form>
     </div>

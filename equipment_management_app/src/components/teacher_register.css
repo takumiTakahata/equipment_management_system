@@ -1,0 +1,25 @@
+@charset "UTF-8";
+#teacher_register p,
+h1 {
+  font-family: "Roboto", sans-serif;
+}
+
+.title {
+  font-size: 28px;
+}
+
+.required_txt {
+  color: #ff0000;
+  font-size: 14px;
+}
+
+.error_message {
+  color: #ff0000;
+}
+
+.name_title,
+.mail_title,
+.pass_title,
+.passch_title {
+  font-size: 16px;
+}
