@@ -13,7 +13,7 @@ import { getValue } from "@testing-library/user-event/dist/utils";
 
 interface FormInputs {
   name: string;
-  mail_error: string; //メールのエラーメッセージ
+  mail: string;
   password_error: string; //パスワードのエラーメッセージ
   c_password_error: string; //確認用パスワードのエラーメッセージ
 }
@@ -62,7 +62,7 @@ function TeacherRegister() {
         <ErrorMessage errors={errors} name="name" as="p" />
         <p>メールアドレス</p>
         <TextField
-          {...register("mail_error", {
+          {...register("mail", {
             required: "メールアドレスを入力してください",
             pattern: {
               value: /^[a-zA-Z0-9.]+@morijyobi\.ac\.jp$/,
@@ -70,7 +70,7 @@ function TeacherRegister() {
             },
           })}
         />
-        <ErrorMessage errors={errors} name="mail_error" as="p" />
+        <ErrorMessage errors={errors} name="mail" as="p" />
 
         <p>
           パスワード（8文字以上16文字以内 半角英数字
