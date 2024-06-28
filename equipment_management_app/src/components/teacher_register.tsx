@@ -15,7 +15,7 @@ interface FormInputs {
   name: string;
   mail: string;
   password: string;
-  c_password_error: string; //確認用パスワードのエラーメッセージ
+  c_password: string;
 }
 
 function TeacherRegister() {
@@ -117,7 +117,7 @@ function TeacherRegister() {
               </IconButton>
             </InputAdornment>
           }
-          {...register("c_password_error", {
+          {...register("c_password", {
             required: "パスワード（確認用）を入力してください",
             validate: (value) => {
               return value === getValue("password");
