@@ -55,18 +55,25 @@ function TeacherRegister() {
       <Header />
       <h1 className="title">教員登録</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <p className="name_title">名前</p>
-        <p className="required_txt">必須</p>
+        <div className="name_container">
+          <p className="name_title">名前</p>
+          <p className="required_txt">※必須</p>
+        </div>
         <TextField
           {...register("name", {
             required: "名前を入力してください",
           })}
         />
-        <ErrorMessage errors={errors} name="name" as="p" className="text_red" />
+        <ErrorMessage
+          errors={errors}
+          name="name"
+          as="p"
+          className="error_message"
+        />
 
-        <div className="">
+        <div className="eamil_container">
           <p className="mail_title">メールアドレス</p>
-          <p className="required_txt">必須</p>
+          <p className="required_txt">※必須</p>
         </div>
         <TextField
           {...register("mail", {
@@ -84,8 +91,10 @@ function TeacherRegister() {
           className="error_message"
         />
 
-        <p>パスワード（8文字以上 半角英数字を入力してください）</p>
-        <p className="required_txt">必須</p>
+        <div className="pass_container">
+          <p>パスワード（8文字以上 半角英数字）</p>
+          <p className="required_txt">※必須</p>
+        </div>
         <OutlinedInput
           id="outlined-adornment-password"
           type={showPassword ? "text" : "password"}
@@ -117,8 +126,10 @@ function TeacherRegister() {
           className="error_message"
         />
 
-        <p>パスワード（確認）</p>
-        <p className="required_txt">必須</p>
+        <div className="passch_container">
+          <p>パスワード（確認）</p>
+          <p className="required_txt">※必須</p>
+        </div>
         <OutlinedInput
           id="outlined-adornment-password_c"
           type={showPassword_C ? "text" : "password"}

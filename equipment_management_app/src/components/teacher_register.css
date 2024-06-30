@@ -10,7 +10,8 @@ h1 {
 
 .required_txt {
   color: #ff0000;
-  font-size: 14px;
+  font-size: 16px;
+  margin-left: 1rem;
 }
 
 .error_message {
@@ -22,4 +23,11 @@ h1 {
 .pass_title,
 .passch_title {
   font-size: 16px;
+}
+
+.name_container,
+.eamil_container,
+.pass_container,
+.passch_container {
+  display: flex;
 }
