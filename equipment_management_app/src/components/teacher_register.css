@@ -23,11 +23,20 @@ h1 {
 .pass_title,
 .passch_title {
   font-size: 16px;
+  /* margin: 0 auto; */
 }
 
 .name_container,
 .eamil_container,
 .pass_container,
 .passch_container {
+  display: flex;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.flex {
   display: flex;
 }
