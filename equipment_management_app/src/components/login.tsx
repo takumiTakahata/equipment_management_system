@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import FetchLogin from "./login";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -18,6 +17,31 @@ const Login: React.FC = () => {
     // login.tsのhandleLogin関数を呼び出す
     FetchLogin(email, password);
   };
+
+  // fetchApi関数を定義します。emailとpasswordを引数として受け取ります。
+  async function FetchLogin(email: string, password: string): Promise<void> {
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/login?email=${email}&password=${password}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
+
+      // レスポンスのJSONを待ちます。
+      const data = await response.json();
+
+      // レスポンスデータをコンソールに出力します。
+      console.log(data);
+    } catch (error) {
+      // エラーが発生した場合、コンソールにエラーを出力します。
+      console.error("Login error:", error);
+    }
+  }
 
   return (
     <div>
