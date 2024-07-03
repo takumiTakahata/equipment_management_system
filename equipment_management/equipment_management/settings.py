@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'rest_framework',
 ]
 AUTH_USER_MODEL = 'equipment_management_api.User'
 
