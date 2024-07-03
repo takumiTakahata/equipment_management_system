@@ -98,7 +98,7 @@ function TeacherRegister() {
         <div className="flex">
           <div className="column">
             <div className="pass_container">
-              <p>パスワード（8文字以上 半角英数字）</p>
+              <p className="pass_title">パスワード（8文字以上 半角英数字）</p>
               <p className="required_txt">※必須</p>
             </div>
             <OutlinedInput
@@ -123,7 +123,6 @@ function TeacherRegister() {
                   message: "パスワードの形式が間違っています",
                 },
               })}
-              className="pass_title"
             />
             <ErrorMessage
               errors={errors}
@@ -135,7 +134,7 @@ function TeacherRegister() {
 
           <div className="column">
             <div className="passch_container">
-              <p>パスワード（確認）</p>
+              <p className="passch_title">パスワード（確認）</p>
               <p className="required_txt">※必須</p>
             </div>
             <OutlinedInput
@@ -159,7 +158,6 @@ function TeacherRegister() {
                   return value === password || "パスワードが間違がっています";
                 },
               })}
-              className="passch_title"
             />
             <ErrorMessage
               errors={errors}
