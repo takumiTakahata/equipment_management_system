@@ -12,8 +12,8 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-@api_view(['GET'])
+@api_view(['POST'])
 def login_view(request):
-    email = request.GET.get('email')
-    password = request.GET.get('password')
+    email = request.data.get('email')
+    password = request.data.get('password')
     return Response({'email': email, 'password': password})

@@ -14,31 +14,24 @@ const Login: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // login.tsのhandleLogin関数を呼び出す
     FetchLogin(email, password);
   };
 
-  // fetchApi関数を定義します。emailとpasswordを引数として受け取ります。
   async function FetchLogin(email: string, password: string): Promise<void> {
     try {
-      const response = await fetch(
-        `http://127.0.0.1:8000/api/login?email=${email}&password=${password}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      );
+      const response = await fetch(`http://127.0.0.1:8000/api/login/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-      // レスポンスのJSONを待ちます。
       const data = await response.json();
-
-      // レスポンスデータをコンソールに出力します。
       console.log(data);
+      setEmail(data.email);
+      setPassword(data.password);
     } catch (error) {
-      // エラーが発生した場合、コンソールにエラーを出力します。
       console.error("Login error:", error);
     }
   }
@@ -67,6 +60,7 @@ const Login: React.FC = () => {
         </div>
         <button type="submit">Login</button>
       </form>
+      <p>{email}</p>
     </div>
   );
 };
