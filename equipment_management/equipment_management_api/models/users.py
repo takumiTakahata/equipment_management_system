@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from .courses import Course
 
 class User(AbstractUser):
-  course_id = models.ForeignKey("Course",on_delete=models.CASCADE)
+  course = models.ForeignKey("Course",on_delete=models.CASCADE)
   school_year = models.IntegerField('学年',null=True)
   email = models.EmailField('メールアドレス', unique=True)
   admin_flag = models.BooleanField('管理者フラグ', db_default=False)

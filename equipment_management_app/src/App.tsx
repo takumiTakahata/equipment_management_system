@@ -1,13 +1,15 @@
 import React from "react";
-import "./App.css";
+
+import TeacherRegister from "./components/teacher_register";
 import Login from "./components/login";
 
-function App() {
+const App = () => {
   return (
     <>
+      <TeacherRegister />
       <Login />
     </>
   );
-}
+};
 
 export default App;
