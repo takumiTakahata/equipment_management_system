@@ -6,11 +6,13 @@ h1 {
 
 .title {
   font-size: 28px;
+  margin: 0;
 }
 
 .required_txt {
   color: #ff0000;
   font-size: 16px;
+  margin: 0;
 }
 
 .error_message {
@@ -22,6 +24,7 @@ h1 {
 .pass_title,
 .passch_title {
   font-size: 16px;
+  margin: 0;
 }
 
 .name_container,
@@ -33,8 +36,4 @@ h1 {
 
 .column {
   flex-direction: column;
-}
-
-.flex {
-  display: flex;
 }
