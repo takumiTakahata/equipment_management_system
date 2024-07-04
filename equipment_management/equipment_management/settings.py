@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'rest_framework',
+    'corsheaders',
 ]
 AUTH_USER_MODEL = 'equipment_management_api.User'
 
@@ -56,7 +57,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+# すべてのオリジンを許可する場合
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'equipment_management.urls'
 
