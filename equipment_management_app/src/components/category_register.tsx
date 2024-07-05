@@ -14,6 +14,8 @@ function Category_register() {
         body: JSON.stringify({ categoryName }),
       });
 
+      const jma_json = await response.json();
+
       if (response.ok) {
         // Handle success
         console.log("Category registered successfully");
