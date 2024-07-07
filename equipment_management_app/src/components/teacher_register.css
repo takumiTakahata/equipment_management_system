@@ -4,9 +4,8 @@ h1 {
   font-family: "Roboto", sans-serif;
 }
 
-.title {
+.page_title {
   font-size: 28px;
-  margin: 0;
 }
 
 .required_txt {
@@ -32,8 +31,17 @@ h1 {
 .pass_container,
 .passch_container {
   display: flex;
+  justify-content: center;
 }
 
-.column {
-  flex-direction: column;
+.center {
+  text-align: center;
+}
+
+.name_input,
+.mail_input,
+.pass_input,
+.passch_input {
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
