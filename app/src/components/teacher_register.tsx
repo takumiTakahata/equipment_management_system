@@ -20,19 +20,8 @@ interface FormInputs {
 
 function TeacherRegister() {
   const [showPassword, setShowPassword] = React.useState(false);
-  //確認用パスワード
-  const [showPassword_C, setShowPassword_C] = React.useState(false);
-
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
-
-  //確認用パスワード
-  const handleClickShowPassword_C = () => setShowPassword_C((show) => !show);
-  const handleMouseDownPassword_C = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.preventDefault();
@@ -138,19 +127,6 @@ function TeacherRegister() {
           <div className="passch_input">
             <OutlinedInput
               id="outlined-adornment-password_c"
-              type={showPassword_C ? "text" : "password"}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword_C}
-                    onMouseDown={handleMouseDownPassword_C}
-                    edge="end"
-                  >
-                    {showPassword_C ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              }
               {...register("check_password", {
                 required: "パスワード（確認用）を入力してください",
                 validate: (value) => {

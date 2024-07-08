@@ -7,6 +7,7 @@ h1 {
 .page_title {
   font-size: 28px;
   margin: 0;
+  margin-top: 1%;
 }
 
 .required_txt {
@@ -43,6 +44,6 @@ h1 {
 .mail_input,
 .pass_input,
 .passch_input {
-  margin-top: 1%;
+  margin-top: 0.5%;
   margin-bottom: 1%;
 }
