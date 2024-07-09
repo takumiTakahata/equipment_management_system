@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth import get_user_model
 from rest_framework import permissions, viewsets
-from ..serializers.login_serializer import UserSerializer
+from ..serializers.login_serializer import LoginSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -9,7 +9,7 @@ User = get_user_model()  # カスタムユーザーモデルを取得
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer
+    serializer_class = LoginSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 @api_view(['POST'])
