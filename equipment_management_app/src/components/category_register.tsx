@@ -1,17 +1,16 @@
 function Category_register() {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const categoryName = (
-      document.getElementById("category_name") as HTMLInputElement
-    ).value;
+    const name = (document.getElementById("category_name") as HTMLInputElement)
+      .value;
 
     try {
-      const response = await fetch("/api/categories", {
+      const response = await fetch("http://127.0.0.1:8000/api/category/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ categoryName }),
+        body: JSON.stringify({ name }),
       });
 
       const data = await response.json();
