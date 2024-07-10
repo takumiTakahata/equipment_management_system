@@ -9,6 +9,8 @@ import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
 import Header from "./header";
 import "./teacher_register.css";
 
@@ -101,40 +103,44 @@ function TeacherRegister() {
             )}
           </div>
 
-          <div className="pass_container">
-            <p className="pass_title">パスワード（8文字以上 半角英数字）</p>
-            <p className="required_txt">※必須</p>
-          </div>
           <div className="pass_input">
-            <OutlinedInput
-              id="outlined-adornment-password"
-              type={showPassword ? "text" : "password"}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              {...register("password", {
-                required: "パスワードを入力してください",
-                pattern: {
-                  value: /^(?=.*[A-Z]|[a-z])(?=.*\d)[A-Za-z0-9]{8,}$/, // 入力規則 8文字以上
-                  message: "パスワードの形式が間違っています",
-                },
-              })}
-            />
-            <ErrorMessage
-              errors={errors}
-              name="password"
-              as="p"
-              className="error_message"
-            />
+            <FormControl variant="outlined">
+              <InputLabel>パスワード</InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                label="パスワード"
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                {...register("password", {
+                  required: "パスワードを入力してください",
+                  pattern: {
+                    value: /^(?=.*[A-Z]|[a-z])(?=.*\d)[A-Za-z0-9]{8,}$/, // 入力規則 8文字以上
+                    message: "パスワードの形式が間違っています",
+                  },
+                })}
+              />
+              {errorFlg ? (
+                <ErrorMessage
+                  errors={errors}
+                  name="password"
+                  as="p"
+                  className="error_message"
+                />
+              ) : (
+                <p className="required_txt">※必須（8文字以上 半角英数字）</p>
+              )}
+            </FormControl>
           </div>
 
           <div className="passch_container">
