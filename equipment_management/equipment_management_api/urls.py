@@ -9,5 +9,5 @@ router = DefaultRouter()
 urlpatterns = [
     path('', include(router.urls)),
     path('login/', login_view),
-    path('/category', category_register_view),
+    path('category/', category_register_view),
 ]
