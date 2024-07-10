@@ -76,12 +76,11 @@ function TeacherRegister() {
               <p className="required_txt">※必須</p>
             )}
           </div>
-          <div className="eamil_container">
-            <p className="mail_title">メールアドレス</p>
-            <p className="required_txt">※必須</p>
-          </div>
+
           <div className="mail_input">
             <TextField
+              label="メールアドレス"
+              variant="outlined"
               {...register("mail", {
                 required: "メールアドレスを入力してください",
                 pattern: {
@@ -90,12 +89,16 @@ function TeacherRegister() {
                 },
               })}
             />
-            <ErrorMessage
-              errors={errors}
-              name="mail"
-              as="p"
-              className="error_message"
-            />
+            {errorFlg ? (
+              <ErrorMessage
+                errors={errors}
+                name="mail"
+                as="p"
+                className="error_message"
+              />
+            ) : (
+              <p className="required_txt">※必須</p>
+            )}
           </div>
 
           <div className="pass_container">
