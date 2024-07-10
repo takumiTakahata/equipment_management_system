@@ -143,27 +143,31 @@ function TeacherRegister() {
             </FormControl>
           </div>
 
-          <div className="passch_container">
-            <p className="passch_title">パスワード（確認）</p>
-            <p className="required_txt">※必須</p>
-          </div>
           <div className="passch_input">
-            <OutlinedInput
-              id="outlined-adornment-password_c"
-              type="password"
-              {...register("check_password", {
-                required: "パスワード（確認用）を入力してください",
-                validate: (value) => {
-                  return value === password || "パスワードが間違がっています";
-                },
-              })}
-            />
-            <ErrorMessage
-              errors={errors}
-              name="check_password"
-              as="p"
-              className="error_message"
-            />
+            <FormControl variant="outlined">
+              <InputLabel>パスワード（確認）</InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password_c"
+                label="パスワード（確認）"
+                type="password"
+                {...register("check_password", {
+                  required: "パスワード（確認用）を入力してください",
+                  validate: (value) => {
+                    return value === password || "パスワードが間違がっています";
+                  },
+                })}
+              />
+              {errorFlg ? (
+                <ErrorMessage
+                  errors={errors}
+                  name="check_password"
+                  as="p"
+                  className="error_message"
+                />
+              ) : (
+                <p className="required_txt">※必須</p>
+              )}
+            </FormControl>
           </div>
           <Button type="submit">登録</Button>
         </form>
