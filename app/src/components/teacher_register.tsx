@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
@@ -19,7 +20,8 @@ interface FormInputs {
 }
 
 function TeacherRegister() {
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [errorFlg, setErrorFlg] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -35,7 +37,17 @@ function TeacherRegister() {
   } = useForm<FormInputs>();
 
   const onSubmit = (data: FormInputs) => {
+    //  エラーじゃないときしかとれない
     console.log(data);
+  };
+
+  const onError = (errors: Object) => {
+    console.log(errors);
+    if (Object.keys(errors).length > 0) {
+      setErrorFlg(true);
+    } else {
+      setErrorFlg(false);
+    }
   };
 
   const password = watch("password");
@@ -44,23 +56,25 @@ function TeacherRegister() {
       <Header />
       <div className="center">
         <h1 className="page_title">教員登録</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="name_container">
-            <p className="name_title">名前</p>
-            <p className="required_txt">※必須</p>
-          </div>
+        <form onSubmit={handleSubmit(onSubmit, onError)}>
           <div className="name_input">
             <TextField
+              label="名前"
+              variant="outlined"
               {...register("name", {
                 required: "名前を入力してください",
               })}
             />
-            <ErrorMessage
-              errors={errors}
-              name="name"
-              as="p"
-              className="error_message"
-            />
+            {errorFlg ? (
+              <ErrorMessage
+                errors={errors}
+                name="name"
+                as="p"
+                className="error_message"
+              />
+            ) : (
+              <p className="required_txt">※必須</p>
+            )}
           </div>
           <div className="eamil_container">
             <p className="mail_title">メールアドレス</p>
@@ -107,7 +121,7 @@ function TeacherRegister() {
               {...register("password", {
                 required: "パスワードを入力してください",
                 pattern: {
-                  value: /^(?=.*[A-Z]|[a-z])(?=.*\d)[A-Za-z0-9]{8}$/, // 入力規則 8文字以上
+                  value: /^(?=.*[A-Z]|[a-z])(?=.*\d)[A-Za-z0-9]{8,}$/, // 入力規則 8文字以上
                   message: "パスワードの形式が間違っています",
                 },
               })}
@@ -127,6 +141,7 @@ function TeacherRegister() {
           <div className="passch_input">
             <OutlinedInput
               id="outlined-adornment-password_c"
+              type="password"
               {...register("check_password", {
                 required: "パスワード（確認用）を入力してください",
                 validate: (value) => {
