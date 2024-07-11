@@ -38,8 +38,8 @@ function TeacherRegister() {
     formState: { errors },
   } = useForm<FormInputs>();
 
+  //エラーじゃないときにしか動作しない
   const onSubmit = (data: FormInputs) => {
-    //  エラーじゃないときしかとれない
     console.log(data);
   };
 
@@ -59,14 +59,16 @@ function TeacherRegister() {
       <div className="center">
         <h1 className="page_title">教員登録</h1>
         <form onSubmit={handleSubmit(onSubmit, onError)}>
-          <div className="name_input">
-            <TextField
-              label="名前"
-              variant="outlined"
-              {...register("name", {
-                required: "名前を入力してください",
-              })}
-            />
+          <div className="name_container">
+            <div className="name_input">
+              <TextField
+                label="名前"
+                variant="outlined"
+                {...register("name", {
+                  required: "名前を入力してください",
+                })}
+              />
+            </div>
             {errorFlg ? (
               <ErrorMessage
                 errors={errors}
@@ -78,19 +80,21 @@ function TeacherRegister() {
               <p className="required_txt">※必須</p>
             )}
           </div>
+          <div className="mail_container">
+            <div className="mail_input">
+              <TextField
+                label="メールアドレス"
+                variant="outlined"
+                {...register("mail", {
+                  required: "メールアドレスを入力してください",
+                  pattern: {
+                    value: /^[a-zA-Z0-9.]+@morijyobi\.ac\.jp$/,
+                    message: "盛ジョビのメールアドレスを入力してください",
+                  },
+                })}
+              />
+            </div>
 
-          <div className="mail_input">
-            <TextField
-              label="メールアドレス"
-              variant="outlined"
-              {...register("mail", {
-                required: "メールアドレスを入力してください",
-                pattern: {
-                  value: /^[a-zA-Z0-9.]+@morijyobi\.ac\.jp$/,
-                  message: "盛ジョビのメールアドレスを入力してください",
-                },
-              })}
-            />
             {errorFlg ? (
               <ErrorMessage
                 errors={errors}
@@ -103,71 +107,77 @@ function TeacherRegister() {
             )}
           </div>
 
-          <div className="pass_input">
-            <FormControl variant="outlined">
-              <InputLabel>パスワード</InputLabel>
-              <OutlinedInput
-                id="outlined-adornment-password"
-                label="パスワード"
-                type={showPassword ? "text" : "password"}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                {...register("password", {
-                  required: "パスワードを入力してください",
-                  pattern: {
-                    value: /^(?=.*[A-Z]|[a-z])(?=.*\d)[A-Za-z0-9]{8,}$/, // 入力規則 8文字以上
-                    message: "パスワードの形式が間違っています",
-                  },
-                })}
-              />
-              {errorFlg ? (
-                <ErrorMessage
-                  errors={errors}
-                  name="password"
-                  as="p"
-                  className="error_message"
+          <div className="pass_container">
+            <div className="pass_input">
+              <FormControl variant="outlined">
+                <InputLabel>パスワード</InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-password"
+                  label="パスワード"
+                  type={showPassword ? "text" : "password"}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  {...register("password", {
+                    required: "パスワードを入力してください",
+                    pattern: {
+                      value: /^(?=.*[A-Z]|[a-z])(?=.*\d)[A-Za-z0-9]{8,}$/, // 入力規則 8文字以上
+                      message: "パスワードの形式が間違っています",
+                    },
+                  })}
                 />
-              ) : (
-                <p className="required_txt">※必須（8文字以上 半角英数字）</p>
-              )}
-            </FormControl>
+              </FormControl>
+            </div>
+            {errorFlg ? (
+              <ErrorMessage
+                errors={errors}
+                name="password"
+                as="p"
+                className="error_message"
+              />
+            ) : (
+              <p className="required_txt">※必須（8文字以上 半角英数字）</p>
+            )}
           </div>
 
-          <div className="passch_input">
-            <FormControl variant="outlined">
-              <InputLabel>パスワード（確認）</InputLabel>
-              <OutlinedInput
-                id="outlined-adornment-password_c"
-                label="パスワード（確認）"
-                type="password"
-                {...register("check_password", {
-                  required: "パスワード（確認用）を入力してください",
-                  validate: (value) => {
-                    return value === password || "パスワードが間違がっています";
-                  },
-                })}
-              />
-              {errorFlg ? (
-                <ErrorMessage
-                  errors={errors}
-                  name="check_password"
-                  as="p"
-                  className="error_message"
+          <div className="passch_container">
+            <div className="passch_input">
+              <FormControl variant="outlined">
+                <InputLabel>パスワード（確認）</InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-password_c"
+                  label="パスワード（確認）"
+                  type="password"
+                  {...register("check_password", {
+                    required: "パスワード（確認用）を入力してください",
+                    validate: (value) => {
+                      return (
+                        value === password || "パスワードが間違がっています"
+                      );
+                    },
+                  })}
                 />
-              ) : (
-                <p className="required_txt">※必須</p>
-              )}
-            </FormControl>
+              </FormControl>
+            </div>
+            {errorFlg ? (
+              <ErrorMessage
+                errors={errors}
+                name="check_password"
+                as="p"
+                className="error_message"
+              />
+            ) : (
+              <p className="required_txt">※必須</p>
+            )}
           </div>
           <Button type="submit">登録</Button>
         </form>
