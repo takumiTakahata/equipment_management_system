@@ -50,6 +50,26 @@ function TeacherRegister() {
   };
 
   const password = watch("password");
+
+  async function FetchRegister(email: string, password: string): Promise<void> {
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/api/login/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+      console.log(data);
+      setEmail(data.email);
+      setPassword(data.password);
+    } catch (error) {
+      console.error("Login error:", error);
+    }
+  }
+
   return (
     <div id="teacher_register">
       <Header />
