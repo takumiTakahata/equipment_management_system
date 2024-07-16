@@ -46,7 +46,7 @@ function TeacherRegister() {
   } = useForm<FormInputs>();
 
   const onSubmit = (data: FormInputs) => {
-    console.log(data);
+    FetchRegister(data.name, data.mail, data.password);
   };
 
   const password = watch("password");
