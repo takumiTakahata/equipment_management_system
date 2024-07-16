@@ -11,7 +11,7 @@ def teacher_register_view(request):
   if serializer.is_valid():
     # シリアライザーを使用してデータベースに保存
     serializer.save()
-    return Response({'message': 'Category successfully registered', 'category_name': serializer.validated_data['name']}, status=status.HTTP_201_CREATED)
+    return Response({'message': 'Teacher successfully registered', 'username': serializer.validated_data['username']}, status=status.HTTP_201_CREATED)
   else:
     # バリデーションエラーを処理
     print(serializer.errors)
