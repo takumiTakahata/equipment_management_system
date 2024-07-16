@@ -12,8 +12,8 @@ import Header from "./header";
 import "./teacher_register.css";
 
 interface FormInputs {
-  name: string;
-  mail: string;
+  username: string;
+  email: string;
   password: string;
   check_password: string; //パスワード（確認用）
 }
@@ -46,14 +46,14 @@ function TeacherRegister() {
   } = useForm<FormInputs>();
 
   const onSubmit = (data: FormInputs) => {
-    FetchRegister(data.name, data.mail, data.password);
+    FetchRegister(data.username, data.email, data.password);
   };
 
   const password = watch("password");
 
   async function FetchRegister(
-    name: string,
-    mail: string,
+    username: string,
+    email: string,
     password: string
   ): Promise<void> {
     try {
@@ -62,7 +62,7 @@ function TeacherRegister() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, mail, password }),
+        body: JSON.stringify({ username, email, password }),
       });
 
       const data = await response.json();
@@ -84,13 +84,13 @@ function TeacherRegister() {
               <p className="required_txt">※必須</p>
             </div>
             <TextField
-              {...register("name", {
+              {...register("username", {
                 required: "名前を入力してください",
               })}
             />
             <ErrorMessage
               errors={errors}
-              name="name"
+              name="username"
               as="p"
               className="error_message"
             />
@@ -101,7 +101,7 @@ function TeacherRegister() {
               <p className="required_txt">※必須</p>
             </div>
             <TextField
-              {...register("mail", {
+              {...register("email", {
                 required: "メールアドレスを入力してください",
                 pattern: {
                   value: /^[a-zA-Z0-9.]+@morijyobi\.ac\.jp$/,
@@ -111,7 +111,7 @@ function TeacherRegister() {
             />
             <ErrorMessage
               errors={errors}
-              name="mail"
+              name="email"
               as="p"
               className="error_message"
             />
