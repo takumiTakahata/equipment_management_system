@@ -51,20 +51,22 @@ function TeacherRegister() {
 
   const password = watch("password");
 
-  async function FetchRegister(email: string, password: string): Promise<void> {
+  async function FetchRegister(
+    name: string,
+    mail: string,
+    password: string
+  ): Promise<void> {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/login/`, {
+      const response = await fetch(`http://127.0.0.1:8000/api/teacher/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ name, mail, password }),
       });
 
       const data = await response.json();
       console.log(data);
-      setEmail(data.email);
-      setPassword(data.password);
     } catch (error) {
       console.error("Login error:", error);
     }
