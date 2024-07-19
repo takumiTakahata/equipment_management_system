@@ -8,6 +8,7 @@ import ProductList from "../components/product_list";
 import UserTop from "../components/user_top";
 import QrReading from "../components/qr_reading";
 import ReturnRequest from "../components/return_request";
+import LendingRequest from "../components/lending_request";
 
 function UserRoute() {
   return (
@@ -20,13 +21,15 @@ function UserRoute() {
         {/*ユーザーパスワード変更画面 */}
         <Route path="/user_password_change" element={<UserPasswordChange />} />
         {/*備品一覧*/}
-        <Route path="/user_top" element={<ProductList />} />
+        <Route path="/product_list" element={<ProductList />} />
         {/* ユーザートップ画面 */}
-        <Route path="/user_password_change" element={<UserTop />} />
+        <Route path="/user_top" element={<UserTop />} />
         {/*QR読み込み画面 */}
-        <Route path="/user_password_change" element={<QrReading />} />
+        <Route path="/qr_reading" element={<QrReading />} />
         {/*返却申請画面*/}
-        <Route path="/user_password_change" element={<ReturnRequest />} />
+        <Route path="/return_request" element={<ReturnRequest />} />
+        {/*貸出申請画面*/}
+        <Route path="/lending_request" element={<LendingRequest />} />
       </Routes>
     </div>
   );
