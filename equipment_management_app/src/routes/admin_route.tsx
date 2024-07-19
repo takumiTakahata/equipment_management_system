@@ -5,6 +5,7 @@ import ReturnApproval from "../components/return_approval";
 import EquipmentRegister from "../components/equipment_register";
 import EquipmentEdit from "../components/equipment_edit";
 import TeacherList from "../components/teacher_list";
+import TeacherEdit from "../components/teacher_edit";
 
 function AdminRoute() {
   return (
@@ -22,6 +23,8 @@ function AdminRoute() {
         <Route path="/equipment_edit" element={<EquipmentEdit />} />
         {/* 教員一覧画面 */}
         <Route path="/teacher_list" element={<TeacherList />} />
+        {/* 教員編集画面 */}
+        <Route path="/teacher_edit" element={<TeacherEdit />} />
       </Routes>
     </div>
   );
