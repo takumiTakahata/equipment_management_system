@@ -8,6 +8,7 @@ import TeacherList from "../components/teacher_list";
 import TeacherEdit from "../components/teacher_edit";
 import DepartmentList from "../components/department_list";
 import DepartmentRegister from "../components/department_register";
+import DepartmentEdit from "../components/department_edit";
 
 function AdminRoute() {
   return (
@@ -31,6 +32,8 @@ function AdminRoute() {
         <Route path="/department_list" element={<DepartmentList />} />
         {/* 学科登録画面 */}
         <Route path="/department_register" element={<DepartmentRegister />} />
+        {/* 学科編集画面 */}
+        <Route path="/department_edit" element={<DepartmentEdit />} />
       </Routes>
     </div>
   );
