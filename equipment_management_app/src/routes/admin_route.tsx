@@ -4,6 +4,7 @@ import LoanApproval from "../components/loan_approval";
 import ReturnApproval from "../components/return_approval";
 import EquipmentRegister from "../components/equipment_register";
 import EquipmentEdit from "../components/equipment_edit";
+import TeacherList from "../components/teacher_list";
 
 function AdminRoute() {
   return (
@@ -19,6 +20,8 @@ function AdminRoute() {
         <Route path="/equipment_register" element={<EquipmentRegister />} />
         {/* 備品編集画面 */}
         <Route path="/equipment_edit" element={<EquipmentEdit />} />
+        {/* 教員一覧画面 */}
+        <Route path="/teacher_list" element={<TeacherList />} />
       </Routes>
     </div>
   );
