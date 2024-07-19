@@ -4,6 +4,7 @@ import { Routes } from "react-router-dom";
 import UserLogin from "../components/user_login";
 import UserPasswordReset from "../components/user_password_reset";
 import UserPasswordChange from "../components/user_password_change";
+import UserTop from "../components/user_top";
 
 function UserRoute() {
   return (
@@ -15,6 +16,8 @@ function UserRoute() {
         <Route path="/user_password_reset" element={<UserPasswordReset />} />
         {/*ユーザーパスワード変更画面 */}
         <Route path="/user_password_change" element={<UserPasswordChange />} />
+        {/* ユーザートップ画面 */}
+        <Route path="/user_password_change" element={<UserTop />} />
       </Routes>
     </div>
   );
