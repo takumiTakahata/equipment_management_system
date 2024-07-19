@@ -6,6 +6,7 @@ import UserPasswordReset from "../components/user_password_reset";
 import UserPasswordChange from "../components/user_password_change";
 import ProductList from "../components/product_list";
 import UserTop from "../components/user_top";
+import QrReading from "../components/qr_reading";
 
 function UserRoute() {
   return (
@@ -21,6 +22,8 @@ function UserRoute() {
         <Route path="/user_top" element={<ProductList />} />
         {/* ユーザートップ画面 */}
         <Route path="/user_password_change" element={<UserTop />} />
+        {/*QR読み込み */}
+        <Route path="/user_password_change" element={<QrReading />} />
       </Routes>
     </div>
   );
