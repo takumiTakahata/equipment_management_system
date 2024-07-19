@@ -12,6 +12,7 @@ import DepartmentEdit from "../components/department_edit";
 import StudentList from "../components/student_list";
 import StudentEdit from "../components/student_edit";
 import InventoryHistory from "../components/inventory_history";
+import Inventory from "../components/inventory";
 
 function AdminRoute() {
   return (
@@ -43,6 +44,8 @@ function AdminRoute() {
         <Route path="/student_edit" element={<StudentEdit />} />
         {/* 棚卸履歴画面 */}
         <Route path="/inventory_history" element={<InventoryHistory />} />
+        {/* 棚卸画面 */}
+        <Route path="/inventory" element={<Inventory />} />
       </Routes>
     </div>
   );
