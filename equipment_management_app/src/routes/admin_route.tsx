@@ -20,6 +20,7 @@ import Login from "../components/login";
 import TeacherRegister from "../components/teacher_register";
 import CategoryRegister from "../components/category_register";
 import CategoryList from "../components/category_list";
+import CategoryEdit from "../components/category_edit";
 
 function AdminRoute() {
   return (
@@ -67,6 +68,8 @@ function AdminRoute() {
         <Route path="/category_register" element={<CategoryRegister />} />
         {/* カテゴリ一覧画面 */}
         <Route path="/category_list" element={<CategoryList />} />
+        {/* カテゴリ編集画面 */}
+        <Route path="/category_edit" element={<CategoryEdit />} />
       </Routes>
     </div>
   );
