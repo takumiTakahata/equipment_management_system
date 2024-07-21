@@ -15,6 +15,7 @@ import InventoryHistory from "../components/inventory_history";
 import Inventory from "../components/inventory";
 import NoList from "../components/no_list";
 import ViewPdf from "../components/view_pdf";
+import LoanHistoryList from "../components/loan_history_list";
 
 function AdminRoute() {
   return (
@@ -52,6 +53,8 @@ function AdminRoute() {
         <Route path="/no_list" element={<NoList />} />
         {/* PDF表示画面 */}
         <Route path="/view_pdf" element={<ViewPdf />} />
+        {/* 貸出履歴一覧画面 */}
+        <Route path="/loan_history_list" element={<LoanHistoryList />} />
       </Routes>
     </div>
   );
