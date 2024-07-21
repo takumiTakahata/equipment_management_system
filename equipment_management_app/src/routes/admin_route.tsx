@@ -16,11 +16,14 @@ import Inventory from "../components/inventory";
 import NoList from "../components/no_list";
 import ViewPdf from "../components/view_pdf";
 import LoanHistoryList from "../components/loan_history_list";
+import Login from "../components/login";
 
 function AdminRoute() {
   return (
     <div>
       <Routes>
+        {/* ログイン画面 */}
+        <Route path="/login" element={<Login />} />
         {/* 教員TOP画面 */}
         <Route path="/teacher_top" element={<TeacherTop />} />
         {/* 貸出承認画面 */}
