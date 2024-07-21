@@ -5,7 +5,7 @@ interface Category {
   name: string;
 }
 
-const Category_list = () => {
+const CategoryList = () => {
   const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
@@ -44,4 +44,4 @@ const Category_list = () => {
   );
 };
 
-export default Category_list;
+export default CategoryList;
