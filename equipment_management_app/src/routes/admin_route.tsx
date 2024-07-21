@@ -13,6 +13,7 @@ import StudentList from "../components/student_list";
 import StudentEdit from "../components/student_edit";
 import InventoryHistory from "../components/inventory_history";
 import Inventory from "../components/inventory";
+import NoList from "../components/no_list";
 
 function AdminRoute() {
   return (
@@ -46,6 +47,8 @@ function AdminRoute() {
         <Route path="/inventory_history" element={<InventoryHistory />} />
         {/* 棚卸画面 */}
         <Route path="/inventory" element={<Inventory />} />
+        {/* ないものリスト画面 */}
+        <Route path="/no_list" element={<NoList />} />
       </Routes>
     </div>
   );
