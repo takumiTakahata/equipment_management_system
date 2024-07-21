@@ -17,6 +17,7 @@ import NoList from "../components/no_list";
 import ViewPdf from "../components/view_pdf";
 import LoanHistoryList from "../components/loan_history_list";
 import Login from "../components/login";
+import TeacherRegister from "../components/teacher_register";
 
 function AdminRoute() {
   return (
@@ -34,6 +35,8 @@ function AdminRoute() {
         <Route path="/equipment_register" element={<EquipmentRegister />} />
         {/* 備品編集画面 */}
         <Route path="/equipment_edit" element={<EquipmentEdit />} />
+        {/* 教員登録画面 */}
+        <Route path="/teacher_register" element={<TeacherRegister />} />
         {/* 教員一覧画面 */}
         <Route path="/teacher_list" element={<TeacherList />} />
         {/* 教員編集画面 */}
