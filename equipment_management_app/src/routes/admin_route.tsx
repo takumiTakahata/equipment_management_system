@@ -14,6 +14,7 @@ import StudentEdit from "../components/student_edit";
 import InventoryHistory from "../components/inventory_history";
 import Inventory from "../components/inventory";
 import NoList from "../components/no_list";
+import ViewPdf from "../components/view_pdf";
 
 function AdminRoute() {
   return (
@@ -49,6 +50,8 @@ function AdminRoute() {
         <Route path="/inventory" element={<Inventory />} />
         {/* ないものリスト画面 */}
         <Route path="/no_list" element={<NoList />} />
+        {/* PDF表示画面 */}
+        <Route path="/view_pdf" element={<ViewPdf />} />
       </Routes>
     </div>
   );
