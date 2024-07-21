@@ -3,6 +3,7 @@ import TeacherTop from "../components/teacher_top";
 import LoanApproval from "../components/loan_approval";
 import ReturnApproval from "../components/return_approval";
 import EquipmentRegister from "../components/equipment_register";
+import EquipmentList from "../components/equipment_list";
 import EquipmentEdit from "../components/equipment_edit";
 import TeacherList from "../components/teacher_list";
 import TeacherEdit from "../components/teacher_edit";
@@ -36,6 +37,8 @@ function AdminRoute() {
         <Route path="/return_approval" element={<ReturnApproval />} />
         {/* 備品登録画面 */}
         <Route path="/equipment_register" element={<EquipmentRegister />} />
+        {/* 備品一覧画面 */}
+        <Route path="/equipment_list" element={<EquipmentList />} />
         {/* 備品編集画面 */}
         <Route path="/equipment_edit" element={<EquipmentEdit />} />
         {/* 教員登録画面 */}
