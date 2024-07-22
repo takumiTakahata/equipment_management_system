@@ -20,6 +20,7 @@ import Login from "../components/login";
 import TeacherRegister from "../components/teacher_register";
 import CategoryList from "../components/category_list";
 
+
 function AdminRoute() {
   return (
     <div>
