@@ -15,8 +15,8 @@ import Header from "./header";
 import "./teacher_register.css";
 
 interface FormInputs {
-  name: string;
-  mail: string;
+  username: string;
+  email: string;
   password: string;
   check_password: string; //パスワード（確認用）
 }
@@ -40,7 +40,7 @@ function TeacherRegister() {
 
   //エラーじゃないときにしか動作しない
   const onSubmit = (data: FormInputs) => {
-    console.log(data);
+    FetchRegister(data.username, data.email, data.password);
   };
 
   const onError = (errors: Object) => {
@@ -53,6 +53,28 @@ function TeacherRegister() {
   };
 
   const password = watch("password");
+
+  async function FetchRegister(
+    username: string,
+    email: string,
+    password: string
+  ): Promise<void> {
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/api/teacher/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, email, password }),
+      });
+
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Login error:", error);
+    }
+  }
+
   return (
     <div id="teacher_register">
       <Header />
@@ -64,7 +86,7 @@ function TeacherRegister() {
               <TextField
                 label="名前"
                 variant="outlined"
-                {...register("name", {
+                {...register("username", {
                   required: "名前を入力してください",
                 })}
               />
@@ -72,7 +94,7 @@ function TeacherRegister() {
             {errorFlg ? (
               <ErrorMessage
                 errors={errors}
-                name="name"
+                name="username"
                 as="p"
                 className="error_message"
               />
@@ -85,7 +107,7 @@ function TeacherRegister() {
               <TextField
                 label="メールアドレス"
                 variant="outlined"
-                {...register("mail", {
+                {...register("email", {
                   required: "メールアドレスを入力してください",
                   pattern: {
                     value: /^[a-zA-Z0-9.]+@morijyobi\.ac\.jp$/,
@@ -98,7 +120,7 @@ function TeacherRegister() {
             {errorFlg ? (
               <ErrorMessage
                 errors={errors}
-                name="mail"
+                name="email"
                 as="p"
                 className="error_message"
               />
