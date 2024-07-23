@@ -81,8 +81,8 @@ function TeacherRegister() {
       <div className="center">
         <h1 className="page_title">教員登録</h1>
         <form onSubmit={handleSubmit(onSubmit, onError)}>
-          <div className="name_container">
-            <div className="name_input">
+          <div className="username_container">
+            <div className="username_input">
               <TextField
                 label="名前"
                 variant="outlined"
@@ -102,8 +102,8 @@ function TeacherRegister() {
               <p className="required_txt">※必須</p>
             )}
           </div>
-          <div className="mail_container">
-            <div className="mail_input">
+          <div className="email_container">
+            <div className="email_input">
               <TextField
                 label="メールアドレス"
                 variant="outlined"

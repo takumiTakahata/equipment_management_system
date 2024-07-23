@@ -14,27 +14,18 @@ h1 {
   color: #ff0000;
   font-size: 16px;
   margin: 0;
-  margin-left: 1%;
 }
 
 .error_message {
   color: #ff0000;
 }
 
-.name_title,
-.mail_title,
-.pass_title,
-.passch_title {
-  font-size: 16px;
-  margin: 0;
-}
-
 .center {
   text-align: center;
 }
 
-.name_input,
-.mail_input,
+.username_input,
+.email_input,
 .pass_input,
 .passch_input {
   margin-top: 0.5%;
