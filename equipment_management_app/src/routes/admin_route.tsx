@@ -18,6 +18,7 @@ import ViewPdf from "../components/view_pdf";
 import LoanHistoryList from "../components/loan_history_list";
 import Login from "../components/login";
 import TeacherRegister from "../components/teacher_register";
+import CategoryRegister from "../components/category_register";
 import CategoryList from "../components/category_list";
 
 
@@ -63,6 +64,8 @@ function AdminRoute() {
         <Route path="/view_pdf" element={<ViewPdf />} />
         {/* 貸出履歴一覧画面 */}
         <Route path="/loan_history_list" element={<LoanHistoryList />} />
+        {/* カテゴリ登録画面 */}
+        <Route path="/category_register" element={<CategoryRegister />} />
         {/* カテゴリ一覧画面 */}
         <Route path="/category_list" element={<CategoryList />} />
       </Routes>

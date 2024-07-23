@@ -1,4 +1,4 @@
-function Category_register() {
+function CategoryRegister() {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const name = (document.getElementById("category_name") as HTMLInputElement)
@@ -40,4 +40,4 @@ function Category_register() {
   );
 }
 
-export default Category_register;
+export default CategoryRegister;
