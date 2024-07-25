@@ -203,7 +203,9 @@ function TeacherRegister() {
               <p className="required_txt">※必須</p>
             )}
           </div>
-          <Button type="submit">登録</Button>
+          <Button type="submit" variant="contained" className="register_button">
+            登録
+          </Button>
         </form>
       </div>
     </div>

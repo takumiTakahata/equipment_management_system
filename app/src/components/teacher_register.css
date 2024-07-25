@@ -28,7 +28,7 @@ h1 {
 .email_input,
 .pass_input,
 .passch_input {
-  margin-top: 0.5%;
+  margin-top: 1%;
   margin-bottom: 0.5%;
 }
 
@@ -37,4 +37,14 @@ h1 {
 .pass_input_text,
 .passch_input_text {
   width: 25%;
+}
+
+.MuiButton-root.register_button {
+  margin-top: 1%;
+  width: 25%;
+  background-color: #00d12e;
+}
+
+.MuiButton-root.register_button:hover {
+  background-color: #00d12e;
 }
