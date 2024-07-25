@@ -85,6 +85,7 @@ function TeacherRegister() {
             <div className="username_input">
               <TextField
                 label="名前"
+                className="username_input_text"
                 variant="outlined"
                 {...register("username", {
                   required: "名前を入力してください",
@@ -106,6 +107,7 @@ function TeacherRegister() {
             <div className="email_input">
               <TextField
                 label="メールアドレス"
+                className="email_input_text"
                 variant="outlined"
                 {...register("email", {
                   required: "メールアドレスを入力してください",
@@ -131,7 +133,7 @@ function TeacherRegister() {
 
           <div className="pass_container">
             <div className="pass_input">
-              <FormControl variant="outlined">
+              <FormControl variant="outlined" className="pass_input_text">
                 <InputLabel>パスワード</InputLabel>
                 <OutlinedInput
                   id="outlined-adornment-password"
@@ -173,7 +175,7 @@ function TeacherRegister() {
 
           <div className="passch_container">
             <div className="passch_input">
-              <FormControl variant="outlined">
+              <FormControl variant="outlined" className="passch_input_text">
                 <InputLabel>パスワード（確認）</InputLabel>
                 <OutlinedInput
                   id="outlined-adornment-password_c"

@@ -29,5 +29,12 @@ h1 {
 .pass_input,
 .passch_input {
   margin-top: 0.5%;
-  margin-bottom: 1%;
+  margin-bottom: 0.5%;
+}
+
+.username_input_text,
+.email_input_text,
+.pass_input_text,
+.passch_input_text {
+  width: 25%;
 }
