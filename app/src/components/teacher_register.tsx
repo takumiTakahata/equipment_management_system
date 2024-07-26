@@ -28,6 +28,7 @@ interface FormInputs {
 function TeacherRegister() {
   const [showPassword, setShowPassword] = useState(false);
   const [errorFlg, setErrorFlg] = useState(false);
+  const [open, setOpen] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -44,6 +45,7 @@ function TeacherRegister() {
 
   //エラーじゃないときにしか動作しない
   const onSubmit = (data: FormInputs) => {
+    setOpen(true);
     FetchRegister(data.username, data.email, data.password);
   };
 
@@ -54,6 +56,10 @@ function TeacherRegister() {
     } else {
       setErrorFlg(false);
     }
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   const password = watch("password");
@@ -212,7 +218,11 @@ function TeacherRegister() {
           </Button>
         </form>
       </div>
-      <Dialog open={true} aria-describedby="alert-dialog-slide-description">
+      <Dialog
+        open={open}
+        aria-describedby="alert-dialog-slide-description"
+        onClose={handleClose}
+      >
         <DialogTitle>入力された項目が正しいか確認してください</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
