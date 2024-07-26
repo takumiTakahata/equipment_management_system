@@ -11,6 +11,10 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
 import Header from "./header";
 import "./teacher_register.css";
 
@@ -208,6 +212,20 @@ function TeacherRegister() {
           </Button>
         </form>
       </div>
+      <Dialog open={true} aria-describedby="alert-dialog-slide-description">
+        <DialogTitle>入力された項目が正しいか確認してください</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            名前
+          </DialogContentText>
+          <DialogContentText id="alert-dialog-slide-description">
+            メールアドレス
+          </DialogContentText>
+          <DialogContentText id="alert-dialog-slide-description">
+            役割
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
