@@ -23,7 +23,6 @@ import CategoryRegister from "../components/category_register";
 import CategoryList from "../components/category_list";
 import CategoryEdit from "../components/category_edit";
 
-
 function AdminRoute() {
   return (
     <div>
