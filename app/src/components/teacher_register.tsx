@@ -31,6 +31,7 @@ function TeacherRegister() {
   const [errorFlg, setErrorFlg] = useState(false);
   const [open, setOpen] = useState(false);
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -49,6 +50,7 @@ function TeacherRegister() {
   const onSubmit = (data: FormInputs) => {
     setOpen(true);
     setUsername(data.username);
+    setEmail(data.email);
     FetchRegister(data.username, data.email, data.password);
   };
 
@@ -235,6 +237,7 @@ function TeacherRegister() {
           <DialogContentText id="alert-dialog-slide-description">
             メールアドレス
           </DialogContentText>
+          <Typography>{email}</Typography>
           <DialogContentText id="alert-dialog-slide-description">
             役割
           </DialogContentText>
