@@ -15,6 +15,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
+import Typography from "@mui/material/Typography";
 import Header from "./header";
 import "./teacher_register.css";
 
@@ -29,6 +30,7 @@ function TeacherRegister() {
   const [showPassword, setShowPassword] = useState(false);
   const [errorFlg, setErrorFlg] = useState(false);
   const [open, setOpen] = useState(false);
+  const [username, setUsername] = useState("");
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -46,6 +48,7 @@ function TeacherRegister() {
   //エラーじゃないときにしか動作しない
   const onSubmit = (data: FormInputs) => {
     setOpen(true);
+    setUsername(data.username);
     FetchRegister(data.username, data.email, data.password);
   };
 
@@ -228,6 +231,7 @@ function TeacherRegister() {
           <DialogContentText id="alert-dialog-slide-description">
             名前
           </DialogContentText>
+          <Typography>{username}</Typography>
           <DialogContentText id="alert-dialog-slide-description">
             メールアドレス
           </DialogContentText>
