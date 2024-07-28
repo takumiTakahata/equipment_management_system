@@ -241,6 +241,7 @@ function TeacherRegister() {
           <DialogContentText id="alert-dialog-slide-description">
             役割
           </DialogContentText>
+          <Typography>常勤</Typography>
         </DialogContent>
       </Dialog>
     </div>
