@@ -10,4 +10,8 @@ class TeacherSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data['course_id'] = self.course_id  # course_idを設定
         return super().create(validated_data)
-        
+
+class TeacherListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'email')
