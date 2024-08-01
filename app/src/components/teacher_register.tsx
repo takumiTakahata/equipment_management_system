@@ -52,9 +52,9 @@ function TeacherRegister() {
     setOpen(true);
     setUsername(data.username);
     setEmail(data.email);
-    FetchRegister(data.username, data.email, data.password);
   };
 
+  //validationエラーが出た時
   const onError = (errors: Object) => {
     console.log(errors);
     if (Object.keys(errors).length > 0) {
@@ -64,8 +64,13 @@ function TeacherRegister() {
     }
   };
 
+  //popupを閉じる
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const teacherRegister = () => {
+    FetchRegister(username, email, password);
   };
 
   const password = watch("password");
@@ -244,8 +249,8 @@ function TeacherRegister() {
           </DialogContentText>
           <Typography>常勤</Typography>
           <DialogActions>
-            <Button>戻る</Button>
-            <Button>登録</Button>
+            <Button onClick={handleClose}>戻る</Button>
+            <Button onClick={teacherRegister}>登録</Button>
           </DialogActions>
         </DialogContent>
       </Dialog>
