@@ -16,6 +16,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import Typography from "@mui/material/Typography";
+import DialogActions from "@mui/material/DialogActions";
 import Header from "./header";
 import "./teacher_register.css";
 
@@ -242,6 +243,10 @@ function TeacherRegister() {
             役割
           </DialogContentText>
           <Typography>常勤</Typography>
+          <DialogActions>
+            <Button>戻る</Button>
+            <Button>登録</Button>
+          </DialogActions>
         </DialogContent>
       </Dialog>
     </div>
