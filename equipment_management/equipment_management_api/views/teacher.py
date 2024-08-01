@@ -1,10 +1,17 @@
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth.hashers import make_password
-from ..serializers.teacher_serializer import TeacherSerializer
+from ..serializers.teacher_serializer import TeacherSerializer, TeacherListSerializer
 from rest_framework.views import APIView
+from ..models import User as Teacher
 
 class TeacherView(APIView):
+  
+  # GETの時の一覧表示処理
+  def get(self, request):
+      teachers = Teacher.objects.all()
+      serializer = TeacherListSerializer(teachers, many=True)
+      return Response(serializer.data)
    
   # POSTの時の登録処理
   def post(self, request):
