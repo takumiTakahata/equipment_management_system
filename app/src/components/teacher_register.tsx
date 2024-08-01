@@ -16,6 +16,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import Typography from "@mui/material/Typography";
+import DialogActions from "@mui/material/DialogActions";
 import Header from "./header";
 import "./teacher_register.css";
 
@@ -51,9 +52,9 @@ function TeacherRegister() {
     setOpen(true);
     setUsername(data.username);
     setEmail(data.email);
-    FetchRegister(data.username, data.email, data.password);
   };
 
+  //validationエラーが出た時
   const onError = (errors: Object) => {
     console.log(errors);
     if (Object.keys(errors).length > 0) {
@@ -63,8 +64,13 @@ function TeacherRegister() {
     }
   };
 
+  //popupを閉じる
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const teacherRegister = () => {
+    FetchRegister(username, email, password);
   };
 
   const password = watch("password");
@@ -242,6 +248,10 @@ function TeacherRegister() {
             役割
           </DialogContentText>
           <Typography>常勤</Typography>
+          <DialogActions>
+            <Button onClick={handleClose}>戻る</Button>
+            <Button onClick={teacherRegister}>登録</Button>
+          </DialogActions>
         </DialogContent>
       </Dialog>
     </div>
