@@ -52,3 +52,8 @@ h1 {
 .popup {
   text-align: center;
 }
+
+.MuiDialogTitle-root.popup_title,
+.popup_text {
+  font-weight: bold;
+}
