@@ -240,15 +240,15 @@ function TeacherRegister() {
           <DialogContentText id="alert-dialog-slide-description">
             名前
           </DialogContentText>
-          <Typography>{username}</Typography>
+          <p>{username}</p>
           <DialogContentText id="alert-dialog-slide-description">
             メールアドレス
           </DialogContentText>
-          <Typography>{email}</Typography>
+          <p>{email}</p>
           <DialogContentText id="alert-dialog-slide-description">
             役割
           </DialogContentText>
-          <Typography>常勤</Typography>
+          <p>常勤</p>
           <DialogActions>
             <Button onClick={handleClose}>戻る</Button>
             <Button onClick={teacherRegister}>登録</Button>
