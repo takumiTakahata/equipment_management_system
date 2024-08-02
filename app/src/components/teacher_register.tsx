@@ -233,6 +233,7 @@ function TeacherRegister() {
         open={open}
         aria-describedby="alert-dialog-slide-description"
         onClose={handleClose}
+        className="popup"
       >
         <DialogTitle>入力された項目が正しいか確認してください</DialogTitle>
         <DialogContent>

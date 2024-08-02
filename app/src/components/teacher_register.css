@@ -48,3 +48,7 @@ h1 {
 .MuiButton-root.register_button:hover {
   background-color: #00d12e;
 }
+
+.popup {
+  text-align: center;
+}
