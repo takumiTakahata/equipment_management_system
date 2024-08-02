@@ -57,3 +57,7 @@ h1 {
 .popup_text {
   font-weight: bold;
 }
+
+.popup_text {
+  margin-top: 0.5%;
+}
