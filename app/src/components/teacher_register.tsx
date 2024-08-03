@@ -251,10 +251,18 @@ function TeacherRegister() {
           </DialogContentText>
           <p className="popup_text">常勤</p>
           <DialogActions className="popup_button">
-            <Button onClick={handleClose} className="popup_return_button">
+            <Button
+              onClick={handleClose}
+              className="popup_return_button"
+              variant="contained"
+            >
               戻る
             </Button>
-            <Button onClick={teacherRegister} className="popup_register_button">
+            <Button
+              onClick={teacherRegister}
+              className="popup_register_button"
+              variant="contained"
+            >
               登録
             </Button>
           </DialogActions>
