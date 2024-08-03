@@ -233,21 +233,24 @@ function TeacherRegister() {
         open={open}
         aria-describedby="alert-dialog-slide-description"
         onClose={handleClose}
+        className="popup"
       >
-        <DialogTitle>入力された項目が正しいか確認してください</DialogTitle>
+        <DialogTitle className="popup_title">
+          入力された項目が正しいか確認してください
+        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             名前
           </DialogContentText>
-          <Typography>{username}</Typography>
+          <p className="popup_text">{username}</p>
           <DialogContentText id="alert-dialog-slide-description">
             メールアドレス
           </DialogContentText>
-          <Typography>{email}</Typography>
+          <p className="popup_text">{email}</p>
           <DialogContentText id="alert-dialog-slide-description">
             役割
           </DialogContentText>
-          <Typography>常勤</Typography>
+          <p className="popup_text">常勤</p>
           <DialogActions>
             <Button onClick={handleClose}>戻る</Button>
             <Button onClick={teacherRegister}>登録</Button>
