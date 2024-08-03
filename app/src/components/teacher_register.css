@@ -61,3 +61,16 @@ h1 {
 .popup_text {
   margin-top: 0.5%;
 }
+
+.MuiDialogActions-root.popup_button {
+  display: flex;
+  justify-content: center;
+}
+
+.MuiButton-root.popup_return_button {
+  margin-right: 10%;
+}
+
+.MuiButton-root.popup_register_button {
+  margin-left: 10%;
+}
