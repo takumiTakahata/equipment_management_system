@@ -28,14 +28,3 @@ class TeacherView(APIView):
       # バリデーションエラーを処理
       print(serializer.errors)
       return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-  # DELETEの時の削除処理
-  def delete(self, request, pk):
-    try:
-      teacher = Teacher.objects.get(pk=pk)
-      teacher.delete_flag = True
-      teacher.save()
-      return Response({'message': 'Teacher successfully marked as deleted'}, status=status.HTTP_200_OK)
-    except Teacher.DoesNotExist:
-      return Response({'error': 'Teacher not found'}, status=status.HTTP_404_NOT_FOUND)
-        
