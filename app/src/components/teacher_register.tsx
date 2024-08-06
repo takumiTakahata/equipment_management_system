@@ -15,7 +15,6 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
-import Typography from "@mui/material/Typography";
 import DialogActions from "@mui/material/DialogActions";
 import Header from "./header";
 import "./teacher_register.css";
@@ -251,9 +250,21 @@ function TeacherRegister() {
             役割
           </DialogContentText>
           <p className="popup_text">常勤</p>
-          <DialogActions>
-            <Button onClick={handleClose}>戻る</Button>
-            <Button onClick={teacherRegister}>登録</Button>
+          <DialogActions className="popup_button">
+            <Button
+              onClick={handleClose}
+              className="popup_return_button"
+              variant="contained"
+            >
+              戻る
+            </Button>
+            <Button
+              onClick={teacherRegister}
+              className="popup_register_button"
+              variant="contained"
+            >
+              登録
+            </Button>
           </DialogActions>
         </DialogContent>
       </Dialog>
