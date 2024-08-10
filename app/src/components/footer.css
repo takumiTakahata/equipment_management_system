@@ -1,0 +1,23 @@
+footer {
+  background-color: #e0e0e0;
+  font-family: "Roboto", sans-serif;
+  justify-content: space-around; /*フッター内のアイテム間に均等なスペースをおく*/
+  display: flex; /*フッター内のアイテムを横並びにする*/
+  position: fixed; /*フッターの位置を固定する */
+  bottom: 0;
+  width: 100%;
+}
+.box {
+  width: 100%;
+}
+.custom-bottom-navigation .MuiBottomNavigationAction-root {
+  background-color: #e0e0e0;
+  padding: 0;
+}
+
+.borrow-button .MuiBottomNavigationAction-label,
+.list-button .MuiBottomNavigationAction-label,
+.borrowing-button .MuiBottomNavigationAction-label,
+.logout-button .MuiBottomNavigationAction-label {
+  font-size: 14px;
+}
