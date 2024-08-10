@@ -22,3 +22,18 @@ const grade = [
   { value: "3", label: "3" },
   { value: "4", label: "4" },
 ];
+
+interface FormInputs {
+  name: string;
+  email: string;
+  password: string;
+  check_password: string;
+  subject: string;
+  grade: string;
+}
+
+const handleMouseDownPassword = (
+  event: React.MouseEvent<HTMLButtonElement>
+) => {
+  event.preventDefault();
+};
