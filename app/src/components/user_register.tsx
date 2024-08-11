@@ -224,6 +224,23 @@ function UserRegister() {
             <p className="required_txt">※必須</p>
           )}
         </div>
+        <div className="subject">
+          <p className="sub_title">学科</p>
+          <TextField
+            id="outlined-select-currency"
+            className="select"
+            select
+            defaultValue="0"
+            value={selectSubject}
+            onChange={handleSubjectChange}
+          >
+            {subject.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </div>
       </form>
     </div>
   );
