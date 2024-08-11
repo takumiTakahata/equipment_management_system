@@ -247,7 +247,6 @@ function UserRegister() {
             className="select"
             id="outlined-select-currency"
             select
-            // defaultValue={"1"}
             value={selectGrade}
             onChange={handleGradeChange}
           >
@@ -262,3 +261,5 @@ function UserRegister() {
     </div>
   );
 }
+
+export default UserRegister;
