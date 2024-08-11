@@ -46,7 +46,7 @@ function AdminRoute() {
         {/* 教員一覧画面 */}
         <Route path="/teacher_list" element={<TeacherList />} />
         {/* 教員編集画面 */}
-        <Route path="/teacher_edit" element={<TeacherEdit />} />
+        <Route path="/teacher_edit/:id" element={<TeacherEdit />} />
         {/* 学科一覧画面 */}
         <Route path="/department_list" element={<DepartmentList />} />
         {/* 学科登録画面 */}
