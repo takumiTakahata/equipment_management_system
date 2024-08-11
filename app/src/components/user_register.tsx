@@ -134,6 +134,31 @@ function UserRegister() {
             <p className="required_txt">※必須</p>
           )}
         </div>
+        <div className="email_input">
+          <TextField
+            className="email_txt"
+            id="outlined-basic"
+            label="メールアドレス"
+            variant="outlined"
+            {...register("email", {
+              required: "メールアドレスを入力してください",
+              pattern: {
+                value: /[a-zA-Z0-9.]+@morijyobi.ac.jp$/,
+                message: "盛ジョビのメールアドレスを入力してください",
+              },
+            })}
+          />
+          {errorFlg ? (
+            <ErrorMessage
+              errors={errors}
+              name="email"
+              as="p"
+              className="error_message"
+            />
+          ) : (
+            <p className="required_txt">※必須</p>
+          )}
+        </div>
       </form>
     </div>
   );
