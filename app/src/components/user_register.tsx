@@ -4,12 +4,12 @@ import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { DialogActions, InputLabel, TextField } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
-import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
+import MenuItem from "@mui/material/MenuItem";
+import OutlinedInput from "@mui/material/OutlinedInput";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import MenuItem from "@mui/material";
 import "./user_register.css";
 
 const subject = [
@@ -235,6 +235,23 @@ function UserRegister() {
             onChange={handleSubjectChange}
           >
             {subject.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </div>
+        <div className="grade">
+          <p className="sub_title">学年</p>
+          <TextField
+            className="select"
+            id="outlined-select-currency"
+            select
+            // defaultValue={"1"}
+            value={selectGrade}
+            onChange={handleGradeChange}
+          >
+            {grade.map((option) => (
               <MenuItem key={option.value} value={option.value}>
                 {option.label}
               </MenuItem>
