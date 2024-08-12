@@ -34,3 +34,10 @@
 .pwconf_txt {
   width: 75%;
 }
+
+.select {
+  width: 41%;
+}
+.subject {
+  margin-top: 20px;
+}
