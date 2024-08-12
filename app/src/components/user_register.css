@@ -11,3 +11,11 @@
   margin-top: 4%;
   margin-bottom: 1%;
 }
+
+.required_txt {
+  /* margin: 3% auto 1% 0; */
+  color: red;
+}
+.error_message {
+  color: red;
+}
