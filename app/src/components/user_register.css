@@ -41,3 +41,13 @@
 .subject {
   margin-top: 20px;
 }
+
+.MuiButton-root.button {
+  margin-top: 8%;
+  width: 25%;
+  background-color: #00d12e;
+}
+
+.MuiButton-root.button:hover {
+  background-color: #00d12e;
+}
