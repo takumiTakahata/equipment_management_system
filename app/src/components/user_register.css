@@ -19,3 +19,18 @@
 .error_message {
   color: red;
 }
+
+.name_input,
+.email_input,
+.pass_input,
+.passch_input {
+  margin-top: 3%;
+  margin-bottom: 6%;
+}
+
+.name_txt,
+.email_txt,
+.password_txt,
+.pwconf_txt {
+  width: 75%;
+}
