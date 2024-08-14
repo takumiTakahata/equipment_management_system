@@ -51,3 +51,20 @@
 .MuiButton-root.button:hover {
   background-color: #00d12e;
 }
+
+.log {
+  text-align: center;
+  color: black;
+}
+.log_title {
+  text-align: center;
+}
+
+#alert-dialog-slide-description {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.log_value {
+  font-size: 25px;
+}
