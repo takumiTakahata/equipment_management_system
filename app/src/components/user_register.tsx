@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { DialogActions, InputLabel, TextField } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import FormControl from "@mui/material/FormControl";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -271,6 +273,12 @@ function UserRegister() {
           入力された項目が正しいか<br></br>
           確認してください
         </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            名前
+          </DialogContentText>
+          <p className="log_value">{name}</p>
+        </DialogContent>
       </Dialog>
     </div>
   );
