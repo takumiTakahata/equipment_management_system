@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { DialogActions, InputLabel, TextField } from "@mui/material";
+import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
@@ -291,6 +292,15 @@ function UserRegister() {
           </DialogContentText>
           <p className="log_value">{getGradeLabel(selectGrade)}</p>
         </DialogContent>
+        <DialogActions className="popup_button">
+          <Button
+            onClick={handleClose}
+            className="popup_return_button"
+            variant="contained"
+          >
+            戻る
+          </Button>
+        </DialogActions>
       </Dialog>
     </div>
   );
