@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { DialogActions, InputLabel, TextField } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
 import FormControl from "@mui/material/FormControl";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
@@ -265,7 +266,12 @@ function UserRegister() {
         open={open}
         aria-describedby="alert-dialog-slide-decription"
         onClose={handleClose}
-      ></Dialog>
+      >
+        <DialogTitle className="log_title">
+          入力された項目が正しいか<br></br>
+          確認してください
+        </DialogTitle>
+      </Dialog>
     </div>
   );
 }
