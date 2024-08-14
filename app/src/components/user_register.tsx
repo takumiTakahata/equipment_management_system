@@ -278,6 +278,10 @@ function UserRegister() {
             名前
           </DialogContentText>
           <p className="log_value">{name}</p>
+          <DialogContentText id="alert-dialog-slide-description">
+            メールアドレス
+          </DialogContentText>
+          <p className="log_value">{mail}</p>
         </DialogContent>
       </Dialog>
     </div>
