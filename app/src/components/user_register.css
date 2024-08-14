@@ -51,3 +51,43 @@
 .MuiButton-root.button:hover {
   background-color: #00d12e;
 }
+
+.log {
+  text-align: center;
+  color: black;
+}
+.log_title {
+  text-align: center;
+}
+
+#alert-dialog-slide-description {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.log_value {
+  font-size: 25px;
+}
+
+.MuiDialogActions-root.popup_button {
+  display: flex;
+  justify-content: center;
+}
+
+.MuiButton-root.popup_return_button {
+  margin-right: 10%;
+  background-color: #000000;
+}
+
+.MuiButton-root.popup_return_button:hover {
+  background-color: #000000;
+}
+
+.MuiButton-root.popup_register_button {
+  margin-left: 10%;
+  background-color: #00d12e;
+}
+
+.MuiButton-root.popup_register_button:hover {
+  background-color: #00d12e;
+}

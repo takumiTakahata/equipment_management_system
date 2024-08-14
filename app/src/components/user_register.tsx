@@ -3,6 +3,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { DialogActions, InputLabel, TextField } from "@mui/material";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 import FormControl from "@mui/material/FormControl";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
@@ -258,6 +263,45 @@ function UserRegister() {
           </TextField>
         </div>
       </form>
+
+      <Dialog
+        className="log"
+        open={open}
+        aria-describedby="alert-dialog-slide-decription"
+        onClose={handleClose}
+      >
+        <DialogTitle className="log_title">
+          入力された項目が正しいか<br></br>
+          確認してください
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            名前
+          </DialogContentText>
+          <p className="log_value">{name}</p>
+          <DialogContentText id="alert-dialog-slide-description">
+            メールアドレス
+          </DialogContentText>
+          <p className="log_value">{mail}</p>
+          <DialogContentText id="alert-dialog-slide-description">
+            学科
+          </DialogContentText>
+          <p className="log_value">{getSubjectLabel(selectSubject)}</p>
+          <DialogContentText id="alert-dialog-slide-description">
+            学年
+          </DialogContentText>
+          <p className="log_value">{getGradeLabel(selectGrade)}</p>
+        </DialogContent>
+        <DialogActions className="popup_button">
+          <Button
+            onClick={handleClose}
+            className="popup_return_button"
+            variant="contained"
+          >
+            戻る
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
