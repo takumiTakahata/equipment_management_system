@@ -286,6 +286,10 @@ function UserRegister() {
             学科
           </DialogContentText>
           <p className="log_value">{getSubjectLabel(selectSubject)}</p>
+          <DialogContentText id="alert-dialog-slide-description">
+            学年
+          </DialogContentText>
+          <p className="log_value">{getGradeLabel(selectGrade)}</p>
         </DialogContent>
       </Dialog>
     </div>
