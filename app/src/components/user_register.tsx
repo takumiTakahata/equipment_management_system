@@ -282,6 +282,10 @@ function UserRegister() {
             メールアドレス
           </DialogContentText>
           <p className="log_value">{mail}</p>
+          <DialogContentText id="alert-dialog-slide-description">
+            学科
+          </DialogContentText>
+          <p className="log_value">{getSubjectLabel(selectSubject)}</p>
         </DialogContent>
       </Dialog>
     </div>
