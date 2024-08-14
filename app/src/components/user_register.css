@@ -82,3 +82,12 @@
 .MuiButton-root.popup_return_button:hover {
   background-color: #000000;
 }
+
+.MuiButton-root.popup_register_button {
+  margin-left: 10%;
+  background-color: #00d12e;
+}
+
+.MuiButton-root.popup_register_button:hover {
+  background-color: #00d12e;
+}
