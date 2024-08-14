@@ -300,9 +300,6 @@ function UserRegister() {
           >
             戻る
           </Button>
-          <Button className="popup_register_button" variant="contained">
-            登録
-          </Button>
         </DialogActions>
       </Dialog>
     </div>
