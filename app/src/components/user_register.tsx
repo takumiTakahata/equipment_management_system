@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { DialogActions, InputLabel, TextField } from "@mui/material";
+import Dialog from "@mui/material/Dialog";
 import FormControl from "@mui/material/FormControl";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
@@ -258,6 +259,13 @@ function UserRegister() {
           </TextField>
         </div>
       </form>
+
+      <Dialog
+        className="log"
+        open={open}
+        aria-describedby="alert-dialog-slide-decription"
+        onClose={handleClose}
+      ></Dialog>
     </div>
   );
 }
