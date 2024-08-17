@@ -6,6 +6,7 @@ import { TextField } from "@mui/material";
 import { MenuItem } from "@mui/material";
 import { Button } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import Box from "@mui/material/Box";
 
 function renderRow(props: ListChildComponentProps) {
   const { index, style } = props;
@@ -90,6 +91,26 @@ function ProductList() {
             <SearchIcon></SearchIcon>
           </TextField>
           <Button className="button">検索</Button>
+        </div>
+        <div className="list">
+          <Box
+            sx={{
+              width: "100%",
+              height: 600,
+              maxWidth: 360,
+              bgcolor: "background.paper",
+            }}
+          >
+            <FixedSizeList
+              height={600}
+              width={450}
+              itemSize={150}
+              itemCount={30}
+              overscanCount={10}
+            >
+              {renderRow}
+            </FixedSizeList>
+          </Box>
         </div>
       </div>
     </div>
