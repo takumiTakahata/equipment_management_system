@@ -4,6 +4,8 @@ import { ListItem } from "@mui/material";
 import { ListItemButton } from "@mui/material";
 import { TextField } from "@mui/material";
 import { MenuItem } from "@mui/material";
+import { Button } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 function renderRow(props: ListChildComponentProps) {
   const { index, style } = props;
@@ -82,6 +84,12 @@ function ProductList() {
               </MenuItem>
             ))}
           </TextField>
+        </div>
+        <div className="search_var">
+          <TextField className="search_field">
+            <SearchIcon></SearchIcon>
+          </TextField>
+          <Button className="button">検索</Button>
         </div>
       </div>
     </div>
