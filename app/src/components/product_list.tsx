@@ -2,6 +2,8 @@ import React from "react";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
 import { ListItem } from "@mui/material";
 import { ListItemButton } from "@mui/material";
+import { TextField } from "@mui/material";
+import { MenuItem } from "@mui/material";
 
 function renderRow(props: ListChildComponentProps) {
   const { index, style } = props;
@@ -50,8 +52,24 @@ function ProductList() {
     },
   ];
   return (
-    <div>
-      <p>ユーザーTOP</p>
+    <div className="body">
+      <p className="title">備品一覧</p>
+      <div className="search">
+        <div className="category">
+          <TextField
+            className="category"
+            id="outlined-select-currency"
+            select
+            defaultValue="すべて"
+          >
+            {category.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </div>
+      </div>
     </div>
   );
 }
