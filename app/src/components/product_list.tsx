@@ -69,6 +69,20 @@ function ProductList() {
             ))}
           </TextField>
         </div>
+        <div className="leading">
+          <TextField
+            className="category"
+            id="outlined-select-currency"
+            select
+            defaultValue="貸出中"
+          >
+            {lending.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </div>
       </div>
     </div>
   );
