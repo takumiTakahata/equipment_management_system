@@ -25,6 +25,30 @@ function renderRow(props: ListChildComponentProps) {
 }
 
 function ProductList() {
+  const category = [
+    {
+      value: "すべて",
+      label: "すべて",
+    },
+    {
+      value: "本",
+      label: "本",
+    },
+    {
+      value: "モニター",
+      label: "モニター",
+    },
+  ];
+  const lending = [
+    {
+      value: "貸出中",
+      label: "貸出中",
+    },
+    {
+      value: "貸出可",
+      label: "貸出可",
+    },
+  ];
   return (
     <div>
       <p>ユーザーTOP</p>
