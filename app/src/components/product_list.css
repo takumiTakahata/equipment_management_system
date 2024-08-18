@@ -29,3 +29,23 @@
 .MuiButton-root.button:hover {
   background-color: #627cff;
 }
+.list_button {
+  display: flex;
+  align-items: center;
+  /* border: 1px solid #000; */
+}
+.MuiButtonBase-root.list_button {
+  padding: 1%;
+}
+.contents {
+  width: 68%;
+}
+.name {
+  margin: 0 0 0 2%;
+  font-size: 1.15rem;
+  width: 100%;
+}
+.product_name {
+  font-size: 14px;
+  margin: 0 0 2% 2%;
+}
