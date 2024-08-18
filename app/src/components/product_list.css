@@ -49,3 +49,19 @@
   font-size: 14px;
   margin: 0 0 2% 2%;
 }
+.green_circle {
+  margin-left: 8%;
+  display: flex;
+  width: 75px;
+  height: 75px;
+  background-color: #14ff00;
+  border-radius: 50%;
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+}
+.limit {
+  text-align: left;
+  margin-left: 2%;
+  font-size: 1.1rem;
+}
