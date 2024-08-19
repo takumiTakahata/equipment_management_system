@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react"; // Removed 'React' as it's not used directly
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 interface Category {
   id: number;
@@ -37,7 +38,15 @@ const CategoryList = () => {
       <h1>Category List</h1>
       <ul>
         {categories.map((category) => (
-          <li key={category.id}>{category.name}</li>
+          <li key={category.id}>
+            <Link
+              to={`/category_edit?id=${category.id}&name=${encodeURIComponent(
+                category.name
+              )}`}
+            >
+              {category.name}
+            </Link>
+          </li>
         ))}
       </ul>
     </div>
