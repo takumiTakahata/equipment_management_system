@@ -1,0 +1,93 @@
+.user-register {
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+.title {
+  font-size: 20px;
+  margin-bottom: 3%;
+  font-weight: bold;
+}
+.sub_title {
+  margin-top: 4%;
+  margin-bottom: 1%;
+}
+
+.required_txt {
+  /* margin: 3% auto 1% 0; */
+  color: red;
+}
+.error_message {
+  color: red;
+}
+
+.name_input,
+.email_input,
+.pass_input,
+.passch_input {
+  margin-top: 3%;
+  margin-bottom: 6%;
+}
+
+.name_txt,
+.email_txt,
+.password_txt,
+.pwconf_txt {
+  width: 75%;
+}
+
+.select {
+  width: 41%;
+}
+.subject {
+  margin-top: 20px;
+}
+
+.MuiButton-root.button {
+  margin-top: 8%;
+  width: 25%;
+  background-color: #00d12e;
+}
+
+.MuiButton-root.button:hover {
+  background-color: #00d12e;
+}
+
+.log {
+  text-align: center;
+  color: black;
+}
+.log_title {
+  text-align: center;
+}
+
+#alert-dialog-slide-description {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.log_value {
+  font-size: 25px;
+}
+
+.MuiDialogActions-root.popup_button {
+  display: flex;
+  justify-content: center;
+}
+
+.MuiButton-root.popup_return_button {
+  margin-right: 10%;
+  background-color: #000000;
+}
+
+.MuiButton-root.popup_return_button:hover {
+  background-color: #000000;
+}
+
+.MuiButton-root.popup_register_button {
+  margin-left: 10%;
+  background-color: #00d12e;
+}
+
+.MuiButton-root.popup_register_button:hover {
+  background-color: #00d12e;
+}
