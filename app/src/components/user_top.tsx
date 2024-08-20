@@ -25,8 +25,8 @@ function renderRow(props: ListChildComponentProps) {
 
 function UserTop() {
   return (
-    <div>
-      <p>ユーザーTOP</p>
+    <div className="user_top">
+      <p className="title">借りている物一覧</p>
     </div>
   );
 }
