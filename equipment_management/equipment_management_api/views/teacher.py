@@ -11,13 +11,13 @@ class TeacherView(APIView):
   def get(self, request, pk=None):
     if pk:
       try:
-        teacher = Teacher.objects.get(pk=pk)
+        teacher = Teacher.objects.get(pk=pk, delete_flag=False)
         serializer = TeacherSerializer(teacher)
         return Response(serializer.data)
       except Teacher.DoesNotExist:
         return Response({'error': 'Teacher not found'}, status=status.HTTP_404_NOT_FOUND)
     else:
-      teachers = Teacher.objects.all()
+      teachers = Teacher.objects.filter(delete_flag=False)
       serializer = TeacherListSerializer(teachers, many=True)
       return Response(serializer.data)
    
