@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const DepartmentRegister = () => {
+function DepartmentRegister() {
   const [departmentName, setDepartmentName] = useState("");
   const [years, setYears] = useState("");
 
@@ -14,7 +14,7 @@ const DepartmentRegister = () => {
     setYears(e.target.value);
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const response = await fetch("http://127.0.0.1:8000/api/department/", {
@@ -22,20 +22,22 @@ const DepartmentRegister = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name: departmentName, years }),
+        body: JSON.stringify({
+          name: departmentName,
+          course_year: years,
+          delete_flag: false,
+        }),
       });
 
-      const data = await response.json();
-      console.log(data);
-      if (response.ok) {
-        // Handle success
-        console.log("Department registered successfully");
-      } else {
-        // Handle error
-        console.error("Failed to register department");
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Failed to register department: ${errorText}`);
       }
+
+      const data = await response.json();
+      console.log("Department registered successfully:", data);
     } catch (error) {
-      console.error("An error occurred", error);
+      console.error("An error occurred:", error);
     }
   };
 
@@ -64,6 +66,6 @@ const DepartmentRegister = () => {
       </form>
     </div>
   );
-};
+}
 
 export default DepartmentRegister;
