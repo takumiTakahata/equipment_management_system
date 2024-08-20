@@ -26,8 +26,10 @@ function renderRow(props: ListChildComponentProps) {
 
 function LendingRequest() {
   return (
-    <div>
-      <p>貸出申請</p>
+    <div className="return_request">
+      <p className="title">
+        選択するものが正しいか<br></br>確認してください
+      </p>
     </div>
   );
 }
