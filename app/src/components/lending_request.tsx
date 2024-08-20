@@ -30,6 +30,27 @@ function LendingRequest() {
       <p className="title">
         選択するものが正しいか<br></br>確認してください
       </p>
+
+      <div className="list">
+        <Box
+          sx={{
+            width: "100%",
+            height: 600,
+            maxWidth: 360,
+            bgcolor: "background.paper",
+          }}
+        >
+          <FixedSizeList
+            height={400}
+            width={450}
+            itemSize={150}
+            itemCount={2}
+            overscanCount={10}
+          >
+            {renderRow}
+          </FixedSizeList>
+        </Box>
+      </div>
     </div>
   );
 }
