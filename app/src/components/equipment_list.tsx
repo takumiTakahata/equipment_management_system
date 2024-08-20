@@ -14,6 +14,8 @@ import Pagination from "@mui/material/Pagination";
 import { useState } from "react";
 import "./equipment_list.css";
 import AddIcon from "@mui/icons-material/Add";
+import ClearIcon from "@mui/icons-material/Clear";
+import { IconButton } from "@mui/material";
 
 function createEquipmentList(
   id: number, //備品ID
@@ -29,9 +31,9 @@ function createEquipmentList(
 
 const data: [number, string, string][] = [
   [1, "ITパスポート", "2024/04/10"],
-  [2, "ITパスポート", "2024/04/10"],
-  [3, "ITパスポート", "2024/04/10"],
-  [4, "ITパスポート", "2024/04/10"],
+  [2, "基本情報", "2024/04/10"],
+  [3, "応用情報", "2024/04/10"],
+  [4, "Java検定", "2024/04/10"],
   [5, "ITパスポート", "2024/04/10"],
   [6, "ITパスポート", "2024/04/10"],
 ];
@@ -73,6 +75,10 @@ function EquipmentList() {
     },
   ];
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [buttonValue, setButtonValue] = useState<string[]>([]);
+  const [buttonId, setButtonId] = useState<number[]>([]);
+
   const [currentPage, setCurrentPage] = useState(1); //currentPageが現在のページ番号
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -85,6 +91,38 @@ function EquipmentList() {
   const currentItems = data
     .slice(startIndex, startIndex + ITEMS_PER_PAGE)
     .map((item) => createEquipmentList(...item));
+
+  // プラスボタンを押したときに呼ばれる関数
+  const handleButtonClick = async (id: number, value: string) => {
+    // 非同期処理を挿入（例: APIコールやタイムアウトなど）
+    await new Promise((resolve) => setTimeout(resolve, 500)); // 0.5秒待つ
+
+    if (!buttonId.includes(id)) {
+      setButtonValue([...buttonValue, value]);
+      setButtonId([...buttonId, id]);
+      setIsSidebarOpen(true);
+    }
+  };
+
+  const handleRemoveValue = (index: number) => {
+    const newButtonValue = [...buttonValue];
+    const newButtonId = [...buttonId];
+    console.log(index);
+    newButtonValue.splice(index, 1); // 指定したインデックスの値を削除
+    newButtonId.splice(index, 1);
+    setButtonValue(newButtonValue);
+    setButtonId(newButtonId);
+
+    // 配列が空になった場合、サイドバーを閉じる
+    if (newButtonValue.length === 0) {
+      setIsSidebarOpen(false);
+    }
+  };
+
+  const qrRegister = () => {
+    console.log(buttonValue);
+    console.log(buttonId);
+  };
 
   return (
     <div>
@@ -143,9 +181,11 @@ function EquipmentList() {
                 <TableCell>{item.name}</TableCell>
                 <TableCell>{item.deadline}</TableCell>
                 <TableCell>
-                  <Button>
+                  <IconButton
+                    onClick={() => handleButtonClick(item.id, item.name)}
+                  >
                     <AddIcon />
-                  </Button>
+                  </IconButton>
                 </TableCell>
               </TableRow>
             ))}
@@ -158,6 +198,26 @@ function EquipmentList() {
         onChange={handlePageChange}
         color="primary"
       />
+      {/* サイドバー */}
+      {isSidebarOpen && (
+        <div className="sidebar">
+          <h2>QRコード生成リスト</h2>
+          {buttonValue.map((value, index) => (
+            <div key={index} className="sidebar_content">
+              <p>{value}</p>
+              <IconButton
+                onClick={() => handleRemoveValue(index)}
+                className="sidebar_button"
+              >
+                <ClearIcon />
+              </IconButton>
+            </div>
+          ))}
+          <Button onClick={qrRegister} variant="outlined">
+            QR登録
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
