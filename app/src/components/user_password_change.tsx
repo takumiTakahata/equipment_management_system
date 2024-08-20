@@ -50,8 +50,49 @@ function UserPasswordChange() {
   };
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   return (
-    <div>
-      <p>パスワード変更</p>
+    <div className="password_reset">
+      <p className="title">パスワード変更</p>
+
+      <form onSubmit={handleSubmit(onSubmit, onError)}>
+        <div className="password_input">
+          <FormControl variant="outlined" className="password_txt">
+            <InputLabel htmlFor="outlined-pw">パスワード</InputLabel>
+            <OutlinedInput
+              id="outlined-pw"
+              label="パスワード"
+              type={showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              {...register("password", {
+                required: "パスワードを入力してください",
+                pattern: {
+                  value: /^(?=.*[A-Z]|[a-z])(?=.*\d)[A-Za-z0-9]{8,}$/, // 入力規則 8文字以上
+                  message: "パスワードの形式が違います",
+                },
+              })}
+            />
+          </FormControl>
+          {errorFlg ? (
+            <ErrorMessage
+              errors={errors}
+              name="password"
+              as="p"
+              className="error_message"
+            />
+          ) : (
+            <p className="required_txt">※必須（8文字以上 半角英数字）</p>
+          )}
+        </div>
+      </form>
     </div>
   );
 }
