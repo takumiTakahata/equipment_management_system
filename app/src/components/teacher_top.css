@@ -1,0 +1,21 @@
+.red_circle {
+  width: 60px;
+  height: 60px;
+  background-color: #ed6666;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.green_circle {
+  width: 60px;
+  height: 60px;
+  background-color: #14ff00;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
