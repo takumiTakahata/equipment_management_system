@@ -10,6 +10,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import "./equipment_list.css";
 
 function createEquipmentList(
   id: number, //備品ID
@@ -110,7 +111,15 @@ function EquipmentList() {
           <TableBody>
             {rows.map((item) => (
               <TableRow key={item.id}>
-                <TableCell></TableCell>
+                <TableCell>
+                  {item.id % 5 === 0 ? (
+                    <div className="red_circle">貸出中</div>
+                  ) : item.id % 3 === 0 ? (
+                    <div className="green_circle">貸出可</div>
+                  ) : (
+                    <div className="blue_circle">紛失中</div>
+                  )}
+                </TableCell>
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.name}</TableCell>
                 <TableCell>{item.deadline}</TableCell>
