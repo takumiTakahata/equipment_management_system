@@ -48,6 +48,11 @@ function UserTop() {
           </FixedSizeList>
         </Box>
       </div>
+      <div className="button">
+        <Button className="return_button" variant="contained" color="primary">
+          返却申請へ
+        </Button>
+      </div>
     </div>
   );
 }
