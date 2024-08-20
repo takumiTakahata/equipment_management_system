@@ -37,6 +37,23 @@ class TeacherView(APIView):
       print(serializer.errors)
       return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+ # PUTの時の更新処理
+  def put(self, request, pk):
+    try:
+      teacher = Teacher.objects.get(pk=pk)
+    except Teacher.DoesNotExist:
+      return Response({'error': 'Teacher not found'}, status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = TeacherSerializer(teacher, data=request.data, partial=True)
+    if serializer.is_valid():
+      # パスワードが提供されている場合はハッシュ化
+      if 'password' in serializer.validated_data:
+        hashed_password = make_password(serializer.validated_data['password'])
+        serializer.validated_data['password'] = hashed_password
+      serializer.save()
+      return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
   # DELETEの時の削除処理
   def delete(self, request, pk):
     try:
