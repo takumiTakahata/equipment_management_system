@@ -118,6 +118,11 @@ function UserPasswordChange() {
             <p className="required_txt">※必須</p>
           )}
         </div>
+        <div className="send_button">
+          <Button className="button" variant="contained" color="primary">
+            変更
+          </Button>
+        </div>
       </form>
     </div>
   );
