@@ -7,6 +7,20 @@ from ..models import User as Student
 
 class StudentView(APIView):
 
+  # GETの時の一覧表示処理
+  def get(self, request, pk=None):
+    if pk:
+      try:
+        student = Student.objects.filter(pk=pk, delete_flag=False,admin_flag=False)
+        serializer = StudentSerializer(student)
+        return Response(serializer.data)
+      except Student.DoesNotExist:
+        return Response({'error': 'Student not found'}, status=status.HTTP_404_NOT_FOUND)
+    else:
+      students = Student.objects.filter(delete_flag=False,admin_flag=False).order_by('id')
+      serializer = StudentListSerializer(students, many=True)
+      return Response(serializer.data)
+
   # POSTの時の登録処理
   def post(self, request):
     serializer = StudentSerializer(data=request.data)

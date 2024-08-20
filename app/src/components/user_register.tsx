@@ -70,7 +70,6 @@ function UserRegister() {
   const password = watch("password");
   //エラーじゃないときにしか動作しない
   const onSubmit = (data: FormInputs) => {
-    console.log(data);
     setOpen(true);
     setName(data.username);
     setMail(data.email);
@@ -263,7 +262,6 @@ function UserRegister() {
                 label="学科"
                 className="curse_input_text"
                 variant="outlined"
-                value={course_id}
                 {...register("course_id", {
                   required: "学科を選択してください",
                 })}
@@ -283,7 +281,6 @@ function UserRegister() {
                 label="学年"
                 className="school_year_input_text"
                 variant="outlined"
-                value={school_year}
                 {...register("school_year", {
                   required: "学年を選択してください",
                 })}
