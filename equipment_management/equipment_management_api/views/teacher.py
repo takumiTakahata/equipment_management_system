@@ -8,7 +8,7 @@ from ..models import User as Teacher
 class TeacherView(APIView):
   
   # GETの時の一覧表示処理
-  def get(self, request, pk):
+  def get(self, request, pk=None):
     if pk:
       try:
         teacher = Teacher.objects.get(pk=pk)
