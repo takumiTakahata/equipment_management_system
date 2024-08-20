@@ -10,6 +10,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Pagination from "@mui/material/Pagination";
+import { useState } from "react";
 import "./equipment_list.css";
 
 function createEquipmentList(
@@ -24,14 +26,16 @@ function createEquipmentList(
   };
 }
 
-const rows = [
-  createEquipmentList(1, "ITパスポート", "2024/04/10"),
-  createEquipmentList(2, "ITパスポート", "2024/04/10"),
-  createEquipmentList(3, "ITパスポート", "2024/04/10"),
-  createEquipmentList(4, "ITパスポート", "2024/04/10"),
-  createEquipmentList(5, "ITパスポート", "2024/04/10"),
-  createEquipmentList(6, "ITパスポート", "2024/04/10"),
+const data: [number, string, string][] = [
+  [1, "ITパスポート", "2024/04/10"],
+  [2, "ITパスポート", "2024/04/10"],
+  [3, "ITパスポート", "2024/04/10"],
+  [4, "ITパスポート", "2024/04/10"],
+  [5, "ITパスポート", "2024/04/10"],
+  [6, "ITパスポート", "2024/04/10"],
 ];
+
+const ITEMS_PER_PAGE = 5;
 
 function EquipmentList() {
   const loan_status = [
@@ -67,6 +71,19 @@ function EquipmentList() {
       label: "ディスプレイ",
     },
   ];
+
+  const [currentPage, setCurrentPage] = useState(1); //currentPageが現在のページ番号
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setCurrentPage(value);
+  };
+
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const currentItems = data
+    .slice(startIndex, startIndex + ITEMS_PER_PAGE)
+    .map((item) => createEquipmentList(...item));
 
   return (
     <div>
@@ -109,7 +126,7 @@ function EquipmentList() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((item) => (
+            {currentItems.map((item) => (
               <TableRow key={item.id}>
                 <TableCell>
                   {item.id % 5 === 0 ? (
@@ -128,6 +145,12 @@ function EquipmentList() {
           </TableBody>
         </Table>
       </TableContainer>
+      <Pagination
+        count={Math.ceil(data.length / ITEMS_PER_PAGE)}
+        page={currentPage}
+        onChange={handlePageChange}
+        color="primary"
+      />
     </div>
   );
 }
