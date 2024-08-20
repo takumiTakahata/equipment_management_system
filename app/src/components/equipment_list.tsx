@@ -13,6 +13,7 @@ import Paper from "@mui/material/Paper";
 import Pagination from "@mui/material/Pagination";
 import { useState } from "react";
 import "./equipment_list.css";
+import AddIcon from "@mui/icons-material/Add";
 
 function createEquipmentList(
   id: number, //備品ID
@@ -123,6 +124,7 @@ function EquipmentList() {
               <TableCell>備品id</TableCell>
               <TableCell>備品名</TableCell>
               <TableCell>返却期限</TableCell>
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -140,6 +142,11 @@ function EquipmentList() {
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.name}</TableCell>
                 <TableCell>{item.deadline}</TableCell>
+                <TableCell>
+                  <Button>
+                    <AddIcon />
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
