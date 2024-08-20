@@ -8,7 +8,7 @@ class DepartmentView(APIView):
     
     # GETの時の一覧表示処理
     def get(self, request):
-        course = Course.objects.all()
+        course = Course.objects.filter(delete_flag=False)
         serializer = DepartmentSerializer(course, many=True)
         return Response(serializer.data)
 
