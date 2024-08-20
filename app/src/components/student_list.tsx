@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+interface Course {
+  id: number;
+  name: string;
+}
+
 interface Student {
   id: number;
   username: string;
@@ -11,24 +16,49 @@ interface Student {
 }
 
 function StudentList() {
-  const [students, setStudens] = useState<Student[]>([]);
+  const [students, setStudents] = useState<Student[]>([]);
+  const [courses, setCourses] = useState<Course[]>([]);
+
   useEffect(() => {
-    const fetchStudents = async () => {
+    // 学生情報を取得
+    const fetchStudentsAndCourses = async () => {
       try {
         const response = await fetch("http://127.0.0.1:8000/api/student/");
         if (!response.ok) {
           throw new Error("Failed to fetch students");
         }
-        const data = await response.json();
-        // idでソートする
-        console.log(data);
-        const sortedData = data.sort((a: Student, b: Student) => a.id - b.id);
-        setStudens(sortedData);
+        const studentsData = await response.json();
+
+        // コース情報を取得
+        const coursesResponse = await fetch(
+          "http://127.0.0.1:8000/api/department/"
+        );
+        if (!coursesResponse.ok) {
+          throw new Error("Failed to fetch courses");
+        }
+        const coursesData = await coursesResponse.json();
+
+        // Create a map of course IDs to course names
+        const courseMap = new Map(
+          coursesData.map((course: Course) => [course.id, course.name])
+        );
+
+        // Map student data to include course names
+        const studentsWithCourses = studentsData.map((student: Student) => ({
+          ...student,
+          course_name: courseMap.get(student.course_id) || "Unknown Course",
+        }));
+
+        // Sort students by ID
+        const sortedStudents = studentsWithCourses.sort(
+          (a: Student, b: Student) => a.id - b.id
+        );
+        setStudents(sortedStudents);
       } catch (error) {
-        console.error("An error occurred while fetching students", error);
+        console.error("An error occurred while fetching data", error);
       }
     };
-    fetchStudents();
+    fetchStudentsAndCourses();
   }, []);
 
   return (
@@ -43,7 +73,7 @@ function StudentList() {
           >
             <li>
               <div>ユーザー名: {student.username}</div>
-              <p>学科: {student.course}</p>
+              <p>学科: {student.course_name}</p>
               <p>学年: {student.school_year}</p>
               <div>メールアドレス: {student.email}</div>
             </li>
