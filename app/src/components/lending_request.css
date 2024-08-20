@@ -30,3 +30,13 @@
 .MuiButton-root.button:hover {
   background-color: #627cff;
 }
+.MuiButton-root.cancel_button {
+  margin-top: 5%;
+  margin-left: 9%;
+  font-size: 20px;
+  width: 48%;
+  background-color: #000000;
+}
+.MuiButton-root.cancel_button:hover {
+  background-color: #000000;
+}
