@@ -28,6 +28,27 @@ function UserPasswordChange() {
   const [open, setOpen] = React.useState(false);
   const [mail, setMail] = React.useState("");
 
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormInputs>();
+  const password = watch("password");
+  //エラーじゃないときにしか動作しない
+  const onSubmit = (data: FormInputs) => {};
+  const onError = (errors: Object) => {
+    console.log(errors);
+    if (Object.keys(errors).length > 0) {
+      setErrorFlg(true);
+    } else {
+      setErrorFlg(false);
+    }
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
   return (
     <div>
       <p>パスワード変更</p>
