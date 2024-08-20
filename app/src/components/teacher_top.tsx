@@ -7,6 +7,28 @@ import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 
+function createLoanHistory(
+  loan_date: string, //貸出日
+  return_date: string, //返却日
+  product_id: number,
+  product_name: string,
+  deadline: string, //返却期限
+  borrower: string, //借りた人
+  loan_approver: string, //貸出承認者
+  return_approver: string //返却承認者
+) {
+  return {
+    loan_date,
+    return_date,
+    equipment_id: product_id,
+    equipment_name: product_name,
+    return_deadline: deadline,
+    borrower,
+    loan_approver,
+    return_approver,
+  };
+}
+
 function TeacherTop() {
   return (
     <div>
