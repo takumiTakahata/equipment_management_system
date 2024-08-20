@@ -4,6 +4,7 @@ import { FixedSizeList, ListChildComponentProps } from "react-window";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import ListItemButton from "@mui/material/ListItemButton";
+import "./user_top.css";
 
 function renderRow(props: ListChildComponentProps) {
   const { index, style } = props;
