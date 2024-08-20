@@ -4,4 +4,4 @@ from rest_framework import serializers
 class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = '__all__'
+        fields = ['id', 'name', 'course_year']

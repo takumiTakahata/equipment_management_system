@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 interface department {
   id: number;
@@ -38,8 +39,16 @@ const DepartmentList = () => {
       <ul>
         {departments.map((department) => (
           <li key={department.id}>
-            {department.name}
-            {department.course_year}
+            <Link
+              to={`/department_edit?id=${
+                department.id
+              }&name=${encodeURIComponent(department.name)}&years=${
+                department.course_year
+              }`}
+            >
+              {department.name}
+              {department.course_year}
+            </Link>
           </li>
         ))}
       </ul>
