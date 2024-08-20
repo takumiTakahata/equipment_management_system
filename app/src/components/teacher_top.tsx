@@ -13,6 +13,8 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import Pagination from "@mui/material/Pagination";
+import { useState } from "react";
 import "./teacher_top.css";
 
 function createLoanHistory(
@@ -38,82 +40,77 @@ function createLoanHistory(
 }
 
 //テストデータ
-const rows = [
-  createLoanHistory(
-    "2024/02/10",
-    "2024/03/10",
-    1,
-    "誰でも簡単に",
-    "2024/04/10",
-    "佐藤",
-    "川島",
-    "伊藤"
-  ),
-  createLoanHistory(
-    "2024/04/5",
-    "未返却",
-    2,
-    "過去問道場",
-    "2024/05/5",
-    "橋本",
-    "豊橋",
-    "岡田"
-  ),
-  createLoanHistory(
-    "2024/05/10",
-    "未返却",
-    3,
-    "ディスプレイ",
-    "2024/09/10",
-    "佐藤",
-    "川島",
-    "渡辺"
-  ),
-  createLoanHistory(
-    "2024/05/01",
-    "未返却",
-    4,
-    "本",
-    "2024/10/10",
-    "佐藤",
-    "前田",
-    "渡辺"
-  ),
-  createLoanHistory(
-    "2024/05/10",
-    "未返却",
-    5,
-    "HDMI",
-    "2024/11/11",
-    "長谷川",
-    "川島",
-    "渡辺"
-  ),
-  createLoanHistory(
-    "2024/05/10",
-    "未返却",
-    6,
-    "パソコン",
-    "2025/12/10",
-    "斎藤",
-    "川島",
-    "伊藤"
-  ),
-  createLoanHistory(
-    "2024/05/10",
-    "未返却",
-    7,
-    "パソコン",
-    "2025/12/10",
-    "斎藤",
-    "川島",
-    "伊藤"
-  ),
-];
+const data: [string, string, number, string, string, string, string, string][] =
+  [
+    [
+      "2024/02/10",
+      "2024/03/10",
+      1,
+      "誰でも簡単に",
+      "2024/04/10",
+      "佐藤",
+      "川島",
+      "伊藤",
+    ],
+    [
+      "2024/04/5",
+      "未返却",
+      2,
+      "過去問道場",
+      "2024/05/5",
+      "橋本",
+      "豊橋",
+      "岡田",
+    ],
+    [
+      "2024/05/10",
+      "未返却",
+      3,
+      "ディスプレイ",
+      "2024/09/10",
+      "佐藤",
+      "川島",
+      "渡辺",
+    ],
+    ["2024/05/04", "未返却", 4, "本", "2024/10/10", "佐藤", "前田", "渡辺"],
+    ["2024/05/13", "未返却", 5, "HDMI", "2024/11/11", "長谷川", "川島", "渡辺"],
+    [
+      "2024/05/04",
+      "未返却",
+      6,
+      "パソコン",
+      "2025/12/10",
+      "斎藤",
+      "川島",
+      "伊藤",
+    ],
+    [
+      "2024/05/12",
+      "未返却",
+      7,
+      "パソコン",
+      "2025/12/10",
+      "斎藤",
+      "川島",
+      "伊藤",
+    ],
+  ];
+
+const ITEMS_PER_PAGE = 5;
 
 function TeacherTop() {
-  // createLoanHistory(...data);
+  const [currentPage, setCurrentPage] = useState(1); //currentPageが現在のページ番号
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setCurrentPage(value);
+  };
 
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const currentItems = data
+    .slice(startIndex, startIndex + ITEMS_PER_PAGE)
+    .map((item) => createLoanHistory(...item));
   return (
     <div>
       <h2>教員TOP</h2>
@@ -155,8 +152,8 @@ function TeacherTop() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((item) => (
-              <TableRow key={item.loan_date}>
+            {currentItems.map((item) => (
+              <TableRow key={`${item.loan_date}-${item.product_id}`}>
                 <TableCell>
                   {item.product_id % 2 === 1 ? (
                     <div className="red_circle">済</div>
@@ -179,6 +176,17 @@ function TeacherTop() {
           </TableBody>
         </Table>
       </TableContainer>
+      <Pagination
+        count={Math.ceil(data.length / ITEMS_PER_PAGE)}
+        page={currentPage}
+        onChange={handlePageChange}
+        color="primary"
+      />
+      {/*
+        count: 総ページ数を計算
+        page: 現在のページ番号
+        onChange: ページ変更時に呼び出される関数
+      */}
     </div>
   );
 }
