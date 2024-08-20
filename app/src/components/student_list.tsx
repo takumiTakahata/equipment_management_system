@@ -38,18 +38,18 @@ function StudentList() {
         }
         const coursesData = await coursesResponse.json();
 
-        // Create a map of course IDs to course names
+        // コースIDとコース名の対応表を作成
         const courseMap = new Map(
           coursesData.map((course: Course) => [course.id, course.name])
         );
 
-        // Map student data to include course names
+        // コース名を含む学生データのマッピング
         const studentsWithCourses = studentsData.map((student: Student) => ({
           ...student,
           course_name: courseMap.get(student.course_id) || "Unknown Course",
         }));
 
-        // Sort students by ID
+        // idでソート
         const sortedStudents = studentsWithCourses.sort(
           (a: Student, b: Student) => a.id - b.id
         );
