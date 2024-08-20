@@ -1,5 +1,8 @@
 import { TextField } from "@mui/material";
 import { MenuItem } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import InputAdornment from "@mui/material/InputAdornment";
+import { Button } from "@mui/material";
 
 function EquipmentList() {
   const loan_status = [
@@ -53,7 +56,19 @@ function EquipmentList() {
           </MenuItem>
         ))}
       </TextField>
-      <TextField></TextField>
+      <TextField
+        placeholder="ITパスポート"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
+      />
+      <Button variant="outlined">検索</Button>
+      <Button variant="outlined">備品登録</Button>
+      <Button variant="outlined">すべて選択</Button>
     </div>
   );
 }
