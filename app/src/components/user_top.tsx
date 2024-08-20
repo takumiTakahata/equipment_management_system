@@ -27,6 +27,27 @@ function UserTop() {
   return (
     <div className="user_top">
       <p className="title">借りている物一覧</p>
+
+      <div className="list">
+        <Box
+          sx={{
+            width: "100%",
+            height: 600,
+            maxWidth: 360,
+            bgcolor: "background.paper",
+          }}
+        >
+          <FixedSizeList
+            height={400}
+            width={450}
+            itemSize={150}
+            itemCount={2}
+            overscanCount={10}
+          >
+            {renderRow}
+          </FixedSizeList>
+        </Box>
+      </div>
     </div>
   );
 }
