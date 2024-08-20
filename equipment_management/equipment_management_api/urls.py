@@ -11,6 +11,8 @@ urlpatterns = [
     path('', include(router.urls)),
     path('login/', login_view),
     path('category/', CategoryView.as_view()),
+    path('category/<int:pk>/', CategoryView.as_view()),
     path('teacher/', TeacherView.as_view()),
     path('teacher/<int:pk>/', TeacherView.as_view()),
+    
 ]

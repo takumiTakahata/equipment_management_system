@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 interface Teacher {
+  id: number;
   username: string;
   email: string;
 }
@@ -15,7 +17,9 @@ function TeacherList() {
           throw new Error("Failed to fetch teachers");
         }
         const data = await response.json();
-        setTeachers(data);
+        // idでソートする
+        const sortedData = data.sort((a: Teacher, b: Teacher) => a.id - b.id);
+        setTeachers(sortedData);
       } catch (error) {
         console.error("An error occurred while fetching teachers", error);
       }
@@ -27,11 +31,17 @@ function TeacherList() {
     <div>
       <h2>教員一覧</h2>
       <ul>
-        {teachers.map((teacher, index) => (
-          <li key={index}>
-            <div>ユーザー名: {teacher.username}</div>
-            <div>メールアドレス: {teacher.email}</div>
-          </li>
+        {teachers.map((teacher) => (
+          <Link
+            to={`/teacher_edit/${teacher.id}`}
+            key={teacher.id}
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <li>
+              <div>ユーザー名: {teacher.username}</div>
+              <div>メールアドレス: {teacher.email}</div>
+            </li>
+          </Link>
         ))}
       </ul>
     </div>
