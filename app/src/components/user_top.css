@@ -10,3 +10,13 @@
 .list {
   margin-top: 10%;
 }
+.MuiButton-root.return_button {
+  margin-left: 9%;
+  font-size: 20px;
+  width: 48%;
+  color: white;
+  background-color: #627cff;
+}
+.MuiButton-root.button:hover {
+  background-color: #627cff;
+}
