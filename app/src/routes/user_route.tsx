@@ -6,6 +6,7 @@ import UserPasswordReset from "../components/user_password_reset";
 import UserPasswordChange from "../components/user_password_change";
 import ProductList from "../components/product_list";
 import UserTop from "../components/user_top";
+import UserRegister from "../components/user_register";
 import QrReading from "../components/qr_reading";
 import ReturnRequest from "../components/return_request";
 import LendingRequest from "../components/lending_request";
@@ -14,6 +15,8 @@ function UserRoute() {
   return (
     <div>
       <Routes>
+        {/* ユーザー登録画面*/}
+        <Route path="/user_register" element={<UserRegister />} />
         {/* ユーザーログイン画面*/}
         <Route path="/user_login" element={<UserLogin />} />
         {/*ユーザーパスワード変更メール送信画面 */}
