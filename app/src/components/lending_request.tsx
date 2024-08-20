@@ -51,6 +51,11 @@ function LendingRequest() {
           </FixedSizeList>
         </Box>
       </div>
+      <div className="button">
+        <Button className="request_button" variant="contained">
+          貸出申請
+        </Button>
+      </div>
     </div>
   );
 }
