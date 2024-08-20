@@ -8,7 +8,15 @@ from ..models import User as Teacher
 class TeacherView(APIView):
   
   # GETの時の一覧表示処理
-  def get(self, request):
+  def get(self, request, pk):
+    if pk:
+      try:
+        teacher = Teacher.objects.get(pk=pk)
+        serializer = TeacherSerializer(teacher)
+        return Response(serializer.data)
+      except Teacher.DoesNotExist:
+        return Response({'error': 'Teacher not found'}, status=status.HTTP_404_NOT_FOUND)
+    else:
       teachers = Teacher.objects.all()
       serializer = TeacherListSerializer(teachers, many=True)
       return Response(serializer.data)
