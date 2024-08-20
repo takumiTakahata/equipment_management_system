@@ -26,7 +26,6 @@ function UserPasswordChange() {
   const [showPassword, setShowPassword] = React.useState(false);
   const [errorFlg, setErrorFlg] = React.useState(false);
   const [open, setOpen] = React.useState(false);
-  const [mail, setMail] = React.useState("");
 
   const {
     register,
