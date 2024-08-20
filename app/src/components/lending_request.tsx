@@ -56,6 +56,11 @@ function LendingRequest() {
           貸出申請
         </Button>
       </div>
+      <div className="button">
+        <Button className="continue_button" variant="contained" color="primary">
+          続けて読み込む
+        </Button>
+      </div>
     </div>
   );
 }
