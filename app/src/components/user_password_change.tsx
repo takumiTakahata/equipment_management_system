@@ -92,6 +92,32 @@ function UserPasswordChange() {
             <p className="required_txt">※必須（8文字以上 半角英数字）</p>
           )}
         </div>
+        <div className="pwconf_input">
+          <FormControl variant="outlined" className="pwconf_txt">
+            <InputLabel>パスワード(確認用)</InputLabel>
+            <OutlinedInput
+              id="outlined-pw"
+              type="password"
+              {...register("check_password", {
+                required: "パスワード（確認用）を入力してください",
+                validate: (value) => {
+                  return value === password || "パスワードが間違っています";
+                },
+              })}
+              label="パスワード確認用"
+            />
+          </FormControl>
+          {errorFlg ? (
+            <ErrorMessage
+              errors={errors}
+              name="check_password"
+              as="p"
+              className="error_message"
+            />
+          ) : (
+            <p className="required_txt">※必須</p>
+          )}
+        </div>
       </form>
     </div>
   );
