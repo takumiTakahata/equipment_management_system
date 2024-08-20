@@ -4,6 +4,18 @@ import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Button } from "@mui/material";
 
+function createEquipmentList(
+  id: number, //備品ID
+  name: string, //備品名
+  deadline: string //返却期限
+) {
+  return {
+    id,
+    name,
+    deadline,
+  };
+}
+
 function EquipmentList() {
   const loan_status = [
     {
