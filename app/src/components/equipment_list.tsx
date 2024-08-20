@@ -3,6 +3,13 @@ import { MenuItem } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Button } from "@mui/material";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
 function createEquipmentList(
   id: number, //備品ID
@@ -15,6 +22,15 @@ function createEquipmentList(
     deadline,
   };
 }
+
+const rows = [
+  createEquipmentList(1, "ITパスポート", "2024/04/10"),
+  createEquipmentList(2, "ITパスポート", "2024/04/10"),
+  createEquipmentList(3, "ITパスポート", "2024/04/10"),
+  createEquipmentList(4, "ITパスポート", "2024/04/10"),
+  createEquipmentList(5, "ITパスポート", "2024/04/10"),
+  createEquipmentList(6, "ITパスポート", "2024/04/10"),
+];
 
 function EquipmentList() {
   const loan_status = [
@@ -81,6 +97,28 @@ function EquipmentList() {
       <Button variant="outlined">検索</Button>
       <Button variant="outlined">備品登録</Button>
       <Button variant="outlined">すべて選択</Button>
+      <TableContainer component={Paper} className="tablecontainer">
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell></TableCell>
+              <TableCell>備品id</TableCell>
+              <TableCell>備品名</TableCell>
+              <TableCell>返却期限</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((item) => (
+              <TableRow key={item.id}>
+                <TableCell></TableCell>
+                <TableCell>{item.id}</TableCell>
+                <TableCell>{item.name}</TableCell>
+                <TableCell>{item.deadline}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 }
