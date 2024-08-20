@@ -33,6 +33,7 @@ function TeacherEdit() {
     }
   };
 
+  // 教員削除を呼び出す関数
   const handleDelete = async () => {
     try {
       const response = await fetch(
@@ -60,6 +61,7 @@ function TeacherEdit() {
     }));
   };
 
+  // 教員情報更新を呼び出す関数
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
