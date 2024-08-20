@@ -7,3 +7,15 @@
   text-align: center;
   font-family: "Roboto", sans-serif;
 }
+.button {
+  margin: 4% auto;
+}
+.MuiButton-root.request_button {
+  margin-left: 9%;
+  font-size: 20px;
+  width: 48%;
+  background-color: #00d12e;
+}
+.MuiButton-root.popup_register_button:hover {
+  background-color: #00d12e;
+}
