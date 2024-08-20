@@ -1,9 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import login_view
-from .views import CategoryView
-from .views import TeacherView
-from .views import DepartmentView
+from .views import login_view,CategoryView,TeacherView,StudentView,DepartmentView
 
 router = DefaultRouter()
 # router.register(r'users', views.UserViewSet)
@@ -16,5 +13,6 @@ urlpatterns = [
     path('teacher/', TeacherView.as_view()),
     path('teacher/<int:pk>/', TeacherView.as_view()),
     path('department/',DepartmentView.as_view()),
-    path('department/<int:pk>/',DepartmentView.as_view()),
+    path('department/<int:pk>/',DepartmentView.as_view())
+    path('student/', StudentView.as_view()),
 ]
