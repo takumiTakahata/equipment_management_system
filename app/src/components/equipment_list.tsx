@@ -1,46 +1,63 @@
-import { TextField } from "@mui/material";
-import { MenuItem } from "@mui/material";
+import {
+  TextField,
+  MenuItem,
+  InputAdornment,
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Pagination,
+  IconButton,
+} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import InputAdornment from "@mui/material/InputAdornment";
-import { Button } from "@mui/material";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import Pagination from "@mui/material/Pagination";
-import { useState } from "react";
-import "./equipment_list.css";
 import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from "@mui/icons-material/Clear";
-import { IconButton } from "@mui/material";
+import { useState, useEffect } from "react";
+import "./equipment_list.css";
 
-function createEquipmentList(
-  id: number, //備品ID
-  name: string, //備品名
-  deadline: string //返却期限
-) {
-  return {
-    id,
-    name,
-    deadline,
-  };
+interface Equipment {
+  id: number; // 備品ID
+  categories_id: number; // カテゴリーID
+  name: string; // 備品名
+  deadline: string; // 返却期限
+  lost_status: boolean; // 紛失ステータス
+  active_flag: boolean; // アクティブフラグ
 }
-
-const data: [number, string, string][] = [
-  [1, "ITパスポート", "2024/04/10"],
-  [2, "基本情報", "2024/04/10"],
-  [3, "応用情報", "2024/04/10"],
-  [4, "Java検定", "2024/04/10"],
-  [5, "ITパスポート", "2024/04/10"],
-  [6, "ITパスポート", "2024/04/10"],
-];
 
 const ITEMS_PER_PAGE = 5;
 
 function EquipmentList() {
+  const [data, setEquipment] = useState<Equipment[]>([]);
+
+  useEffect(() => {
+    const fetchEquipment = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/equipment/", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch equipment");
+        }
+
+        const data = await response.json();
+        console.log(data);
+        setEquipment(data); // Update state with fetched equipment
+      } catch (error) {
+        console.error("An error occurred while fetching equipment", error);
+      }
+    };
+
+    fetchEquipment();
+  }, []);
+
   const loan_status = [
     {
       value: "すべて",
@@ -88,9 +105,7 @@ function EquipmentList() {
   };
 
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const currentItems = data
-    .slice(startIndex, startIndex + ITEMS_PER_PAGE)
-    .map((item) => createEquipmentList(...item));
+  const currentItems = data.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   // プラスボタンを押したときに呼ばれる関数
   const handleButtonClick = async (id: number, value: string) => {
@@ -170,17 +185,29 @@ function EquipmentList() {
               {currentItems.map((item) => (
                 <TableRow key={item.id}>
                   <TableCell>
-                    {item.id % 5 === 0 ? (
-                      <div className="red_circle">貸出中</div>
-                    ) : item.id % 3 === 0 ? (
+                    {item.lost_status ? (
+                      <div className="blue_circle">紛失中</div>
+                    ) : item.active_flag ? (
                       <div className="green_circle">貸出可</div>
                     ) : (
-                      <div className="blue_circle">紛失中</div>
+                      <div className="red_circle">貸出中</div>
                     )}
                   </TableCell>
                   <TableCell>{item.id}</TableCell>
                   <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.deadline}</TableCell>
+                  <TableCell>
+                    {Number(item.deadline) === 31
+                      ? "1カ月"
+                      : Number(item.deadline) === 62
+                      ? "2カ月"
+                      : Number(item.deadline) === 93
+                      ? "3カ月"
+                      : Number(item.deadline) === 186
+                      ? "6カ月"
+                      : Number(item.deadline) === 365
+                      ? "1年"
+                      : item.deadline}
+                  </TableCell>
                   <TableCell>
                     <IconButton
                       onClick={() => handleButtonClick(item.id, item.name)}
