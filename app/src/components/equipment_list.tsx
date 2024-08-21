@@ -18,6 +18,7 @@ import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useState, useEffect } from "react";
 import "./equipment_list.css";
+import { Link } from "react-router-dom";
 
 interface Equipment {
   id: number; // 備品ID
@@ -47,16 +48,16 @@ function EquipmentList() {
           throw new Error("Failed to fetch equipment");
         }
 
-        const data = await response.json();
+        const result = await response.json();
+        setEquipment(result); // Update state with fetched equipment
         console.log(data);
-        setEquipment(data); // Update state with fetched equipment
       } catch (error) {
         console.error("An error occurred while fetching equipment", error);
       }
     };
 
     fetchEquipment();
-  }, []);
+  }, [data]);
 
   const loan_status = [
     {
@@ -209,6 +210,17 @@ function EquipmentList() {
                       : item.deadline}
                   </TableCell>
                   <TableCell>
+                    <Link
+                      to={`/equipment_edit?id=${item.id}&categories_id=${
+                        item.categories_id
+                      }&name=${encodeURIComponent(item.name)}&deadline=${
+                        item.deadline
+                      }&lost_status=${item.lost_status}&active_flag=${
+                        item.active_flag
+                      }`}
+                    >
+                      {item.name} {item.deadline}
+                    </Link>
                     <IconButton
                       onClick={() => handleButtonClick(item.id, item.name)}
                     >
@@ -221,7 +233,6 @@ function EquipmentList() {
           </Table>
         </TableContainer>
       </Paper>
-
       <Pagination
         count={Math.ceil(data.length / ITEMS_PER_PAGE)}
         page={currentPage}
