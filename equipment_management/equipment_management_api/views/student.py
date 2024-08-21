@@ -11,7 +11,7 @@ class StudentView(APIView):
   def get(self, request, pk=None):
     if pk:
       try:
-        student = Student.objects.filter(pk=pk, delete_flag=False,admin_flag=False)
+        student = Student.objects.get(pk=pk, delete_flag=False,admin_flag=False)
         serializer = StudentSerializer(student)
         return Response(serializer.data)
       except Student.DoesNotExist:
@@ -36,3 +36,20 @@ class StudentView(APIView):
       # バリデーションエラーを処理
       print(serializer.errors)
       return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+ # PUTの時の更新処理
+  def put(self, request, pk):
+    try:
+      teacher = Student.objects.get(pk=pk)
+    except Student.DoesNotExist:
+      return Response({'error': 'Student not found'}, status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = StudentSerializer(teacher, data=request.data, partial=True)
+    if serializer.is_valid():
+      # パスワードが提供されている場合はハッシュ化
+      if 'password' in serializer.validated_data:
+        hashed_password = make_password(serializer.validated_data['password'])
+        serializer.validated_data['password'] = hashed_password
+      serializer.save()
+      return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
