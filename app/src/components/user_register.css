@@ -28,14 +28,15 @@
   margin-bottom: 6%;
 }
 
-.name_txt,
-.email_txt,
-.password_txt,
-.pwconf_txt {
+.username_input_text,
+.email_input_text,
+.pass_input_text,
+.passch_input_text {
   width: 75%;
 }
 
-.select {
+.curse_input_text,
+.school_year_input_text {
   width: 41%;
 }
 .subject {
