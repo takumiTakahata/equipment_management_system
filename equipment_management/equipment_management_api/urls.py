@@ -17,4 +17,5 @@ urlpatterns = [
     path('student/', StudentView.as_view()),
     path('student/<int:pk>/', StudentView.as_view()),
     path('equipment/', EquipmentView.as_view()),
+    path('equipment/<int:pk>/', EquipmentView.as_view()),
 ]
