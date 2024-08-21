@@ -49,6 +49,11 @@ function ReturnRequest() {
           </FixedSizeList>
         </Box>
       </div>
+      <div className="button">
+        <Button className="request_button" variant="contained">
+          返却申請
+        </Button>
+      </div>
     </div>
   );
 }
