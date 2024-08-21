@@ -1,4 +1,4 @@
-.user-register {
+#student_register {
   text-align: center;
   font-family: "Roboto", sans-serif;
 }
@@ -13,7 +13,7 @@
 }
 
 .required_txt {
-  /* margin: 3% auto 1% 0; */
+  margin: 3% auto 1% 0;
   color: red;
 }
 .error_message {
