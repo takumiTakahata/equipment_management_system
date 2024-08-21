@@ -52,3 +52,13 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.table_txt {
+  color: #627cff;
+}
+
+.paginate {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
