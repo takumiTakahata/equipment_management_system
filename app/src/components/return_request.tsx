@@ -59,6 +59,11 @@ function ReturnRequest() {
           続けて読み込む
         </Button>
       </div>
+      <div className="button">
+        <Button className="cancel_button" variant="contained">
+          キャンセル
+        </Button>
+      </div>
     </div>
   );
 }
