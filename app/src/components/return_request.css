@@ -1,0 +1,52 @@
+.title {
+  text-align: center;
+  margin-top: 5%;
+  font-size: 20px;
+}
+.return_request {
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+.button {
+  margin: 4% auto;
+}
+.product_name {
+  margin: 0 0 2% 2%;
+}
+.name {
+  margin: 0 0 0 2%;
+  font-size: 1.15rem;
+  width: 100%;
+}
+.MuiButton-root.request_button {
+  margin-left: 9%;
+  font-size: 20px;
+  width: 48%;
+  background-color: #00d12e;
+}
+
+.MuiButton-root.request_button:hover {
+  background-color: #00d12e;
+}
+.MuiButton-root.continue_button {
+  margin-top: 5%;
+  margin-left: 9%;
+  font-size: 20px;
+  width: 48%;
+  color: white;
+  background-color: #627cff;
+}
+.MuiButton-root.continue_button:hover {
+  background-color: #627cff;
+}
+.MuiButton-root.cancel_button {
+  margin-top: 5%;
+  margin-left: 9%;
+  font-size: 20px;
+  width: 48%;
+  background-color: #000000;
+}
+
+.MuiButton-root.cancel_button:hover {
+  background-color: #000000;
+}
