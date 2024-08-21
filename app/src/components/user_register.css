@@ -39,7 +39,8 @@
 .school_year_input_text {
   width: 41%;
 }
-.subject {
+.curse_input,
+.school_year_input {
   margin-top: 20px;
 }
 
