@@ -138,11 +138,7 @@ function StudentEdit() {
         </div>
         <div>
           <label>学科:</label>
-          <select
-            name="course_id"
-            value={studentData.course_id}
-            onChange={handleChange}
-          >
+          <select name="course_id" value={studentData.course_id}>
             <option value="">選択してください</option>
             {courses.map((course) => (
               <option key={course.id} value={course.id}>
