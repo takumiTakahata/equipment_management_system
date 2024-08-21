@@ -154,44 +154,47 @@ function EquipmentList() {
       <Button variant="outlined">検索</Button>
       <Button variant="outlined">備品登録</Button>
       <Button variant="outlined">すべて選択</Button>
-      <TableContainer component={Paper} className="tablecontainer">
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell></TableCell>
-              <TableCell>備品id</TableCell>
-              <TableCell>備品名</TableCell>
-              <TableCell>返却期限</TableCell>
-              <TableCell></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {currentItems.map((item) => (
-              <TableRow key={item.id}>
-                <TableCell>
-                  {item.id % 5 === 0 ? (
-                    <div className="red_circle">貸出中</div>
-                  ) : item.id % 3 === 0 ? (
-                    <div className="green_circle">貸出可</div>
-                  ) : (
-                    <div className="blue_circle">紛失中</div>
-                  )}
-                </TableCell>
-                <TableCell>{item.id}</TableCell>
-                <TableCell>{item.name}</TableCell>
-                <TableCell>{item.deadline}</TableCell>
-                <TableCell>
-                  <IconButton
-                    onClick={() => handleButtonClick(item.id, item.name)}
-                  >
-                    <AddIcon />
-                  </IconButton>
-                </TableCell>
+      <Paper elevation={0} sx={{ width: "70%", margin: "auto" }}>
+        <TableContainer className="tablecontainer">
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell></TableCell>
+                <TableCell className="table_txt">備品id</TableCell>
+                <TableCell className="table_txt">備品名</TableCell>
+                <TableCell className="table_txt">返却期限</TableCell>
+                <TableCell></TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {currentItems.map((item) => (
+                <TableRow key={item.id}>
+                  <TableCell>
+                    {item.id % 5 === 0 ? (
+                      <div className="red_circle">貸出中</div>
+                    ) : item.id % 3 === 0 ? (
+                      <div className="green_circle">貸出可</div>
+                    ) : (
+                      <div className="blue_circle">紛失中</div>
+                    )}
+                  </TableCell>
+                  <TableCell>{item.id}</TableCell>
+                  <TableCell>{item.name}</TableCell>
+                  <TableCell>{item.deadline}</TableCell>
+                  <TableCell>
+                    <IconButton
+                      onClick={() => handleButtonClick(item.id, item.name)}
+                    >
+                      <AddIcon />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+
       <Pagination
         count={Math.ceil(data.length / ITEMS_PER_PAGE)}
         page={currentPage}
