@@ -200,6 +200,7 @@ function EquipmentList() {
         page={currentPage}
         onChange={handlePageChange}
         color="primary"
+        className="paginate"
       />
       {/* サイドバー */}
       {isSidebarOpen && (
