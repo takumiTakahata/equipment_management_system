@@ -6,7 +6,7 @@ class Product(models.Model):
     categories = models.ForeignKey('Category', on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     deadline = models.IntegerField(null=False,default=0)
-    ISBN = models.CharField(max_length=16, unique=True, null=True)
+    ISBN = models.CharField(max_length=16, unique=False, null=True)
     lost_status = models.BooleanField(db_default=False)
     active_flag = models.BooleanField(db_default=True)
     delete_flag = models.BooleanField(db_default=False)
