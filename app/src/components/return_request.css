@@ -17,3 +17,14 @@
 .MuiButton-root.request_button:hover {
   background-color: #00d12e;
 }
+.MuiButton-root.continue_button {
+  margin-top: 5%;
+  margin-left: 9%;
+  font-size: 20px;
+  width: 48%;
+  color: white;
+  background-color: #627cff;
+}
+.MuiButton-root.continue_button:hover {
+  background-color: #627cff;
+}
