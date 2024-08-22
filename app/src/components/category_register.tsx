@@ -3,6 +3,7 @@ import Header from "./header";
 import { TextField } from "@mui/material";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
 
 interface FormInputs {
   category_name: string;
@@ -63,8 +64,17 @@ function CategoryRegister() {
             className="category_input_text"
             variant="outlined"
           />
+          {errorFlg ? (
+            <ErrorMessage
+              errors={errors}
+              name="category_name"
+              as="p"
+              className="error_message"
+            />
+          ) : (
+            <p className="required_txt">※必須</p>
+          )}
         </div>
-        <button type="submit">登録</button>
       </form>
     </div>
   );
