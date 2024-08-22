@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import Button from "@mui/material/Button";
 import Header from "./header";
+import "./department_register.css";
 
 interface FormInputs {
   department_name: string;
