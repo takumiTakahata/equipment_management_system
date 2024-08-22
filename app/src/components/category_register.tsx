@@ -4,6 +4,7 @@ import { TextField } from "@mui/material";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import Button from "@mui/material/Button";
 
 interface FormInputs {
   category_name: string;
@@ -75,6 +76,10 @@ function CategoryRegister() {
             <p className="required_txt">※必須</p>
           )}
         </div>
+
+        <Button type="submit" variant="contained" className="register_button">
+          登録
+        </Button>
       </form>
     </div>
   );
