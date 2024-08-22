@@ -13,3 +13,6 @@
 #category_register .error_message {
   color: red;
 }
+#category_register .category_input_text {
+  width: 35%;
+}
