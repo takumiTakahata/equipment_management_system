@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
 import Header from "./header";
 
 interface FormInputs {
@@ -85,6 +86,16 @@ function DepartmentRegister() {
             })}
           />
         </div>
+        {errorFlg ? (
+          <ErrorMessage
+            errors={errors}
+            name="department_name"
+            as="p"
+            className="error_message"
+          />
+        ) : (
+          <p className="required_txt">※必須</p>
+        )}
         <div>
           <TextField
             label="学年"
@@ -95,6 +106,16 @@ function DepartmentRegister() {
             })}
           />
         </div>
+        {errorFlg ? (
+          <ErrorMessage
+            errors={errors}
+            name="years"
+            as="p"
+            className="error_message"
+          />
+        ) : (
+          <p className="required_txt">※必須</p>
+        )}
         <button type="submit">Register</button>
       </form>
     </div>
