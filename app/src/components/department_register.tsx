@@ -21,16 +21,6 @@ function DepartmentRegister() {
   ) => {
     setDepartmentName(e.target.value);
   };
-  //エラーじゃないときにしか動作しない
-  const onSubmit = (data: FormInputs) => {
-    setDepartmentName(data.department_name);
-    setYears(data.years);
-  };
-  const {
-    register,
-    formState: { errors },
-  } = useForm<FormInputs>();
-
   //validationエラーが出た時
   const onError = (errors: Object) => {
     console.log(errors);
