@@ -50,7 +50,6 @@ function EquipmentList() {
 
         const result = await response.json();
         setEquipment(result); // Update state with fetched equipment
-        console.log(data);
       } catch (error) {
         console.error("An error occurred while fetching equipment", error);
       }
@@ -123,7 +122,6 @@ function EquipmentList() {
   const handleRemoveValue = (index: number) => {
     const newButtonValue = [...buttonValue];
     const newButtonId = [...buttonId];
-    console.log(index);
     newButtonValue.splice(index, 1); // 指定したインデックスの値を削除
     newButtonId.splice(index, 1);
     setButtonValue(newButtonValue);
@@ -135,10 +133,7 @@ function EquipmentList() {
     }
   };
 
-  const qrRegister = () => {
-    console.log(buttonValue);
-    console.log(buttonId);
-  };
+  const qrRegister = () => {};
 
   return (
     <div>
