@@ -18,7 +18,7 @@ import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useState, useEffect } from "react";
 import "./equipment_list.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface Equipment {
   id: number; // 備品ID
@@ -33,6 +33,7 @@ const ITEMS_PER_PAGE = 5;
 
 function EquipmentList() {
   const [data, setEquipment] = useState<Equipment[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchEquipment = async () => {
@@ -56,7 +57,7 @@ function EquipmentList() {
     };
 
     fetchEquipment();
-  }, [data]);
+  }, []);
 
   const loan_status = [
     {
@@ -133,7 +134,32 @@ function EquipmentList() {
     }
   };
 
-  const qrRegister = () => {};
+  const qrRegister = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/qr/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          buttonValue: buttonValue,
+          buttonId: buttonId,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to register QR");
+      }
+
+      const pdfBlob = await response.blob();
+      const pdfUrl = URL.createObjectURL(pdfBlob);
+      console.log("QR登録成功:", pdfUrl);
+
+      navigate("/view_pdf", { state: { pdfUrl } }); // PDFのURLを次のページに渡す
+    } catch (error) {
+      console.error("QR登録中にエラーが発生しました", error);
+    }
+  };
 
   return (
     <div>
@@ -251,7 +277,7 @@ function EquipmentList() {
             </div>
           ))}
           <Button onClick={qrRegister} variant="outlined">
-            QR登録
+            pdf生成
           </Button>
         </div>
       )}
