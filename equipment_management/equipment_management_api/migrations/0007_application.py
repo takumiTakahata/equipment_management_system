@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('thread_key', models.CharField(max_length=255)),
                 ('loan_date', models.DateField()),
                 ('return_date', models.DateField()),
-                ('delete_flag', models.BooleanField(db_default=models.Value(False))),
+                ('delete_flag', models.BooleanField(default=models.Value(False))),
                 ('loan_authorizer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='loan_authorizations', to=settings.AUTH_USER_MODEL)),
                 ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='equipment_management_api.product')),
                 ('return_authorizer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='return_authorizations', to=settings.AUTH_USER_MODEL)),

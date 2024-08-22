@@ -18,9 +18,9 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=255)),
                 ('deadline', models.DateField()),
                 ('ISBN', models.CharField(max_length=16, unique=True)),
-                ('lost_status', models.BooleanField(db_default=models.Value(False))),
-                ('active_flag', models.BooleanField(db_default=models.Value(True))),
-                ('delete_flag', models.BooleanField(db_default=models.Value(False))),
+                ('lost_status', models.BooleanField(default=models.Value(False))),
+                ('active_flag', models.BooleanField(default=models.Value(True))),
+                ('delete_flag', models.BooleanField(default=models.Value(False))),
                 ('categories', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='equipment_management_api.category')),
             ],
             options={

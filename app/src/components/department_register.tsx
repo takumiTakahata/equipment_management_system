@@ -1,13 +1,40 @@
 import React, { useState } from "react";
+import { TextField } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
+import Button from "@mui/material/Button";
+import Header from "./header";
+import "./department_register.css";
+
+interface FormInputs {
+  department_name: string;
+  years: string;
+}
 
 function DepartmentRegister() {
   const [departmentName, setDepartmentName] = useState("");
+  const [errorFlg, setErrorFlg] = useState(false);
+
   const [years, setYears] = useState("");
 
   const handleDepartmentNameChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setDepartmentName(e.target.value);
+  };
+  const {
+    register,
+    formState: { errors },
+  } = useForm<FormInputs>();
+
+  //validationエラーが出た時
+  const onError = (errors: Object) => {
+    console.log(errors);
+    if (Object.keys(errors).length > 0) {
+      setErrorFlg(true);
+    } else {
+      setErrorFlg(false);
+    }
   };
 
   const handleYearsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,27 +69,55 @@ function DepartmentRegister() {
   };
 
   return (
-    <div>
+    <div id="department_register">
+      <Header />
+      <h1 className="page_title">学科登録</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="department_name">学科名</label>
-          <input
-            type="text"
-            id="department_name"
-            value={departmentName}
+          <TextField
+            label="学科名"
+            className="department_input_text"
+            variant="outlined"
+            {...register("department_name", {
+              required: "学科名を入力してください",
+            })}
             onChange={handleDepartmentNameChange}
           />
         </div>
+        {errorFlg ? (
+          <ErrorMessage
+            errors={errors}
+            name="department_name"
+            as="p"
+            className="error_message"
+          />
+        ) : (
+          <p className="required_txt">※必須</p>
+        )}
         <div>
-          <label htmlFor="years">年数</label>
-          <input
-            type="text"
-            id="years"
-            value={years}
+          <TextField
+            label="年数"
+            className="years_input_text"
+            variant="outlined"
+            {...register("years", {
+              required: "年数を入力してください",
+            })}
             onChange={handleYearsChange}
           />
         </div>
-        <button type="submit">Register</button>
+        {errorFlg ? (
+          <ErrorMessage
+            errors={errors}
+            name="years"
+            as="p"
+            className="error_message"
+          />
+        ) : (
+          <p className="required_txt">※必須</p>
+        )}
+        <Button type="submit" variant="contained" className="register_button">
+          登録
+        </Button>
       </form>
     </div>
   );

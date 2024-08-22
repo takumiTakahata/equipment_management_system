@@ -1,0 +1,7 @@
+services:
+  - type: web
+    runtime: python
+    name: equipment_management
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python manage.py runwaitress --host=0.0.0.0 --port=$PORT"
+    plan: free

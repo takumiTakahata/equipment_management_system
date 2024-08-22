@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='user',
             name='admin_flag',
-            field=models.BooleanField(db_default=models.Value(False), verbose_name='管理者フラグ'),
+            field=models.BooleanField(default=models.Value(False), verbose_name='管理者フラグ'),
         ),
         migrations.AddField(
             model_name='user',
@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='user',
             name='delete_flag',
-            field=models.BooleanField(db_default=models.Value(False), verbose_name='削除フラグ'),
+            field=models.BooleanField(default=models.Value(False), verbose_name='削除フラグ'),
         ),
         migrations.AddField(
             model_name='user',
