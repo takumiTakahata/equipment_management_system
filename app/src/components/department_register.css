@@ -1,0 +1,19 @@
+#department_register {
+  text-align: center;
+}
+#department_register .page_title {
+  font-size: 20px;
+  margin-bottom: 3%;
+  font-weight: bold;
+}
+#department_register .required_txt {
+  margin: 3% auto 1% 0;
+  color: red;
+}
+#department .error_message {
+  color: red;
+}
+#department_register .department_input_text,
+#department_register .years_input_text {
+  width: 35%;
+}
