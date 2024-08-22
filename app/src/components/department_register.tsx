@@ -85,6 +85,7 @@ function DepartmentRegister() {
             {...register("department_name", {
               required: "学科名を入力してください",
             })}
+            onChange={handleDepartmentNameChange}
           />
         </div>
         {errorFlg ? (
@@ -105,6 +106,7 @@ function DepartmentRegister() {
             {...register("years", {
               required: "年数を入力してください",
             })}
+            onChange={handleYearsChange}
           />
         </div>
         {errorFlg ? (
