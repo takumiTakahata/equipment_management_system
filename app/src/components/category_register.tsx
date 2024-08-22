@@ -1,3 +1,6 @@
+import React from "react";
+import Header from "./header";
+
 function CategoryRegister() {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
