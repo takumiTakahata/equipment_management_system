@@ -35,12 +35,12 @@
 #student_register .school_year_input {
   margin-top: 20px;
 }
-.MuiButton-root.register_button {
+#student_register .MuiButton-root.register_button {
   margin-top: 15%;
   width: 25%;
   background-color: #00d12e;
 }
-.MuiButton-root.register_button:hover {
+#student_register .MuiButton-root.register_button:hover {
   background-color: #00d12e;
 }
 .log {
