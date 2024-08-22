@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { TextField } from "@mui/material";
+import { useForm } from "react-hook-form";
 import Header from "./header";
 
 interface FormInputs {
@@ -22,6 +24,10 @@ function DepartmentRegister() {
     setDepartmentName(data.department_name);
     setYears(data.years);
   };
+  const {
+    register,
+    formState: { errors },
+  } = useForm<FormInputs>();
 
   //validationエラーが出た時
   const onError = (errors: Object) => {
@@ -70,12 +76,13 @@ function DepartmentRegister() {
       <h1 className="page_title">学科登録</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="department_name">学科名</label>
-          <input
-            type="text"
-            id="department_name"
-            value={departmentName}
-            onChange={handleDepartmentNameChange}
+          <TextField
+            label="学科名"
+            className="department_input_text"
+            variant="outlined"
+            {...register("department_name", {
+              required: "メールアドレスを入力してください",
+            })}
           />
         </div>
         <div>
