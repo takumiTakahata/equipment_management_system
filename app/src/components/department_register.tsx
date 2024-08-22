@@ -81,7 +81,7 @@ function DepartmentRegister() {
             className="department_input_text"
             variant="outlined"
             {...register("department_name", {
-              required: "メールアドレスを入力してください",
+              required: "学科名を入力してください",
             })}
           />
         </div>
@@ -91,7 +91,7 @@ function DepartmentRegister() {
             className="years_input_text"
             variant="outlined"
             {...register("years", {
-              required: "メールアドレスを入力してください",
+              required: "学年を入力してください",
             })}
           />
         </div>
