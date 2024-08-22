@@ -56,7 +56,7 @@ function EquipmentList() {
     };
 
     fetchEquipment();
-  }, [data]);
+  }, []);
 
   const loan_status = [
     {
@@ -133,7 +133,9 @@ function EquipmentList() {
     }
   };
 
-  const qrRegister = () => {};
+  const qrRegister = () => {
+    console.log(buttonId);
+  };
 
   return (
     <div>
