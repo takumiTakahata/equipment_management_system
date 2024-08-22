@@ -6,8 +6,8 @@ class User(AbstractUser):
   course = models.ForeignKey("Course",on_delete=models.CASCADE)
   school_year = models.IntegerField('学年',null=True)
   email = models.EmailField('メールアドレス', unique=True)
-  admin_flag = models.BooleanField('管理者フラグ', db_default=False)
-  delete_flag = models.BooleanField('削除フラグ', db_default=False)
+  admin_flag = models.BooleanField('管理者フラグ', default=False)
+  delete_flag = models.BooleanField('削除フラグ', default=False)
 
   class meta:
     db_table = 'user'

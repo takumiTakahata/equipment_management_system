@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100, verbose_name='学科名')),
                 ('course_year', models.IntegerField(verbose_name='学科年')),
-                ('delete_flag', models.BooleanField(db_default=models.Value(False), verbose_name='削除フラグ')),
+                ('delete_flag', models.BooleanField(default=models.Value(False), verbose_name='削除フラグ')),
             ],
             options={
                 'verbose_name': '学科',
