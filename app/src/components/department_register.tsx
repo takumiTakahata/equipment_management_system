@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Header from "./header";
 
 function DepartmentRegister() {
   const [departmentName, setDepartmentName] = useState("");
@@ -43,6 +44,7 @@ function DepartmentRegister() {
 
   return (
     <div>
+      <Header />
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="department_name">学科名</label>
