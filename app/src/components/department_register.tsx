@@ -73,7 +73,7 @@ function DepartmentRegister() {
   };
 
   return (
-    <div>
+    <div id="department_register">
       <Header />
       <h1 className="page_title">学科登録</h1>
       <form onSubmit={handleSubmit}>
