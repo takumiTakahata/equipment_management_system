@@ -99,11 +99,11 @@ function DepartmentRegister() {
         )}
         <div>
           <TextField
-            label="学年"
+            label="年数"
             className="years_input_text"
             variant="outlined"
             {...register("years", {
-              required: "学年を入力してください",
+              required: "年数を入力してください",
             })}
           />
         </div>
