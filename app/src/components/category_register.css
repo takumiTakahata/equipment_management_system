@@ -6,3 +6,10 @@
   margin-bottom: 3%;
   font-weight: bold;
 }
+#category_register .required_txt {
+  margin: 3% auto 1% 0;
+  color: red;
+}
+#category_register .error_message {
+  color: red;
+}
