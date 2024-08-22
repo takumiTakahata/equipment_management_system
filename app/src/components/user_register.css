@@ -7,11 +7,11 @@
   margin-bottom: 3%;
   font-weight: bold;
 }
-.required_txt {
+#student_register .required_txt {
   margin: 3% auto 1% 0;
   color: red;
 }
-.error_message {
+#student_register .error_message {
   color: red;
 }
 .username_input,
