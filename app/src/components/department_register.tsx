@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import Button from "@mui/material/Button";
 import Header from "./header";
 
 interface FormInputs {
@@ -116,7 +117,9 @@ function DepartmentRegister() {
         ) : (
           <p className="required_txt">※必須</p>
         )}
-        <button type="submit">Register</button>
+        <Button type="submit" variant="contained" className="register_button">
+          登録
+        </Button>
       </form>
     </div>
   );
