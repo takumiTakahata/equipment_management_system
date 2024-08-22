@@ -1,14 +1,36 @@
 import React, { useState } from "react";
 import Header from "./header";
 
+interface FormInputs {
+  department_name: string;
+  years: string;
+}
+
 function DepartmentRegister() {
   const [departmentName, setDepartmentName] = useState("");
+  const [errorFlg, setErrorFlg] = useState(false);
+
   const [years, setYears] = useState("");
 
   const handleDepartmentNameChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setDepartmentName(e.target.value);
+  };
+  //エラーじゃないときにしか動作しない
+  const onSubmit = (data: FormInputs) => {
+    setDepartmentName(data.department_name);
+    setYears(data.years);
+  };
+
+  //validationエラーが出た時
+  const onError = (errors: Object) => {
+    console.log(errors);
+    if (Object.keys(errors).length > 0) {
+      setErrorFlg(true);
+    } else {
+      setErrorFlg(false);
+    }
   };
 
   const handleYearsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
