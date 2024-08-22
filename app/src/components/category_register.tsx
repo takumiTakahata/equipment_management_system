@@ -32,6 +32,7 @@ function CategoryRegister() {
 
   return (
     <div>
+      <Header />
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="category_name">カテゴリー名</label>
