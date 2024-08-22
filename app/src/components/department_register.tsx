@@ -45,6 +45,7 @@ function DepartmentRegister() {
   return (
     <div>
       <Header />
+      <h1 className="page_title">学科登録</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="department_name">学科名</label>
