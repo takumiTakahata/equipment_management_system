@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
     'corsheaders',
+    'django_extensions',
 ]
 AUTH_USER_MODEL = 'equipment_management_api.User'
 
