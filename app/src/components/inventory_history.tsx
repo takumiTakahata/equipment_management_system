@@ -7,6 +7,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { Accordion } from "@mui/material";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
 
 function createInventoryHistory(
   date: string,
@@ -50,7 +53,18 @@ function InventoryHistory() {
                 <TableCell component="th" scope="row">
                   {item.date}
                 </TableCell>
-                <TableCell>{item.lost_property}</TableCell>
+                <TableCell>
+                  {item.lost_property.length > 0 ? (
+                    <Accordion>
+                      <AccordionSummary>紛失物あり</AccordionSummary>
+                      {item.lost_property.map((content) => (
+                        <AccordionDetails>{content}</AccordionDetails>
+                      ))}
+                    </Accordion>
+                  ) : (
+                    <p>紛失物なし</p>
+                  )}
+                </TableCell>
                 <TableCell>{item.implementer}</TableCell>
               </TableRow>
             ))}
