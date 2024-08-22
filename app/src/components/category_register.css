@@ -1,0 +1,8 @@
+#category_register {
+  text-align: center;
+}
+#category_register .page_title {
+  font-size: 20px;
+  margin-bottom: 3%;
+  font-weight: bold;
+}
