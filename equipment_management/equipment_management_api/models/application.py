@@ -10,7 +10,7 @@ class Application(models.Model):
   return_authorizer = models.ForeignKey(User, related_name='return_authorizations', on_delete=models.CASCADE)
   loan_date = models.DateField()
   return_date = models.DateField()
-  delete_flag = models.BooleanField(db_default=False)
+  delete_flag = models.BooleanField(default=False)
 
   class Meta:
     db_table = 'application'
