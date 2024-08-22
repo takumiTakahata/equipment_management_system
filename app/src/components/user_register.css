@@ -2,7 +2,7 @@
   text-align: center;
   font-family: "Roboto", sans-serif;
 }
-.page_title {
+#student_register .page_title {
   font-size: 20px;
   margin-bottom: 3%;
   font-weight: bold;
