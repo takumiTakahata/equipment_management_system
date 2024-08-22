@@ -13,16 +13,16 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='course',
             name='delete_flag',
-            field=models.BooleanField(db_default=False, verbose_name='削除フラグ'),
+            field=models.BooleanField(default=False, verbose_name='削除フラグ'),
         ),
         migrations.AlterField(
             model_name='user',
             name='admin_flag',
-            field=models.BooleanField(db_default=False, verbose_name='管理者フラグ'),
+            field=models.BooleanField(default=False, verbose_name='管理者フラグ'),
         ),
         migrations.AlterField(
             model_name='user',
             name='delete_flag',
-            field=models.BooleanField(db_default=False, verbose_name='削除フラグ'),
+            field=models.BooleanField(default=False, verbose_name='削除フラグ'),
         ),
     ]

@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             name='InventoryList',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('delete_flag', models.BooleanField(db_default=models.Value(False), verbose_name='削除フラグ')),
+                ('delete_flag', models.BooleanField(default=models.Value(False), verbose_name='削除フラグ')),
                 ('inventories', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='equipment_management_api.inventory', verbose_name='棚卸Id')),
                 ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='equipment_management_api.product', verbose_name='備品Id')),
             ],

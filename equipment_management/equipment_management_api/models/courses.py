@@ -4,7 +4,7 @@ from django.db import models
 class Course(models.Model):
     name = models.CharField('学科名', max_length=100)
     course_year = models.IntegerField('学科年')
-    delete_flag = models.BooleanField('削除フラグ', db_default=False)
+    delete_flag = models.BooleanField('削除フラグ', default=False)
 
     class Meta:
         db_table = 'courses'

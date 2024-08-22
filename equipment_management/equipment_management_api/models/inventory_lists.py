@@ -4,7 +4,7 @@ from django.db import models
 class InventoryList(models.Model):
     inventories = models.ForeignKey('Inventory', on_delete=models.CASCADE, verbose_name='棚卸Id')
     product = models.ForeignKey('Product', on_delete=models.CASCADE, verbose_name='備品Id')
-    delete_flag = models.BooleanField('削除フラグ', db_default=False)
+    delete_flag = models.BooleanField('削除フラグ', default=False)
 
     class Meta:
         db_table = 'inventory_lists'
