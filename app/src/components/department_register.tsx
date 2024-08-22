@@ -86,12 +86,13 @@ function DepartmentRegister() {
           />
         </div>
         <div>
-          <label htmlFor="years">年数</label>
-          <input
-            type="text"
-            id="years"
-            value={years}
-            onChange={handleYearsChange}
+          <TextField
+            label="学年"
+            className="years_input_text"
+            variant="outlined"
+            {...register("years", {
+              required: "メールアドレスを入力してください",
+            })}
           />
         </div>
         <button type="submit">Register</button>
