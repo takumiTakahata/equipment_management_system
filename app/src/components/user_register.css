@@ -14,7 +14,6 @@
 .error_message {
   color: red;
 }
-
 .username_input,
 .email_input,
 .pass_input,
@@ -22,14 +21,12 @@
   margin-top: 3%;
   margin-bottom: 6%;
 }
-
 .username_input_text,
 .email_input_text,
 .pass_input_text,
 .passch_input_text {
   width: 75%;
 }
-
 .curse_input_text,
 .school_year_input_text {
   width: 41%;
@@ -38,17 +35,14 @@
 .school_year_input {
   margin-top: 20px;
 }
-
 .MuiButton-root.register_button {
   margin-top: 15%;
   width: 25%;
   background-color: #00d12e;
 }
-
 .MuiButton-root.register_button:hover {
   background-color: #00d12e;
 }
-
 .log {
   text-align: center;
   color: black;
@@ -56,35 +50,28 @@
 .log_title {
   text-align: center;
 }
-
 #alert-dialog-slide-description {
   font-size: 20px;
   font-weight: bold;
 }
-
 .log_value {
   font-size: 25px;
 }
-
 .MuiDialogActions-root.popup_button {
   display: flex;
   justify-content: center;
 }
-
 .MuiButton-root.popup_return_button {
   margin-right: 10%;
   background-color: #000000;
 }
-
 .MuiButton-root.popup_return_button:hover {
   background-color: #000000;
 }
-
 .MuiButton-root.popup_register_button {
   margin-left: 10%;
   background-color: #00d12e;
 }
-
 .MuiButton-root.popup_register_button:hover {
   background-color: #00d12e;
 }
