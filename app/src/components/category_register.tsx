@@ -56,7 +56,7 @@ function CategoryRegister() {
   };
 
   return (
-    <div>
+    <div id="category_register">
       <Header />
       <h1 className="page_title">カテゴリー登録</h1>
       <form onSubmit={handleSubmit}>
