@@ -21,6 +21,11 @@ function DepartmentRegister() {
   ) => {
     setDepartmentName(e.target.value);
   };
+  const {
+    register,
+    formState: { errors },
+  } = useForm<FormInputs>();
+
   //validationエラーが出た時
   const onError = (errors: Object) => {
     console.log(errors);
