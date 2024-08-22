@@ -1,7 +1,29 @@
 import React from "react";
 import Header from "./header";
+import { TextField } from "@mui/material";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+
+interface FormInputs {
+  category_name: string;
+}
 
 function CategoryRegister() {
+  const [errorFlg, setErrorFlg] = useState(false);
+  const {
+    register,
+    formState: { errors },
+  } = useForm<FormInputs>();
+
+  //validationエラーが出た時
+  const onError = (errors: Object) => {
+    console.log(errors);
+    if (Object.keys(errors).length > 0) {
+      setErrorFlg(true);
+    } else {
+      setErrorFlg(false);
+    }
+  };
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const name = (document.getElementById("category_name") as HTMLInputElement)
@@ -33,12 +55,16 @@ function CategoryRegister() {
   return (
     <div>
       <Header />
+      <h1 className="page_title">カテゴリー登録</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="category_name">カテゴリー名</label>
-          <input type="text" id="category_name" />
+          <TextField
+            label="カテゴリー"
+            className="category_input_text"
+            variant="outlined"
+          />
         </div>
-        <button type="submit">Register</button>
+        <button type="submit">登録</button>
       </form>
     </div>
   );
