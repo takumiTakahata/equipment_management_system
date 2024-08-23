@@ -31,8 +31,12 @@ function LoanApproval() {
         </div>
       </Card>
       <div className="loan_button">
-        <Button variant="outlined">キャンセル</Button>
-        <Button variant="outlined">承認</Button>
+        <Button variant="outlined" className="loan_cancel_btn">
+          キャンセル
+        </Button>
+        <Button variant="outlined" className="loan_apploval_btn">
+          承認
+        </Button>
       </div>
     </div>
   );
