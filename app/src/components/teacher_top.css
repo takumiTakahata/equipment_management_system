@@ -1,4 +1,4 @@
-.red_circle {
+#teacher_top .red_circle {
   width: 60px;
   height: 60px;
   background-color: #ed6666;
@@ -9,7 +9,7 @@
   font-size: 18px;
 }
 
-.green_circle {
+#teacher_top .green_circle {
   width: 60px;
   height: 60px;
   background-color: #14ff00;
