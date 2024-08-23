@@ -1,4 +1,4 @@
-.red_circle {
+#equipment_list .red_circle {
   width: 60px;
   height: 60px;
   background-color: #ed6666;
@@ -9,7 +9,7 @@
   font-size: 18px;
 }
 
-.green_circle {
+equipment_list .green_circle {
   width: 60px;
   height: 60px;
   background-color: #14ff00;
@@ -20,7 +20,7 @@
   font-size: 18px;
 }
 
-.blue_circle {
+#equipment_list .blue_circle {
   width: 60px;
   height: 60px;
   background-color: #83a5fe;
@@ -31,7 +31,7 @@
   font-size: 18px;
 }
 
-.sidebar {
+#equipment_list .sidebar {
   position: fixed;
   left: 0;
   top: 0;
@@ -43,21 +43,21 @@
   transition: transform 0.3s ease-in-out;
 }
 
-.sidebar-hidden {
+#equipment_list .sidebar-hidden {
   transform: translateX(100%);
 }
 
-.sidebar_content {
+#equipment_list .sidebar_content {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.table_txt {
+#equipment_list .table_txt {
   color: #627cff;
 }
 
-.paginate {
+#equipment_list .paginate {
   display: flex;
   justify-content: center;
   margin-top: 20px;
