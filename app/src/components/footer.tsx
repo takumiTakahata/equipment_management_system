@@ -30,11 +30,11 @@ export default function Footer() {
     navigate("");
   };
   return (
-    <div id="footer">
+    <div>
       <footer>
         <Box className="footer_box">
           <BottomNavigation
-            className="custom-bottom-navigation"
+            className="custom_bottom_navigation"
             showLabels //ラベルが常に表示されるために必要
             value={value} //現在選択されているナビゲーションアイテムの値を表す
             onChange={(event, newValue) => {
