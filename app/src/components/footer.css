@@ -1,4 +1,4 @@
-#footer footer {
+footer {
   background-color: #e0e0e0;
   font-family: "Roboto", sans-serif;
   justify-content: space-around; /*フッター内のアイテム間に均等なスペースをおく*/
@@ -7,17 +7,17 @@
   bottom: 0;
   width: 100%;
 }
-#footer .box {
+.footer_box {
   width: 100%;
 }
-#footer .custom-bottom-navigation .MuiBottomNavigationAction-root {
+.custom_bottom_navigation .MuiBottomNavigationAction-root {
   background-color: #e0e0e0;
   padding: 0;
 }
 
-#footer .borrow-button .MuiBottomNavigationAction-label,
-#footer .list-button .MuiBottomNavigationAction-label,
-#footer .borrowing-button .MuiBottomNavigationAction-label,
-#footer .logout-button .MuiBottomNavigationAction-label {
+.footer_borrow_button .MuiBottomNavigationAction-label,
+.footer_list_button .MuiBottomNavigationAction-label,
+.footer_borrowing_button .MuiBottomNavigationAction-label,
+.footer_logout-button .MuiBottomNavigationAction-label {
   font-size: 14px;
 }
