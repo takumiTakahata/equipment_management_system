@@ -1,86 +1,86 @@
 @charset "UTF-8";
 #teacher_register p,
-h1 {
+#teacher_register h1 {
   font-family: "Roboto", sans-serif;
 }
 
-.page_title {
+#teacher_register .page_title {
   font-size: 28px;
   margin: 0;
   margin-top: 1%;
 }
 
-.required_txt {
+#teacher_register .required_txt {
   color: #ff0000;
   font-size: 16px;
   margin: 0;
 }
 
-.error_message {
+#teacher_register .error_message {
   color: #ff0000;
 }
 
-.center {
+#teacher_register .center {
   text-align: center;
 }
 
-.username_input,
-.email_input,
-.pass_input,
-.passch_input {
+#teacher_register .username_input,
+#teacher_register .email_input,
+#teacher_register .pass_input,
+#teacher_register .passch_input {
   margin-top: 1%;
   margin-bottom: 0.5%;
 }
 
-.username_input_text,
-.email_input_text,
-.pass_input_text,
-.passch_input_text {
+#teacher_register .username_input_text,
+#teacher_register .email_input_text,
+#teacher_register .pass_input_text,
+#teacher_register .passch_input_text {
   width: 25%;
 }
 
-.MuiButton-root.register_button {
+#teacher_register .MuiButton-root.register_button {
   margin-top: 1%;
   width: 25%;
   background-color: #00d12e;
 }
 
-.MuiButton-root.register_button:hover {
+#teacher_register .MuiButton-root.register_button:hover {
   background-color: #00d12e;
 }
 
-.popup {
+#teacher_register .popup {
   text-align: center;
 }
 
-.MuiDialogTitle-root.popup_title,
-.popup_text {
+#teacher_register .MuiDialogTitle-root.popup_title,
+#teacher_register .popup_text {
   font-weight: bold;
 }
 
-.popup_text {
+#teacher_register .popup_text {
   margin-top: 0.5%;
 }
 
-.MuiDialogActions-root.popup_button {
+#teacher_register .MuiDialogActions-root.popup_button {
   display: flex;
   justify-content: center;
 }
 
-.MuiButton-root.popup_return_button {
+#teacher_register .MuiButton-root.popup_return_button {
   margin-right: 10%;
   background-color: #000000;
 }
 
-.MuiButton-root.popup_return_button:hover {
+#teacher_register .MuiButton-root.popup_return_button:hover {
   background-color: #000000;
 }
 
-.MuiButton-root.popup_register_button {
+#teacher_register .MuiButton-root.popup_register_button {
   margin-left: 10%;
   background-color: #00d12e;
 }
 
-.MuiButton-root.popup_register_button:hover {
+#teacher_register .MuiButton-root.popup_register_button:hover {
   background-color: #00d12e;
 }
