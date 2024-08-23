@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useRef } from "react";
 import {
   TextField,
   MenuItem,
@@ -16,9 +17,8 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from "@mui/icons-material/Clear";
-import { useState, useEffect } from "react";
-import "./equipment_list.css";
 import { Link, useNavigate } from "react-router-dom";
+import "./equipment_list.css";
 
 interface Equipment {
   id: number; // 備品ID
@@ -33,6 +33,7 @@ const ITEMS_PER_PAGE = 5;
 
 function EquipmentList() {
   const [data, setEquipment] = useState<Equipment[]>([]);
+  const buttonRefs = useRef<(HTMLDivElement | null)[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -109,7 +110,11 @@ function EquipmentList() {
   const currentItems = data.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   // プラスボタンを押したときに呼ばれる関数
-  const handleButtonClick = async (id: number, value: string) => {
+  const handleButtonClick = async (
+    id: number,
+    value: string,
+    index: number
+  ) => {
     // 非同期処理を挿入（例: APIコールやタイムアウトなど）
     await new Promise((resolve) => setTimeout(resolve, 500)); // 0.5秒待つ
 
@@ -117,6 +122,11 @@ function EquipmentList() {
       setButtonValue([...buttonValue, value]);
       setButtonId([...buttonId, id]);
       setIsSidebarOpen(true);
+      setTimeout(() => {
+        if (buttonRefs.current[index]) {
+          buttonRefs.current[index]?.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 300);
     }
   };
 
@@ -204,7 +214,7 @@ function EquipmentList() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {currentItems.map((item) => (
+              {currentItems.map((item, index) => (
                 <TableRow key={item.id}>
                   <TableCell>
                     {item.lost_status ? (
@@ -243,7 +253,9 @@ function EquipmentList() {
                       {item.name} {item.deadline}
                     </Link>
                     <IconButton
-                      onClick={() => handleButtonClick(item.id, item.name)}
+                      onClick={() =>
+                        handleButtonClick(item.id, item.name, index)
+                      }
                     >
                       <AddIcon />
                     </IconButton>
@@ -266,7 +278,11 @@ function EquipmentList() {
         <div className="sidebar">
           <h2>QRコード生成リスト</h2>
           {buttonValue.map((value, index) => (
-            <div key={index} className="sidebar_content">
+            <div
+              key={index}
+              className="sidebar_content"
+              ref={(el) => (buttonRefs.current[index] = el)}
+            >
               <p>{value}</p>
               <IconButton
                 onClick={() => handleRemoveValue(index)}

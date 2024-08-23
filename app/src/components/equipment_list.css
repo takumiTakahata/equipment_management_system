@@ -36,11 +36,12 @@ equipment_list .green_circle {
   left: 0;
   top: 0;
   width: 300px;
-  height: 100%;
+  height: calc(100% - 5%);
   background-color: #f0f0f0;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
   padding: 20px;
   transition: transform 0.3s ease-in-out;
+  overflow-y: auto;
 }
 
 #equipment_list .sidebar-hidden {
