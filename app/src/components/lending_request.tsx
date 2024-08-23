@@ -25,6 +25,9 @@ function renderRow(props: ListChildComponentProps) {
 }
 
 function LendingRequest() {
+  const handleClose = () => {
+    localStorage.removeItem("qrresult");
+  };
   return (
     <div id="lending_request">
       <p className="title">
@@ -62,7 +65,11 @@ function LendingRequest() {
         </Button>
       </div>
       <div className="button">
-        <Button className="cancel_button" variant="contained">
+        <Button
+          className="cancel_button"
+          variant="contained"
+          onClick={handleClose}
+        >
           キャンセル
         </Button>
       </div>
