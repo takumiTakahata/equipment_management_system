@@ -34,7 +34,12 @@ const Inventory: FC<Props> = () => {
         if (qrCodeData) {
           console.log(qrCodeData.data);
           if (!qrresult.includes(qrCodeData.data)) {
-            localStorage.setItem("qrresult", JSON.stringify(qrCodeData.data));
+            const newQrresult = [...qrresult, qrCodeData.data];
+            console.log(newQrresult);
+            localStorage.setItem("qrresult", JSON.stringify(newQrresult));
+            setQrresult(newQrresult);
+            setResult(qrCodeData.data);
+            // setQrresult([]);
             navigate("/lending_request");
             return;
           } else {
@@ -44,7 +49,7 @@ const Inventory: FC<Props> = () => {
         setTimeout(scanQrCode, 100);
       }
     }
-  }, []);
+  }, [qrresult]);
   const handleClose = () => {
     localStorage.removeItem("qrresult");
     setQrresult([]);

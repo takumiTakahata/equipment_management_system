@@ -27,9 +27,13 @@ function renderRow(props: ListChildComponentProps) {
 
 function LendingRequest() {
   const navigate = useNavigate();
+
   const handleClose = () => {
     localStorage.removeItem("qrresult");
-    navigate("./user_top");
+    navigate("/user_top");
+  };
+  const continueReading = () => {
+    navigate("/qr_reading");
   };
   return (
     <div id="lending_request">
@@ -63,7 +67,12 @@ function LendingRequest() {
         </Button>
       </div>
       <div className="button">
-        <Button className="continue_button" variant="contained" color="primary">
+        <Button
+          className="continue_button"
+          variant="contained"
+          color="primary"
+          onClick={continueReading}
+        >
           続けて読み込む
         </Button>
       </div>
