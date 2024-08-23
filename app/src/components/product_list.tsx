@@ -110,7 +110,7 @@ function ProductList() {
 
   return (
     <div id="product_list">
-      <p className="title">備品一覧</p>
+      <p className="page_title">備品一覧</p>
       <div className="search">
         <div className="category">
           <TextField
