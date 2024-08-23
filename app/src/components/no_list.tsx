@@ -1,3 +1,12 @@
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import { Button } from "@mui/material";
+
 function createNoList(id: number, name: string, deadline: string) {
   return {
     id, //備品id
@@ -18,8 +27,32 @@ const rows = data.map((item) => {
 
 function NoList() {
   return (
-    <div>
+    <div className="no_list">
       <h2>ないものリスト</h2>
+      <Paper elevation={0} sx={{ width: "70%", margin: "auto" }}>
+        <TableContainer className="tablecontainer">
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>実施日</TableCell>
+                <TableCell>紛失物</TableCell>
+                <TableCell>返却期限</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((item) => (
+                <TableRow className="tableRow" key={item.id}>
+                  <TableCell component="th" scope="row">
+                    {item.id}
+                  </TableCell>
+                  <TableCell>{item.name}</TableCell>
+                  <TableCell>{item.deadline}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
     </div>
   );
 }
