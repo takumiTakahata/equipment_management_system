@@ -65,6 +65,7 @@ function CategoryRegister() {
             label="カテゴリー"
             className="category_input_text"
             variant="outlined"
+            id="category_name"
           />
           {errorFlg ? (
             <ErrorMessage
