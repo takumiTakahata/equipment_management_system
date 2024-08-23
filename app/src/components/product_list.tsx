@@ -56,7 +56,7 @@ function ProductList() {
     },
   ];
   return (
-    <div className="body">
+    <div id="product_list">
       <p className="title">備品一覧</p>
       <div className="search">
         <div className="category">
