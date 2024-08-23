@@ -7,6 +7,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
 import Header from "./header";
+import "./no_list.css";
 
 function createNoList(id: number, name: string, deadline: string) {
   return {
@@ -28,9 +29,9 @@ const rows = data.map((item) => {
 
 function NoList() {
   return (
-    <div className="no_list">
+    <div id="no_list">
       <Header />
-      <h2>ないものリスト</h2>
+      <h2 className="no_list_title">ないものリスト</h2>
       <Paper elevation={0} sx={{ width: "70%", margin: "auto" }}>
         <TableContainer className="tablecontainer">
           <Table aria-label="simple table">
