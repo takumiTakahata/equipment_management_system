@@ -27,7 +27,7 @@ function AdminRoute() {
     <div>
       <Routes>
         {/* ログイン画面 */}
-        <Route path="/login" element={<Login />} />
+        <Route path="/admin_login" element={<Login />} />
         {/* 教員TOP画面 */}
         <Route path="/teacher_top" element={<TeacherTop />} />
         {/* 貸出承認画面 */}
