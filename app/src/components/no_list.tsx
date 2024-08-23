@@ -6,6 +6,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
+import Header from "./header";
 
 function createNoList(id: number, name: string, deadline: string) {
   return {
@@ -28,6 +29,7 @@ const rows = data.map((item) => {
 function NoList() {
   return (
     <div className="no_list">
+      <Header />
       <h2>ないものリスト</h2>
       <Paper elevation={0} sx={{ width: "70%", margin: "auto" }}>
         <TableContainer className="tablecontainer">
@@ -53,6 +55,11 @@ function NoList() {
           </Table>
         </TableContainer>
       </Paper>
+      <div className="button">
+        <Button variant="outlined">
+          ステータスを紛失中に変更して棚卸を終了
+        </Button>
+      </div>
     </div>
   );
 }
