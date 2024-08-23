@@ -1,6 +1,6 @@
 import jsQR from "jsqr";
 import React, { useRef, useState, useEffect, useCallback, FC } from "react";
-import "./inventory.css";
+import "./qr_reading.css";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 type Props = {};
@@ -112,7 +112,12 @@ const Inventory: FC<Props> = () => {
     <div id="inventory">
       {!result && (
         <div className="qr_display">
-          <video ref={videoRef} autoPlay playsInline className="video" />
+          <video
+            ref={videoRef}
+            autoPlay
+            playsInline
+            className="reading_video"
+          />
           <canvas ref={canvasRef} className="canvas" />
           {/* <p>
             {qrresult.map((item, index) => (
@@ -129,7 +134,6 @@ const Inventory: FC<Props> = () => {
               <button onClick={handleClose}>終了する</button>
             </DialogActions>
           </Dialog>
-          <p>{result}</p>
         </div>
       )}
       {error && <p className="text-center text-xs text-red-500">{error}</p>}
