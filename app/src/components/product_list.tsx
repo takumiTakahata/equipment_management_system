@@ -9,22 +9,47 @@ import SearchIcon from "@mui/icons-material/Search";
 import Box from "@mui/material/Box";
 import "./product_list.css";
 import Footer from "./footer";
+import { useState, useEffect } from "react";
 
-function renderRow(props: ListChildComponentProps) {
-  const { index, style } = props;
+interface Equipment {
+  id: number; // 備品ID
+  categories_id: number; // カテゴリーID
+  name: string; // 備品名
+  deadline: string; // 返却期限
+  active_flag: boolean; // アクティブフラグ
+}
+
+function formatDeadline(deadline: string | number): string {
+  const days = Number(deadline);
+  switch (days) {
+    case 31:
+      return "1カ月";
+    case 62:
+      return "2カ月";
+    case 93:
+      return "3カ月";
+    case 186:
+      return "6カ月";
+    case 365:
+      return "1年";
+    default:
+      return String(deadline);
+  }
+}
+
+function renderRow({ index, style, data }: ListChildComponentProps) {
+  const equipment = data[index];
 
   return (
     <ListItem style={style} key={index} component="div" disablePadding>
       <ListItemButton className="list_button">
         <div className="contents">
           <p className="product_name">備品名:</p>
-          <p className="name">
-            いちばんやさしいITパスポート絶対合格の教科書+出る順問題集
-          </p>
-          <p className="limit">貸出期限:3ヶ月</p>
+          <p className="name">{equipment.name}</p>
+          <p className="limit">貸出期限:{formatDeadline(equipment.deadline)}</p>
         </div>
         <div className="green_circle">
-          <p>貸出可</p>
+          <p>{equipment.active_flag ? "貸出可" : "貸出不可"}</p>
         </div>
       </ListItemButton>
     </ListItem>
@@ -56,6 +81,33 @@ function ProductList() {
       label: "貸出可",
     },
   ];
+
+  const [data, setEquipment] = useState<Equipment[]>([]);
+
+  useEffect(() => {
+    const fetchEquipment = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/equipment/", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch equipment");
+        }
+
+        const result = await response.json();
+        setEquipment(result); // Update state with fetched equipment
+      } catch (error) {
+        console.error("An error occurred while fetching equipment", error);
+      }
+    };
+
+    fetchEquipment();
+  }, []);
+
   return (
     <div id="product_list">
       <p className="title">備品一覧</p>
@@ -108,8 +160,9 @@ function ProductList() {
             height={600}
             width={450}
             itemSize={150}
-            itemCount={30}
+            itemCount={data.length}
             overscanCount={10}
+            itemData={data}
           >
             {renderRow}
           </FixedSizeList>

@@ -3,7 +3,8 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
-import "./header.css";
+// import "./header.css";
+import "../components/header.css";
 import {
   HistoryIcon,
   EquipmentIcon,
