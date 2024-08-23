@@ -1,0 +1,18 @@
+.return_flex {
+  display: flex;
+}
+
+.return_title {
+  margin-right: 0;
+  margin-left: 20%;
+}
+
+.return_text {
+  font-weight: bold;
+  margin-left: 1%;
+}
+
+.MuiPaper-root.card {
+  width: 60%;
+  margin-left: 20%;
+}
