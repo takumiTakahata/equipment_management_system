@@ -1,13 +1,13 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import LoginView,AdminLoginView,CategoryView,TeacherView,StudentView,DepartmentView,EquipmentView,qr_code_view
+from .views import UserLoginView,AdminLoginView,CategoryView,TeacherView,StudentView,DepartmentView,EquipmentView,qr_code_view
 
 router = DefaultRouter()
 # router.register(r'users', views.UserViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('login/', LoginView.as_view()),
+    path('user/login/', UserLoginView.as_view()),
     path('admin/login/', AdminLoginView.as_view()),
     path('category/', CategoryView.as_view()),
     path('category/<int:pk>/', CategoryView.as_view()),
