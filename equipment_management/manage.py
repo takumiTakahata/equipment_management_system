@@ -11,9 +11,9 @@ def main():
     if 'runserver' in sys.argv:
         port_index = sys.argv.index('runserver') + 1
         if port_index < len(sys.argv):
-            sys.argv[port_index] = f"0.0.0.0:{os.getenv('PORT', '8000')}"
+            sys.argv[port_index] = f"0.0.0.0:{os.getenv('APP_PORT', '8000')}"
         else:
-            sys.argv.append(f"0.0.0.0:{os.getenv('PORT', '8000')}")
+            sys.argv.append(f"0.0.0.0:{os.getenv('APP_PORT', '8000')}")
 
     try:
         from django.core.management import execute_from_command_line
