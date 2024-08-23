@@ -6,7 +6,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 User = get_user_model()  # カスタムユーザーモデルを取得
 
-class LoginView(APIView):
+class UserLoginView(APIView):
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
         if serializer.is_valid():
