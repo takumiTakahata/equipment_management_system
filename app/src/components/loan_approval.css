@@ -1,20 +1,27 @@
+#loan_approval .loan_approval_title {
+  text-align: center;
+}
+
 #loan_approval .flex {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #loan_approval .loan_title {
-  margin-right: 0;
-  margin-left: 20%;
+  width: 15%;
+  margin-right: 20%;
 }
 
 #loan_approval .loan_text {
   font-weight: bold;
-  margin-left: 1%;
+  width: 50%;
 }
 
 #loan_approval .MuiPaper-root.card {
   width: 60%;
   margin-left: 20%;
+  margin-right: 20%;
 }
 
 #loan_approval .loan_button {
