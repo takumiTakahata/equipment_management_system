@@ -1,20 +1,27 @@
+#return_approval .return_approval_title {
+  text-align: center;
+}
+
 #return_approval .return_flex {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #return_approval .return_title {
-  margin-right: 0;
-  margin-left: 20%;
+  width: 15%;
+  margin-right: 20%;
 }
 
 #return_approval .return_text {
   font-weight: bold;
-  margin-left: 1%;
+  width: 50%;
 }
 
 #return_approval .MuiPaper-root.card {
   width: 60%;
   margin-left: 20%;
+  margin-right: 20%;
 }
 
 #return_approval .return_app_button {
