@@ -9,7 +9,7 @@ const Login: React.FC = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/login/", {
+      const response = await fetch("http://localhost:8000/api/admin/login/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -24,7 +24,7 @@ const Login: React.FC = () => {
         console.log("Login successful");
 
         // ログイン成功後に遷移
-        navigate("/user_top");
+        navigate("/teacher_top");
       } else {
         const errorData = await response.json();
         setError(errorData.non_field_errors || "Login failed");
