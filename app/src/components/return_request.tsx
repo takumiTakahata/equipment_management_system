@@ -26,7 +26,7 @@ function renderRow(props: ListChildComponentProps) {
 
 function ReturnRequest() {
   return (
-    <div className="return_request">
+    <div id="return_request">
       <p className="title">
         選択するものが正しいか<br></br>確認してください
       </p>

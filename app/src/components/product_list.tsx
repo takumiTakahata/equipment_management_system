@@ -7,6 +7,7 @@ import { MenuItem } from "@mui/material";
 import { Button } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Box from "@mui/material/Box";
+import "./product_list.css";
 import Footer from "./footer";
 import { useState, useEffect } from "react";
 
@@ -109,7 +110,7 @@ function ProductList() {
 
   return (
     <div id="product_list">
-      <p className="title">備品一覧</p>
+      <p className="page_title">備品一覧</p>
       <div className="search">
         <div className="category">
           <TextField
@@ -139,33 +140,33 @@ function ProductList() {
             ))}
           </TextField>
         </div>
-        <div className="search_var">
-          <TextField className="search_field">
-            <SearchIcon></SearchIcon>
-          </TextField>
-          <Button className="button">検索</Button>
-        </div>
-        <div className="list">
-          <Box
-            sx={{
-              width: "100%",
-              height: 600,
-              maxWidth: 360,
-              bgcolor: "background.paper",
-            }}
+      </div>
+      <div className="search_var">
+        <TextField className="search_field">
+          <SearchIcon></SearchIcon>
+        </TextField>
+        <Button className="button">検索</Button>
+      </div>
+      <div className="list">
+        <Box
+          sx={{
+            width: "100%",
+            height: 600,
+            maxWidth: 360,
+            bgcolor: "background.paper",
+          }}
+        >
+          <FixedSizeList
+            height={600}
+            width={450}
+            itemSize={150}
+            itemCount={data.length}
+            overscanCount={10}
+            itemData={data}
           >
-            <FixedSizeList
-              height={600}
-              width={450}
-              itemSize={150}
-              itemCount={data.length}
-              overscanCount={10}
-              itemData={data}
-            >
-              {renderRow}
-            </FixedSizeList>
-          </Box>
-        </div>
+            {renderRow}
+          </FixedSizeList>
+        </Box>
       </div>
       <Footer />
     </div>
