@@ -88,32 +88,32 @@ function ProductList() {
             ))}
           </TextField>
         </div>
-        <div className="search_var">
-          <TextField className="search_field">
-            <SearchIcon></SearchIcon>
-          </TextField>
-          <Button className="button">検索</Button>
-        </div>
-        <div className="list">
-          <Box
-            sx={{
-              width: "100%",
-              height: 600,
-              maxWidth: 360,
-              bgcolor: "background.paper",
-            }}
+      </div>
+      <div className="search_var">
+        <TextField className="search_field">
+          <SearchIcon></SearchIcon>
+        </TextField>
+        <Button className="button">検索</Button>
+      </div>
+      <div className="list">
+        <Box
+          sx={{
+            width: "100%",
+            height: 600,
+            maxWidth: 360,
+            bgcolor: "background.paper",
+          }}
+        >
+          <FixedSizeList
+            height={600}
+            width={450}
+            itemSize={150}
+            itemCount={30}
+            overscanCount={10}
           >
-            <FixedSizeList
-              height={600}
-              width={450}
-              itemSize={150}
-              itemCount={30}
-              overscanCount={10}
-            >
-              {renderRow}
-            </FixedSizeList>
-          </Box>
-        </div>
+            {renderRow}
+          </FixedSizeList>
+        </Box>
       </div>
       <Footer />
     </div>
