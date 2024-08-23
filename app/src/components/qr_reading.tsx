@@ -129,16 +129,6 @@ const Inventory: FC<Props> = () => {
           </p> */}
         </div>
       )}
-      {result && (
-        <div className="flex justify-center">
-          <Dialog open={open} onClose={handleClose}>
-            <DialogActions>
-              <button onClick={continueRead}>続けて読む</button>
-              <button onClick={handleClose}>終了する</button>
-            </DialogActions>
-          </Dialog>
-        </div>
-      )}
       {error && <p className="text-center text-xs text-red-500">{error}</p>}
     </div>
   );
