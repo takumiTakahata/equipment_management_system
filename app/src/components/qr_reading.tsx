@@ -3,6 +3,7 @@ import React, { useRef, useState, useEffect, useCallback, FC } from "react";
 import "./qr_reading.css";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
+import { useNavigate } from "react-router-dom";
 type Props = {};
 const Inventory: FC<Props> = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -15,6 +16,7 @@ const Inventory: FC<Props> = () => {
   const [error, setError] = useState("");
   const isInitialMount = useRef(true); // 初回実行を制御するためのuseRef
   const [open, setOpen] = useState(true);
+  const navigate = useNavigate();
   const scanQrCode = useCallback(() => {
     setOpen(true);
     const canvas = canvasRef.current;
@@ -33,6 +35,7 @@ const Inventory: FC<Props> = () => {
           console.log(qrCodeData.data);
           if (!qrresult.includes(qrCodeData.data)) {
             setResult(qrCodeData.data);
+            navigate("/lending_request");
             return;
           } else {
             console.log("読めません");
