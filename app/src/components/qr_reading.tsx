@@ -34,7 +34,7 @@ const Inventory: FC<Props> = () => {
         if (qrCodeData) {
           console.log(qrCodeData.data);
           if (!qrresult.includes(qrCodeData.data)) {
-            setResult(qrCodeData.data);
+            localStorage.setItem("qrresult", JSON.stringify(qrCodeData.data));
             navigate("/lending_request");
             return;
           } else {
