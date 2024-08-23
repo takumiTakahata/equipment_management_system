@@ -171,6 +171,16 @@ function EquipmentList() {
     }
   };
 
+  const handleRowClick = (item: Equipment) => {
+    navigate(
+      `/equipment_edit?id=${item.id}&categories_id=${
+        item.categories_id
+      }&name=${encodeURIComponent(item.name)}&deadline=${
+        item.deadline
+      }&lost_status=${item.lost_status}&active_flag=${item.active_flag}`
+    );
+  };
+
   return (
     <div id="equipment_list">
       <h2>備品一覧</h2>
@@ -215,7 +225,7 @@ function EquipmentList() {
             </TableHead>
             <TableBody>
               {currentItems.map((item, index) => (
-                <TableRow key={item.id}>
+                <TableRow key={item.id} onClick={() => handleRowClick(item)}>
                   <TableCell>
                     {item.lost_status ? (
                       <div className="blue_circle">紛失中</div>
@@ -241,21 +251,12 @@ function EquipmentList() {
                       : item.deadline}
                   </TableCell>
                   <TableCell>
-                    <Link
-                      to={`/equipment_edit?id=${item.id}&categories_id=${
-                        item.categories_id
-                      }&name=${encodeURIComponent(item.name)}&deadline=${
-                        item.deadline
-                      }&lost_status=${item.lost_status}&active_flag=${
-                        item.active_flag
-                      }`}
-                    >
-                      {item.name} {item.deadline}
-                    </Link>
                     <IconButton
-                      onClick={() =>
-                        handleButtonClick(item.id, item.name, index)
-                      }
+                      sx={{ width: 60, height: 60 }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleButtonClick(item.id, item.name, index);
+                      }}
                     >
                       <AddIcon />
                     </IconButton>

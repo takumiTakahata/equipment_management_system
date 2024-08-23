@@ -9,7 +9,7 @@
   font-size: 18px;
 }
 
-equipment_list .green_circle {
+#equipment_list .green_circle {
   width: 60px;
   height: 60px;
   background-color: #14ff00;
@@ -62,4 +62,8 @@ equipment_list .green_circle {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+}
+
+#equipment_list .pointer {
+  cursor: pointer;
 }
