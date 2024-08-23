@@ -1,18 +1,41 @@
-.return_flex {
+#return_approval .return_flex {
   display: flex;
 }
 
-.return_title {
+#return_approval .return_title {
   margin-right: 0;
   margin-left: 20%;
 }
 
-.return_text {
+#return_approval .return_text {
   font-weight: bold;
   margin-left: 1%;
 }
 
-.MuiPaper-root.card {
+#return_approval .MuiPaper-root.card {
   width: 60%;
   margin-left: 20%;
+}
+
+#return_approval .return_app_button {
+  margin: 5% 0 0 0;
+  text-align: center;
+}
+
+#return_approval .MuiButton-root.cancel_re_btn {
+  margin-right: 10%;
+  color: white;
+  background-color: black;
+}
+
+#return_approval .MuiButton-root.return_approval_btn {
+  margin-left: 10%;
+  color: white;
+  background-color: black;
+}
+
+#return_approval .MuiButton-root.cancel_re_btn:hover,
+#return_approval .MuiButton-root.return_approval_btn:hover {
+  color: white;
+  background-color: black;
 }

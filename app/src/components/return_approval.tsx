@@ -4,7 +4,7 @@ import "../components/return_approval.css";
 
 function ReturnApproval() {
   return (
-    <div>
+    <div id="return_approval">
       <h2>返却承認</h2>
       <Card className="card" variant="outlined">
         <div className="return_flex">
@@ -31,8 +31,12 @@ function ReturnApproval() {
         </div>
       </Card>
       <div className="return_app_button">
-        <Button variant="outlined">キャンセル</Button>
-        <Button variant="outlined">承認</Button>
+        <Button variant="outlined" className="cancel_re_btn">
+          キャンセル
+        </Button>
+        <Button variant="outlined" className="return_approval_btn">
+          承認
+        </Button>
       </div>
     </div>
   );
