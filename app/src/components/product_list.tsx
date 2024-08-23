@@ -7,6 +7,7 @@ import { MenuItem } from "@mui/material";
 import { Button } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Box from "@mui/material/Box";
+import Footer from "./footer";
 
 function renderRow(props: ListChildComponentProps) {
   const { index, style } = props;
@@ -55,7 +56,7 @@ function ProductList() {
     },
   ];
   return (
-    <div className="body">
+    <div id="product_list">
       <p className="title">備品一覧</p>
       <div className="search">
         <div className="category">
@@ -113,6 +114,7 @@ function ProductList() {
           </Box>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
