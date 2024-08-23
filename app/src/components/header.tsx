@@ -36,7 +36,7 @@ function Header() {
   };
 
   return (
-    <div>
+    <div id="header">
       <Toolbar className="toolbar">
         <h1 className="title">備品管理システム（仮）</h1>
         <div className="history">
