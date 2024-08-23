@@ -3,7 +3,8 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
-import "./header.css";
+// import "./header.css";
+import "../components/header.css";
 import {
   HistoryIcon,
   EquipmentIcon,
@@ -38,7 +39,7 @@ function Header() {
   return (
     <div id="header">
       <Toolbar className="toolbar">
-        <h1 className="title">備品管理システム（仮）</h1>
+        <h1 className="header_title">備品管理システム（仮）</h1>
         <div className="history">
           <HistoryIcon /> {/* 貸出履歴管理icon */}
           <p className="header_text">貸出履歴管理</p>

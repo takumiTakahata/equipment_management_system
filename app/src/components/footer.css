@@ -7,17 +7,17 @@ footer {
   bottom: 0;
   width: 100%;
 }
-.box {
+.footer_box {
   width: 100%;
 }
-.custom-bottom-navigation .MuiBottomNavigationAction-root {
+.custom_bottom_navigation .MuiBottomNavigationAction-root {
   background-color: #e0e0e0;
   padding: 0;
 }
 
-.borrow-button .MuiBottomNavigationAction-label,
-.list-button .MuiBottomNavigationAction-label,
-.borrowing-button .MuiBottomNavigationAction-label,
-.logout-button .MuiBottomNavigationAction-label {
+.footer_borrow_button .MuiBottomNavigationAction-label,
+.footer_list_button .MuiBottomNavigationAction-label,
+.footer_borrowing_button .MuiBottomNavigationAction-label,
+.footer_logout-button .MuiBottomNavigationAction-label {
   font-size: 14px;
 }

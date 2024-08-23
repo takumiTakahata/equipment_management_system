@@ -1,6 +1,7 @@
 import React from "react";
 import { ListItem } from "@mui/material";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -25,8 +26,17 @@ function renderRow(props: ListChildComponentProps) {
 }
 
 function LendingRequest() {
+  const navigate = useNavigate();
+
+  const handleClose = () => {
+    localStorage.removeItem("qrresult");
+    navigate("/user_top");
+  };
+  const continueReading = () => {
+    navigate("/qr_reading");
+  };
   return (
-    <div className="return_request">
+    <div id="lending_request">
       <p className="title">
         選択するものが正しいか<br></br>確認してください
       </p>
@@ -57,12 +67,21 @@ function LendingRequest() {
         </Button>
       </div>
       <div className="button">
-        <Button className="continue_button" variant="contained" color="primary">
+        <Button
+          className="continue_button"
+          variant="contained"
+          color="primary"
+          onClick={continueReading}
+        >
           続けて読み込む
         </Button>
       </div>
       <div className="button">
-        <Button className="cancel_button" variant="contained">
+        <Button
+          className="cancel_button"
+          variant="contained"
+          onClick={handleClose}
+        >
           キャンセル
         </Button>
       </div>
