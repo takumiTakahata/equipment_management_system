@@ -1,6 +1,7 @@
 import React from "react";
 import { ListItem } from "@mui/material";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -25,8 +26,10 @@ function renderRow(props: ListChildComponentProps) {
 }
 
 function LendingRequest() {
+  const navigate = useNavigate();
   const handleClose = () => {
     localStorage.removeItem("qrresult");
+    navigate("./user_top");
   };
   return (
     <div id="lending_request">
