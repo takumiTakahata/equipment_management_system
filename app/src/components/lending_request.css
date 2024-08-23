@@ -1,25 +1,25 @@
-.title {
+#lending_request .title {
   text-align: center;
   margin-top: 5%;
   font-size: 20px;
 }
-.return_request {
+#lending_request {
   text-align: center;
   font-family: "Roboto", sans-serif;
 }
-.button {
+#lending_request .button {
   margin: 4% auto;
 }
-.MuiButton-root.request_button {
+#lending_request .MuiButton-root.request_button {
   margin-left: 9%;
   font-size: 20px;
   width: 48%;
   background-color: #00d12e;
 }
-.MuiButton-root.popup_register_button:hover {
+#lending_request .MuiButton-root.popup_register_button:hover {
   background-color: #00d12e;
 }
-.MuiButton-root.continue_button {
+#lending_request .MuiButton-root.continue_button {
   margin-top: 5%;
   margin-left: 9%;
   font-size: 20px;
@@ -27,16 +27,16 @@
   color: white;
   background-color: #627cff;
 }
-.MuiButton-root.button:hover {
+#lending_request .MuiButton-root.button:hover {
   background-color: #627cff;
 }
-.MuiButton-root.cancel_button {
+#lending_request .MuiButton-root.cancel_button {
   margin-top: 5%;
   margin-left: 9%;
   font-size: 20px;
   width: 48%;
   background-color: #000000;
 }
-.MuiButton-root.cancel_button:hover {
+#lending_request .MuiButton-root.cancel_button:hover {
   background-color: #000000;
 }
