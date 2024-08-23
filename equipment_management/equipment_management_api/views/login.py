@@ -1,19 +1,21 @@
-from django.shortcuts import render
-from django.contrib.auth import get_user_model
-from rest_framework import permissions, viewsets
-from ..serializers.login_serializer import LoginSerializer
-from rest_framework.decorators import api_view
+from django.contrib.auth import get_user_model, authenticate
+from equipment_management_api.serializers.login_serializer import LoginSerializer
+from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken
 
 User = get_user_model()  # カスタムユーザーモデルを取得
 
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = LoginSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-@api_view(['POST'])
-def login_view(request):
-    email = request.data.get('email')
-    password = request.data.get('password')
-    return Response({'email': email, 'password': password})
+class LoginView(APIView):
+    def post(self, request):
+        serializer = LoginSerializer(data=request.data)
+        if serializer.is_valid():
+            user = authenticate(email=serializer.validated_data['email'], password=serializer.validated_data['password'])
+            if user is None:
+                return Response({'detail': 'Invalid credentials'}, status=401)
+            refresh = RefreshToken.for_user(user)
+            return Response({
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+            })
+        return Response(serializer.errors, status=400)

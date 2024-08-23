@@ -1,4 +1,4 @@
-from .login import login_view
+from .login import LoginView
 from .category import CategoryView
 from .teacher import TeacherView
 from .department import DepartmentView

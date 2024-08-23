@@ -162,7 +162,7 @@ function EquipmentList() {
   };
 
   return (
-    <div>
+    <div id="equipment_list">
       <h2>備品一覧</h2>
       <TextField select id="outlined-select-currency" defaultValue="すべて">
         {loan_status.map((option) => (
