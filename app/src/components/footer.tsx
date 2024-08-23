@@ -16,7 +16,7 @@ import { mdiLogout } from "@mdi/js";
 export default function Footer() {
   const [value, setValue] = useState(0);
   return (
-    <div>
+    <div id="footer">
       <footer>
         <Box className="bos">
           <BottomNavigation
