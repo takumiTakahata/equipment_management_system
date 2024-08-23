@@ -3,13 +3,16 @@
   padding: 0;
   font-family: "Roboto", sans-serif;
 }
-#product_list .title {
+#product_list .page_title {
   text-align: center;
   font-size: 20px;
   font-weight: bold;
 }
+#product_list .search {
+  display: flex;
+}
 #product_list .category {
-  margin-left: 10%;
+  margin-left: 7%;
   width: 70%;
 }
 #product_list .leading {
