@@ -1,24 +1,24 @@
-.body {
+#product_list {
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;
 }
-.title {
+#product_list .title {
   text-align: center;
   font-size: 20px;
   font-weight: bold;
 }
-.category {
+#product_list .category {
   margin-left: 10%;
   width: 70%;
 }
-.leading {
+#product_list .leading {
   width: 70%;
 }
-.search_var {
+#product_list .search_var {
   margin: 7% 0 10% 10%;
 }
-.MuiButton-root.button {
+#product_list .MuiButton-root.button {
   margin-top: 1%;
   margin-left: 9%;
   font-size: 20px;
@@ -26,30 +26,30 @@
   color: white;
   background-color: #627cff;
 }
-.MuiButton-root.button:hover {
+#product_list .MuiButton-root.button:hover {
   background-color: #627cff;
 }
-.list_button {
+#product_list .list_button {
   display: flex;
   align-items: center;
   /* border: 1px solid #000; */
 }
-.MuiButtonBase-root.list_button {
+#product_list .MuiButtonBase-root.list_button {
   padding: 1%;
 }
-.contents {
+#product_list .contents {
   width: 68%;
 }
-.name {
+#product_list .name {
   margin: 0 0 0 2%;
   font-size: 1.15rem;
   width: 100%;
 }
-.product_name {
+#product_list .product_name {
   font-size: 14px;
   margin: 0 0 2% 2%;
 }
-.green_circle {
+#product_list .green_circle {
   margin-left: 8%;
   display: flex;
   width: 75px;
@@ -60,7 +60,7 @@
   align-items: center;
   justify-content: center;
 }
-.limit {
+#product_list .limit {
   text-align: left;
   margin-left: 2%;
   font-size: 1.1rem;
