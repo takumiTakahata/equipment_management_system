@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import Button from "@mui/material/Button";
+import "./category_register.css";
 
 interface FormInputs {
   category_name: string;
@@ -55,7 +56,7 @@ function CategoryRegister() {
   };
 
   return (
-    <div>
+    <div id="category_register">
       <Header />
       <h1 className="page_title">カテゴリー登録</h1>
       <form onSubmit={handleSubmit}>
