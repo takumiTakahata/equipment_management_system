@@ -7,6 +7,7 @@ import { MenuItem } from "@mui/material";
 import { Button } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Box from "@mui/material/Box";
+import "./product_list.css";
 import Footer from "./footer";
 
 function renderRow(props: ListChildComponentProps) {
