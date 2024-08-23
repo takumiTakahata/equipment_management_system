@@ -1,11 +1,13 @@
 import { Card } from "@mui/material";
 import Button from "@mui/material/Button";
 import "../components/loan_approval.css";
+import Header from "./header";
 
 function LoanApproval() {
   return (
     <div id="loan_approval">
-      <h2>貸出承認ページ</h2>
+      <Header />
+      <h2 className="loan_approval_title">貸出承認ページ</h2>
       <Card className="card" variant="outlined">
         <div className="flex">
           <p className="loan_title">名前</p>
@@ -31,8 +33,12 @@ function LoanApproval() {
         </div>
       </Card>
       <div className="loan_button">
-        <Button variant="outlined">キャンセル</Button>
-        <Button variant="outlined">承認</Button>
+        <Button variant="outlined" className="loan_cancel_btn">
+          キャンセル
+        </Button>
+        <Button variant="outlined" className="loan_apploval_btn">
+          承認
+        </Button>
       </div>
     </div>
   );

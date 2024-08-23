@@ -1,0 +1,12 @@
+#inventory .canvas {
+  display: none;
+}
+
+#inventory .qr_display {
+  text-align: center;
+}
+
+#inventory .reading_video {
+  width: 100%;
+  height: 100%;
+}
