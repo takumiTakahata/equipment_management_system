@@ -1,4 +1,4 @@
-.red_circle {
+#equipment_list .red_circle {
   width: 60px;
   height: 60px;
   background-color: #ed6666;
@@ -9,7 +9,7 @@
   font-size: 18px;
 }
 
-.green_circle {
+#equipment_list .green_circle {
   width: 60px;
   height: 60px;
   background-color: #14ff00;
@@ -20,7 +20,7 @@
   font-size: 18px;
 }
 
-.blue_circle {
+#equipment_list .blue_circle {
   width: 60px;
   height: 60px;
   background-color: #83a5fe;
@@ -31,34 +31,39 @@
   font-size: 18px;
 }
 
-.sidebar {
+#equipment_list .sidebar {
   position: fixed;
   left: 0;
   top: 0;
-  width: 300px;
-  height: 100%;
+  width: 250px;
+  height: calc(100% - 5%);
   background-color: #f0f0f0;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
   padding: 20px;
   transition: transform 0.3s ease-in-out;
+  overflow-y: auto;
 }
 
-.sidebar-hidden {
+#equipment_list .sidebar-hidden {
   transform: translateX(100%);
 }
 
-.sidebar_content {
+#equipment_list .sidebar_content {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.table_txt {
+#equipment_list .table_txt {
   color: #627cff;
 }
 
-.paginate {
+#equipment_list .paginate {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+}
+
+#equipment_list .pointer {
+  cursor: pointer;
 }

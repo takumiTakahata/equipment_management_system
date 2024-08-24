@@ -1,64 +1,64 @@
-h1,
-p {
+#header h1,
+#header p {
   font-family: "Roboto", sans-serif;
 }
 
-.toolbar {
+#header .toolbar {
   border-bottom: 3px solid;
   border-color: #627cff;
   height: 64px;
   justify-content: space-between;
 }
 
-.title {
+#header .header_title {
   font-size: 28px;
   font-weight: bolder;
 }
-.history,
-.equipment_management,
-.student_management,
-.teacher_management,
-.invetory_management,
-.category_management,
-.logout {
+#header .history,
+#header .equipment_management,
+#header .student_management,
+#header .teacher_management,
+#header .invetory_management,
+#header .category_management,
+#header .logout {
   display: flex;
   flex-direction: column;
 }
 
-.icon {
+#header .icon {
   width: 40px;
   height: 40px;
   margin: auto;
 }
 
-.header_text {
+#header .header_text {
   margin: 0;
   font-size: 16px;
 }
 
 @media (min-width: 1026px) {
-  #long-button {
+  #header #long-button {
     display: none;
   }
 }
 
 @media (max-width: 1025px) {
-  .history,
-  .equipment_management,
-  .student_management,
-  .teacher_management,
-  .invetory_management,
-  .category_management,
-  .logout {
+  #header .history,
+  #header .equipment_management,
+  #header .student_management,
+  #header .teacher_management,
+  #header .invetory_management,
+  #header .category_management,
+  #header .logout {
     display: none;
   }
-  .hamburger {
+  #header .hamburger {
     width: 40px;
     height: 32px;
     position: relative;
   }
 
-  .hamburger_icon span {
+  #header .hamburger_icon span {
     display: block;
     width: 100%;
     height: 4px;
@@ -67,21 +67,21 @@ p {
     background: #000;
   }
 
-  .hamburger_icon span:nth-child(1) {
+  #header .hamburger_icon span:nth-child(1) {
     top: 0;
   }
 
-  .hamburger_icon span:nth-child(2) {
+  #header .hamburger_icon span:nth-child(2) {
     top: 50%;
     transform: translateY(-50%);
   }
 
-  .hamburger_icon span:nth-child(3) {
+  #header .hamburger_icon span:nth-child(3) {
     top: 100%;
     transform: translateY(-100%);
   }
 
-  .menu_text {
+  #header .menu_text {
     font-size: 16px;
   }
 }

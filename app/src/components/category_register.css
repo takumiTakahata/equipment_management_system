@@ -1,0 +1,18 @@
+#category_register {
+  text-align: center;
+}
+#category_register .page_title {
+  font-size: 20px;
+  margin-bottom: 3%;
+  font-weight: bold;
+}
+#category_register .required_txt {
+  margin: 3% auto 1% 0;
+  color: red;
+}
+#category_register .error_message {
+  color: red;
+}
+#category_register .category_input_text {
+  width: 35%;
+}

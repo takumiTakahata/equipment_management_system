@@ -9,7 +9,7 @@ class User(AbstractUser):
   admin_flag = models.BooleanField('管理者フラグ', default=False)
   delete_flag = models.BooleanField('削除フラグ', default=False)
 
-  class meta:
+  class Meta:
     db_table = 'user'
     verbose_name = 'User'
     verbose_name_plural = 'Users'

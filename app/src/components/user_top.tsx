@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import ListItemButton from "@mui/material/ListItemButton";
 import "./user_top.css";
+import Footer from "./footer";
 
 function renderRow(props: ListChildComponentProps) {
   const { index, style } = props;
@@ -26,7 +27,7 @@ function renderRow(props: ListChildComponentProps) {
 
 function UserTop() {
   return (
-    <div className="user_top">
+    <div id="user_top">
       <p className="title">借りている物一覧</p>
 
       <div className="list">
@@ -54,6 +55,7 @@ function UserTop() {
           返却申請へ
         </Button>
       </div>
+      <Footer />
     </div>
   );
 }

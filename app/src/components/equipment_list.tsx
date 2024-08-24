@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useRef } from "react";
 import {
   TextField,
   MenuItem,
@@ -16,9 +17,8 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from "@mui/icons-material/Clear";
-import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./equipment_list.css";
-import { Link } from "react-router-dom";
 
 interface Equipment {
   id: number; // 備品ID
@@ -33,6 +33,8 @@ const ITEMS_PER_PAGE = 5;
 
 function EquipmentList() {
   const [data, setEquipment] = useState<Equipment[]>([]);
+  const buttonRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchEquipment = async () => {
@@ -56,7 +58,7 @@ function EquipmentList() {
     };
 
     fetchEquipment();
-  }, [data]);
+  }, []);
 
   const loan_status = [
     {
@@ -108,7 +110,11 @@ function EquipmentList() {
   const currentItems = data.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   // プラスボタンを押したときに呼ばれる関数
-  const handleButtonClick = async (id: number, value: string) => {
+  const handleButtonClick = async (
+    id: number,
+    value: string,
+    index: number
+  ) => {
     // 非同期処理を挿入（例: APIコールやタイムアウトなど）
     await new Promise((resolve) => setTimeout(resolve, 500)); // 0.5秒待つ
 
@@ -116,6 +122,11 @@ function EquipmentList() {
       setButtonValue([...buttonValue, value]);
       setButtonId([...buttonId, id]);
       setIsSidebarOpen(true);
+      setTimeout(() => {
+        if (buttonRefs.current[index]) {
+          buttonRefs.current[index]?.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 300);
     }
   };
 
@@ -133,10 +144,45 @@ function EquipmentList() {
     }
   };
 
-  const qrRegister = () => {};
+  const qrRegister = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/qr/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          buttonValue: buttonValue,
+          buttonId: buttonId,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to register QR");
+      }
+
+      const pdfBlob = await response.blob();
+      const pdfUrl = URL.createObjectURL(pdfBlob);
+      console.log("QR登録成功:", pdfUrl);
+
+      navigate("/view_pdf", { state: { pdfUrl } }); // PDFのURLを次のページに渡す
+    } catch (error) {
+      console.error("QR登録中にエラーが発生しました", error);
+    }
+  };
+
+  const handleRowClick = (item: Equipment) => {
+    navigate(
+      `/equipment_edit?id=${item.id}&categories_id=${
+        item.categories_id
+      }&name=${encodeURIComponent(item.name)}&deadline=${
+        item.deadline
+      }&lost_status=${item.lost_status}&active_flag=${item.active_flag}`
+    );
+  };
 
   return (
-    <div>
+    <div id="equipment_list">
       <h2>備品一覧</h2>
       <TextField select id="outlined-select-currency" defaultValue="すべて">
         {loan_status.map((option) => (
@@ -178,8 +224,8 @@ function EquipmentList() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {currentItems.map((item) => (
-                <TableRow key={item.id}>
+              {currentItems.map((item, index) => (
+                <TableRow key={item.id} onClick={() => handleRowClick(item)}>
                   <TableCell>
                     {item.lost_status ? (
                       <div className="blue_circle">紛失中</div>
@@ -205,19 +251,12 @@ function EquipmentList() {
                       : item.deadline}
                   </TableCell>
                   <TableCell>
-                    <Link
-                      to={`/equipment_edit?id=${item.id}&categories_id=${
-                        item.categories_id
-                      }&name=${encodeURIComponent(item.name)}&deadline=${
-                        item.deadline
-                      }&lost_status=${item.lost_status}&active_flag=${
-                        item.active_flag
-                      }`}
-                    >
-                      {item.name} {item.deadline}
-                    </Link>
                     <IconButton
-                      onClick={() => handleButtonClick(item.id, item.name)}
+                      sx={{ width: 60, height: 60 }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleButtonClick(item.id, item.name, index);
+                      }}
                     >
                       <AddIcon />
                     </IconButton>
@@ -240,7 +279,11 @@ function EquipmentList() {
         <div className="sidebar">
           <h2>QRコード生成リスト</h2>
           {buttonValue.map((value, index) => (
-            <div key={index} className="sidebar_content">
+            <div
+              key={index}
+              className="sidebar_content"
+              ref={(el) => (buttonRefs.current[index] = el)}
+            >
               <p>{value}</p>
               <IconButton
                 onClick={() => handleRemoveValue(index)}
@@ -251,7 +294,7 @@ function EquipmentList() {
             </div>
           ))}
           <Button onClick={qrRegister} variant="outlined">
-            QR登録
+            pdf生成
           </Button>
         </div>
       )}

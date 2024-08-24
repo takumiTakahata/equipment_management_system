@@ -6,10 +6,11 @@ class Application(models.Model):
   user = models.ForeignKey(User, related_name='applications', on_delete=models.CASCADE)
   product = models.ForeignKey('Product',on_delete=models.CASCADE)
   thread_key = models.CharField(max_length=255)
-  loan_authorizer = models.ForeignKey(User, related_name='loan_authorizations', on_delete=models.CASCADE)
-  return_authorizer = models.ForeignKey(User, related_name='return_authorizations', on_delete=models.CASCADE)
+  loan_authorizer = models.ForeignKey(User, related_name='loan_authorizations', on_delete=models.CASCADE, null=True)
+  return_authorizer = models.ForeignKey(User, related_name='return_authorizations', on_delete=models.CASCADE, null=True)
   loan_date = models.DateField()
   return_date = models.DateField()
+  deadline = models.DateField(null=True)
   delete_flag = models.BooleanField(default=False)
 
   class Meta:

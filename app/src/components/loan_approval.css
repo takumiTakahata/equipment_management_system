@@ -1,0 +1,48 @@
+#loan_approval .loan_approval_title {
+  text-align: center;
+}
+
+#loan_approval .flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#loan_approval .loan_title {
+  width: 15%;
+  margin-right: 20%;
+}
+
+#loan_approval .loan_text {
+  font-weight: bold;
+  width: 50%;
+}
+
+#loan_approval .MuiPaper-root.card {
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+#loan_approval .loan_button {
+  margin: 5% 0 0 0;
+  text-align: center;
+}
+
+#loan_approval .MuiButton-root.loan_cancel_btn {
+  margin-right: 10%;
+  color: white;
+  background-color: black;
+}
+
+#loan_approval .MuiButton-root.loan_apploval_btn {
+  margin-left: 10%;
+  color: white;
+  background-color: black;
+}
+
+#loan_approval .MuiButton-root.loan_cancel_btn:hover,
+#loan_approval .MuiButton-root.loan_apploval_btn:hover {
+  color: white;
+  background-color: black;
+}
