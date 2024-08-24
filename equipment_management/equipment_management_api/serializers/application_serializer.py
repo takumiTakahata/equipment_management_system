@@ -2,6 +2,8 @@ from ..models import Application
 from rest_framework import serializers
 from .student_serializer import User
 from .teacher_serializer import User
+from .student_serializer import UserSerializer
+from .department_serializer import CourseSerializer
 
 class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
