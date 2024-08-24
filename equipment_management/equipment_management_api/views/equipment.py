@@ -4,14 +4,23 @@ from rest_framework import status
 from ..serializers import EquipmentSerializer
 from ..models import Product
 import requests
+from datetime import datetime, timedelta
 
 class EquipmentView(APIView):
   
   # GETの時の一覧表示処理
-  def get(self, request):
-      product = Product.objects.filter(delete_flag=False)
-      serializer = EquipmentSerializer(product, many=True)
-      return Response(serializer.data)
+  def get(self, request, pk=None):
+      if pk:
+          try:
+              product = Product.objects.get(pk=pk, delete_flag=False)
+              serializer = EquipmentSerializer(product)
+              return Response(serializer.data, status=status.HTTP_200_OK)
+          except Product.DoesNotExist:
+              return Response({'error': 'Product not found'}, status=status.HTTP_404_NOT_FOUND)
+      else:
+          products = Product.objects.filter(delete_flag=False)
+          serializer = EquipmentSerializer(products, many=True)
+          return Response(serializer.data, status=status.HTTP_200_OK)
 
   # POSTの時の登録処理
   def post(self, request):
@@ -47,4 +56,3 @@ class EquipmentView(APIView):
           return Response({'message': 'Product successfully marked as deleted'}, status=status.HTTP_200_OK)
       except Product.DoesNotExist:
           return Response({'error': 'Product not found'}, status=status.HTTP_404_NOT_FOUND)
-
