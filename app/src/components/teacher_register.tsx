@@ -174,7 +174,7 @@ function TeacherRegister() {
                   {...register("password", {
                     required: "パスワードを入力してください",
                     pattern: {
-                      value: /^(?=.*[A-Z]|[a-z])(?=.*\d)[A-Za-z0-9]{8,}$/, // 入力規則 8文字以上
+                      value: /^(?=.*[A-Z]|[a-z]|[0-9])(?=.*\d)[A-Za-z0-9]{8,}$/, // 入力規則 8文字以上
                       message: "パスワードの形式が間違っています",
                     },
                   })}
