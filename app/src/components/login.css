@@ -18,3 +18,9 @@
 #ad_login .ad_login_pass_text {
   width: 25%;
 }
+
+#ad_login .MuiButton-root.ad_login_button {
+  margin-top: 5%;
+  background-color: #627cff;
+  color: white;
+}
