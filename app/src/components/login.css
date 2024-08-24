@@ -1,0 +1,26 @@
+#ad_login {
+  text-align: center;
+}
+
+#ad_login .ad_login_required_txt {
+  color: #ff0000;
+  font-size: 16px;
+  margin: 0;
+}
+
+#ad_login .ad_login_email,
+#ad_login .ad_login_pass {
+  margin-top: 7%;
+  margin-bottom: 0.5%;
+}
+
+#ad_login .ad_login_email_text,
+#ad_login .ad_login_pass_text {
+  width: 25%;
+}
+
+#ad_login .MuiButton-root.ad_login_button {
+  margin-top: 5%;
+  background-color: #627cff;
+  color: white;
+}
