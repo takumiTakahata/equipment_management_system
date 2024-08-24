@@ -17,7 +17,7 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from "@mui/icons-material/Clear";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./equipment_list.css";
 
 interface Equipment {
@@ -52,6 +52,7 @@ function EquipmentList() {
 
         const result = await response.json();
         setEquipment(result); // Update state with fetched equipment
+        setPageCount(Math.ceil(result.length / ITEMS_PER_PAGE));
       } catch (error) {
         console.error("An error occurred while fetching equipment", error);
       }
@@ -97,6 +98,9 @@ function EquipmentList() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [buttonValue, setButtonValue] = useState<string[]>([]);
   const [buttonId, setButtonId] = useState<number[]>([]);
+  const [nameSearch, setNameSearch] = useState("");
+  const [searchItems, setSearchItems] = useState<Equipment[]>([]);
+  const [pageCount, setPageCount] = useState(0); // ページ数を管理する状態
 
   const [currentPage, setCurrentPage] = useState(1); //currentPageが現在のページ番号
   const handlePageChange = (
@@ -106,8 +110,33 @@ function EquipmentList() {
     setCurrentPage(value);
   };
 
+  const handleSearch = () => {
+    const filterItems = data.filter((item) =>
+      item.name.toLowerCase().includes(nameSearch.toLowerCase())
+    );
+    console.log(filterItems);
+    setPageCount(
+      Math.ceil(
+        filterItems.length > 0
+          ? filterItems.length / ITEMS_PER_PAGE
+          : data.length / ITEMS_PER_PAGE
+      )
+    );
+
+    if (filterItems.length > 0) {
+      setSearchItems(filterItems);
+    } else {
+      setSearchItems(data);
+    }
+    setCurrentPage(1);
+  };
+
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const currentItems = data.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+  const currentItems =
+    searchItems.length > 0
+      ? searchItems.slice(startIndex, startIndex + ITEMS_PER_PAGE)
+      : data.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   // プラスボタンを押したときに呼ばれる関数
   const handleButtonClick = async (
@@ -200,6 +229,8 @@ function EquipmentList() {
       </TextField>
       <TextField
         placeholder="ITパスポート"
+        value={nameSearch}
+        onChange={(e) => setNameSearch(e.target.value)}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -208,7 +239,9 @@ function EquipmentList() {
           ),
         }}
       />
-      <Button variant="outlined">検索</Button>
+      <Button variant="outlined" onClick={handleSearch}>
+        検索
+      </Button>
       <Button variant="outlined">備品登録</Button>
       <Button variant="outlined">すべて選択</Button>
       <Paper elevation={0} sx={{ width: "70%", margin: "auto" }}>
@@ -268,7 +301,7 @@ function EquipmentList() {
         </TableContainer>
       </Paper>
       <Pagination
-        count={Math.ceil(data.length / ITEMS_PER_PAGE)}
+        count={pageCount}
         page={currentPage}
         onChange={handlePageChange}
         color="primary"
