@@ -21,4 +21,7 @@ urlpatterns = [
     path('equipment/<int:pk>/', EquipmentView.as_view()),
     path('qr/', qr_code_view, name='qr_code_view'),
     path('application/', ApplicationView.as_view()),
+    path('application/<int:pk>/', ApplicationView.as_view()),
+    path('loan_approval/<int:pk>/', ApplicationView.as_view()),
+    path('loan_approval/', ApplicationView.as_view()),
 ]

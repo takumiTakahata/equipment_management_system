@@ -5,3 +5,5 @@ from .category_serializer import CategorySerializer
 from .department_serializer import DepartmentSerializer
 from .equipment_serializer import EquipmentSerializer
 from .application_serializer import ApplicationSerializer
+from .student_serializer import UserSerializer
+from .department_serializer import CourseSerializer
