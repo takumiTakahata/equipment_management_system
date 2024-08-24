@@ -118,6 +118,15 @@ const Login: React.FC = () => {
       {!passwordError && (
         <p className="ad_login_required_txt">※必須（8文字以上 半角英数字）</p>
       )}
+
+      <Button
+        onClick={handleLogin}
+        variant="outlined"
+        className="user_login_button"
+      >
+        ログイン
+      </Button>
+      {error && <p>{error}</p>}
     </div>
   );
 };
