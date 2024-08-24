@@ -80,7 +80,7 @@ const Login: React.FC = () => {
 
   return (
     <div id="user_login">
-      <h2>Login</h2>
+      <h2 className="page_title">ログイン</h2>
       <div className="user_login_email">
         <TextField
           label="メールアドレス"
@@ -94,15 +94,30 @@ const Login: React.FC = () => {
       </div>
 
       {!emailError && <p className="ad_login_required_txt">※必須</p>}
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-        required
-      />
-      <button onClick={handleLogin}>Login</button>
-      {error && <p>{error}</p>}
+
+      <div className="user_login_pass">
+        <TextField
+          label="パスワード"
+          type={showPassword ? "text" : "password"}
+          className="user_login_pass_text"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          error={!!passwordError}
+          helperText={passwordError}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={handleClickShowPassword}>
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+      </div>
+      {!passwordError && (
+        <p className="ad_login_required_txt">※必須（8文字以上 半角英数字）</p>
+      )}
     </div>
   );
 };
