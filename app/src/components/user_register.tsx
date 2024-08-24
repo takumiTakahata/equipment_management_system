@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { DialogActions, InputLabel, TextField } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
@@ -47,6 +48,7 @@ function UserRegister() {
   const [course_id, setCourseId] = React.useState("");
   const [selectedCourseName, setSelectedCourseName] = useState("");
   const [selectedSchoolYear, setSelectedSchoolYear] = useState("");
+  const navigate = useNavigate();
 
   // 学科情報を取得する
   useEffect(() => {
@@ -106,6 +108,7 @@ function UserRegister() {
 
   const studentRegister = () => {
     FetchRegister(username, email, password, course_id, school_year);
+    navigate("/user_top");
   };
 
   async function FetchRegister(
