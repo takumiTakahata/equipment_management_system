@@ -1,3 +1,4 @@
+import os
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -161,7 +162,8 @@ class ApplicationView(APIView):
         return str(uuid.uuid4())
 
     def send_message_to_google_chat(self,id,thread_key,name):
-        url = "https://chat.googleapis.com/v1/spaces/AAAA_qvmoRo/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=zsW6Are3_UgC-Ujd2p6pjAOQlnvRvOVpE7naVU47sWY&messageReplyOption=REPLY_MESSAGE_FALLBACK_TO_NEW_THREAD"
+        key = os.environ.get('GOOGLE_API_KEY')
+        url = "https://chat.googleapis.com/v1/spaces/AAAA_qvmoRo/messages?key={key}".format(key=key)
         app_message = {
             "text": "{name}の貸出申請http://localhost:3000/loan_approval/?id={id}".format(id=id,name=name),
             "thread": {"threadKey": thread_key},
@@ -176,7 +178,8 @@ class ApplicationView(APIView):
         )
 
     def send_loan_approvalmessage_to_google_chat(self,thread_key):
-        url = "https://chat.googleapis.com/v1/spaces/AAAA_qvmoRo/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=zsW6Are3_UgC-Ujd2p6pjAOQlnvRvOVpE7naVU47sWY&messageReplyOption=REPLY_MESSAGE_FALLBACK_TO_NEW_THREAD"
+        key = os.getenv('GOOGLE_API_KEY')
+        url = "https://chat.googleapis.com/v1/spaces/AAAA_qvmoRo/messages?key={key}".format(key=key)
         app_message = {
             "text": "貸出申請の承認完了",
             "thread": {"threadKey": thread_key},
