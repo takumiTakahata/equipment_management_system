@@ -23,6 +23,7 @@ class TeacherView(APIView):
    
   # POSTの時の登録処理
   def post(self, request):
+    request.data['admin_flag'] = True
     serializer = TeacherSerializer(data=request.data)
     if serializer.is_valid():
       # パスワードをハッシュ化
