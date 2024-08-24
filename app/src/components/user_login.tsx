@@ -10,7 +10,10 @@ import IconButton from "@mui/material/IconButton";
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
   const navigate = useNavigate(); // useNavigate フックを使用して、画面遷移を行う
 
   const handleLogin = async () => {
