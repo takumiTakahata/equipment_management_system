@@ -43,6 +43,7 @@ function EquipmentList() {
   const [selectedCategory, setSelectedCategory] = useState<number | string>(
     "すべて"
   );
+  const [selectedStatus, setSelectedStatus] = useState<string>("すべて");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [buttonValue, setButtonValue] = useState<string[]>([]);
   const [buttonId, setButtonId] = useState<number[]>([]);
@@ -99,25 +100,6 @@ function EquipmentList() {
     fetchCategories();
   }, []);
 
-  const loan_status = [
-    {
-      value: "すべて",
-      label: "すべて",
-    },
-    {
-      value: "貸出可",
-      label: "貸出可",
-    },
-    {
-      value: "貸出中",
-      label: "貸出中",
-    },
-    {
-      value: "紛失中",
-      label: "紛失中",
-    },
-  ];
-
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
     value: number
@@ -133,7 +115,16 @@ function EquipmentList() {
       const matchesCategory =
         selectedCategory === "すべて" ||
         item.categories_id === selectedCategory;
-      return matchesName && matchesCategory;
+      const matchesStatus =
+        selectedStatus === "すべて" ||
+        (selectedStatus === "貸出可" &&
+          item.active_flag &&
+          !item.lost_status) ||
+        (selectedStatus === "貸出中" &&
+          !item.active_flag &&
+          !item.lost_status) ||
+        (selectedStatus === "紛失中" && item.lost_status);
+      return matchesName && matchesCategory && matchesStatus;
     });
     console.log(filterItems);
     setPageCount(
@@ -234,12 +225,16 @@ function EquipmentList() {
   return (
     <div id="equipment_list">
       <h2>備品一覧</h2>
-      <TextField select id="outlined-select-currency" defaultValue="すべて">
-        {loan_status.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
-          </MenuItem>
-        ))}
+      <TextField
+        select
+        id="outlined-select-currency"
+        value={selectedStatus}
+        onChange={(e) => setSelectedStatus(e.target.value)}
+      >
+        <MenuItem value="すべて">すべて</MenuItem>
+        <MenuItem value="貸出可">貸出可</MenuItem>
+        <MenuItem value="貸出中">貸出中</MenuItem>
+        <MenuItem value="紛失中">紛失中</MenuItem>
       </TextField>
       <TextField
         select
