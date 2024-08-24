@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import Visibility from "@mui/icons-material/Visibility";
@@ -127,6 +127,13 @@ const Login: React.FC = () => {
         ログイン
       </Button>
       {error && <p>{error}</p>}
+
+      <div className="trans_user_regiseter">
+        <Link to="/user_register">新規登録はこちら</Link>
+      </div>
+      <div className="trans_password_change">
+        <Link to="/user_password_change">パスワードを忘れた方はこちら</Link>
+      </div>
     </div>
   );
 };
