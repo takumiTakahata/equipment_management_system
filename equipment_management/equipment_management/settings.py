@@ -101,6 +101,13 @@ DATABASES = {
     }
 }
 
+print("SUPABASE_PORT:", os.getenv('SUPABASE_PORT'))
+print("SUPABASE_PORT:", os.getenv('SUPABASE_DB_NAME'))
+print("SUPABASE_PORT:", os.getenv('SUPABASE_USER'))
+print("SUPABASE_PORT:", os.getenv('SUPABASE_PASSWORD'))
+print("SUPABASE_PORT:", os.getenv('SUPABASE_HOST'))
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
