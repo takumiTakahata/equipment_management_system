@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import UserLoginView,AdminLoginView,CategoryView,TeacherView,StudentView,DepartmentView,EquipmentView,qr_code_view
+from .views import UserLoginView,AdminLoginView,CategoryView,TeacherView,StudentView,DepartmentView,EquipmentView,qr_code_view,ApplicationView
 
 router = DefaultRouter()
 # router.register(r'users', views.UserViewSet)
@@ -20,4 +20,5 @@ urlpatterns = [
     path('equipment/', EquipmentView.as_view()),
     path('equipment/<int:pk>/', EquipmentView.as_view()),
     path('qr/', qr_code_view, name='qr_code_view'),
+    path('application/', ApplicationView.as_view()),
 ]
