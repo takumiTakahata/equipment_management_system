@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from datetime import timedelta
 
-load_dotenv('.env')
+# load_dotenv('.env')
 
 """
 Django settings for equipment_mana''gement project.
