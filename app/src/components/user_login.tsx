@@ -79,15 +79,21 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div>
+    <div id="user_login">
       <h2>Login</h2>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-        required
-      />
+      <div className="user_login_email">
+        <TextField
+          label="メールアドレス"
+          type="email"
+          className="user_login_email_text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          error={!!emailError}
+          helperText={emailError}
+        />
+      </div>
+
+      {!emailError && <p className="ad_login_required_txt">※必須</p>}
       <input
         type="password"
         value={password}
