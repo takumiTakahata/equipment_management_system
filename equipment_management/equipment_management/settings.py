@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from datetime import timedelta
 
-load_dotenv('.env')
+# load_dotenv('.env')
 
 """
 Django settings for equipment_mana''gement project.
@@ -93,13 +93,20 @@ WSGI_APPLICATION = 'equipment_management.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv('NAME'),
-        "USER": os.getenv('USER'),
-        "PASSWORD": os.getenv('PASSWORD'),
-        "HOST": os.getenv('HOST'),
-        "PORT": os.getenv('PORT'),
+        "NAME": os.getenv('SUPABASE_DB_NAME'),
+        "USER": os.getenv('SUPABASE_USER'),
+        "PASSWORD": os.getenv('SUPABASE_PASSWORD'),
+        "HOST": os.getenv('SUPABASE_HOST'),
+        "PORT": os.getenv('SUPABASE_PORT'),
     }
 }
+
+print("SUPABASE_PORT:", os.getenv('SUPABASE_PORT'))
+print("SUPABASE_PORT:", os.getenv('SUPABASE_DB_NAME'))
+print("SUPABASE_PORT:", os.getenv('SUPABASE_USER'))
+print("SUPABASE_PORT:", os.getenv('SUPABASE_PASSWORD'))
+print("SUPABASE_PORT:", os.getenv('SUPABASE_HOST'))
+
 
 
 # Password validation
