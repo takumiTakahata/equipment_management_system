@@ -16,6 +16,16 @@ const Login: React.FC = () => {
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const navigate = useNavigate(); // useNavigate フックを使用して、画面遷移を行う
 
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[a-zA-Z0-9.]+@morijyobi\.ac\.jp$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password: string): boolean => {
+    const passwordRegex = /^(?=.[A-Z]|[a-z]|[0-9])(?=.\d)[A-Za-z0-9]{8,}$/;
+    return passwordRegex.test(password);
+  };
+
   const handleLogin = async () => {
     try {
       const response = await fetch("http://localhost:8000/api/user/login/", {
