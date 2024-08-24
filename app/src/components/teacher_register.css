@@ -49,38 +49,42 @@
   background-color: #00d12e;
 }
 
-#teacher_register .popup {
+.teacher_register_popup {
   text-align: center;
 }
 
-#teacher_register .MuiDialogTitle-root.popup_title,
-#teacher_register .popup_text {
+.MuiDialogTitle-root.popup_title,
+.popup_name,
+.popup_email,
+.popup_post {
   font-weight: bold;
 }
 
-#teacher_register .popup_text {
+.popup_name,
+.popup_email,
+.popup_post {
   margin-top: 0.5%;
 }
 
-#teacher_register .MuiDialogActions-root.popup_button {
+.MuiDialogActions-root.popup_button {
   display: flex;
   justify-content: center;
 }
 
-#teacher_register .MuiButton-root.popup_return_button {
+.MuiButton-root.popup_cancel_button {
   margin-right: 10%;
   background-color: #000000;
 }
 
-#teacher_register .MuiButton-root.popup_return_button:hover {
+.MuiButton-root.popup_teacher_cancel_button:hover {
   background-color: #000000;
 }
 
-#teacher_register .MuiButton-root.popup_register_button {
+.MuiButton-root.popup_teacher_register_button {
   margin-left: 10%;
   background-color: #00d12e;
 }
 
-#teacher_register .MuiButton-root.popup_register_button:hover {
+.MuiButton-root.popup_teacher_register_button:hover {
   background-color: #00d12e;
 }

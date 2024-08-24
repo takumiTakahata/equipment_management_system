@@ -17,7 +17,7 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from "@mui/icons-material/Clear";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./equipment_list.css";
 
 interface Equipment {
@@ -29,11 +29,28 @@ interface Equipment {
   active_flag: boolean; // アクティブフラグ
 }
 
+interface Category {
+  id: number;
+  name: string;
+}
+
 const ITEMS_PER_PAGE = 5;
 
 function EquipmentList() {
   const [data, setEquipment] = useState<Equipment[]>([]);
   const buttonRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<number | string>(
+    "すべて"
+  );
+  const [selectedStatus, setSelectedStatus] = useState<string>("すべて");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [buttonValue, setButtonValue] = useState<string[]>([]);
+  const [buttonId, setButtonId] = useState<number[]>([]);
+  const [nameSearch, setNameSearch] = useState("");
+  const [searchItems, setSearchItems] = useState<Equipment[]>([]);
+  const [pageCount, setPageCount] = useState(0); // ページ数を管理する状態
+  const [currentPage, setCurrentPage] = useState(1); //currentPageが現在のページ番号
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -52,53 +69,37 @@ function EquipmentList() {
 
         const result = await response.json();
         setEquipment(result); // Update state with fetched equipment
+        setPageCount(Math.ceil(result.length / ITEMS_PER_PAGE));
       } catch (error) {
         console.error("An error occurred while fetching equipment", error);
       }
     };
 
     fetchEquipment();
+
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/category/", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch categories");
+        }
+
+        const data = await response.json();
+        setCategories(data);
+      } catch (error) {
+        console.error("An error occurred while fetching categories", error);
+      }
+    };
+
+    fetchCategories();
   }, []);
 
-  const loan_status = [
-    {
-      value: "すべて",
-      label: "すべて",
-    },
-    {
-      value: "貸出可",
-      label: "貸出可",
-    },
-    {
-      value: "貸出中",
-      label: "貸出中",
-    },
-    {
-      value: "紛失中",
-      label: "紛失中",
-    },
-  ];
-
-  const category = [
-    {
-      value: "すべて",
-      label: "すべて",
-    },
-    {
-      value: "本",
-      label: "本",
-    },
-    {
-      value: "ディスプレイ",
-      label: "ディスプレイ",
-    },
-  ];
-
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [buttonValue, setButtonValue] = useState<string[]>([]);
-  const [buttonId, setButtonId] = useState<number[]>([]);
-
-  const [currentPage, setCurrentPage] = useState(1); //currentPageが現在のページ番号
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
     value: number
@@ -106,8 +107,48 @@ function EquipmentList() {
     setCurrentPage(value);
   };
 
+  const handleSearch = () => {
+    const filterItems = data.filter((item) => {
+      const matchesName = item.name
+        .toLowerCase()
+        .includes(nameSearch.toLowerCase());
+      const matchesCategory =
+        selectedCategory === "すべて" ||
+        item.categories_id === selectedCategory;
+      const matchesStatus =
+        selectedStatus === "すべて" ||
+        (selectedStatus === "貸出可" &&
+          item.active_flag &&
+          !item.lost_status) ||
+        (selectedStatus === "貸出中" &&
+          !item.active_flag &&
+          !item.lost_status) ||
+        (selectedStatus === "紛失中" && item.lost_status);
+      return matchesName && matchesCategory && matchesStatus;
+    });
+    console.log(filterItems);
+    setPageCount(
+      Math.ceil(
+        filterItems.length > 0
+          ? filterItems.length / ITEMS_PER_PAGE
+          : data.length / ITEMS_PER_PAGE
+      )
+    );
+
+    if (filterItems.length > 0) {
+      setSearchItems(filterItems);
+    } else {
+      setSearchItems(data);
+    }
+    setCurrentPage(1);
+  };
+
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const currentItems = data.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+  const currentItems =
+    searchItems.length > 0
+      ? searchItems.slice(startIndex, startIndex + ITEMS_PER_PAGE)
+      : data.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   // プラスボタンを押したときに呼ばれる関数
   const handleButtonClick = async (
@@ -184,22 +225,34 @@ function EquipmentList() {
   return (
     <div id="equipment_list">
       <h2>備品一覧</h2>
-      <TextField select id="outlined-select-currency" defaultValue="すべて">
-        {loan_status.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
-          </MenuItem>
-        ))}
+      <TextField
+        select
+        id="outlined-select-currency"
+        value={selectedStatus}
+        onChange={(e) => setSelectedStatus(e.target.value)}
+      >
+        <MenuItem value="すべて">すべて</MenuItem>
+        <MenuItem value="貸出可">貸出可</MenuItem>
+        <MenuItem value="貸出中">貸出中</MenuItem>
+        <MenuItem value="紛失中">紛失中</MenuItem>
       </TextField>
-      <TextField select id="outlined-select-currency" defaultValue="すべて">
-        {category.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
+      <TextField
+        select
+        id="outlined-select-category"
+        value={selectedCategory}
+        onChange={(e) => setSelectedCategory(e.target.value)}
+      >
+        <MenuItem value="すべて">すべて</MenuItem>
+        {categories.map((option) => (
+          <MenuItem key={option.id} value={option.id}>
+            {option.name}
           </MenuItem>
         ))}
       </TextField>
       <TextField
         placeholder="ITパスポート"
+        value={nameSearch}
+        onChange={(e) => setNameSearch(e.target.value)}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -208,7 +261,9 @@ function EquipmentList() {
           ),
         }}
       />
-      <Button variant="outlined">検索</Button>
+      <Button variant="outlined" onClick={handleSearch}>
+        検索
+      </Button>
       <Button variant="outlined">備品登録</Button>
       <Button variant="outlined">すべて選択</Button>
       <Paper elevation={0} sx={{ width: "70%", margin: "auto" }}>
@@ -268,7 +323,7 @@ function EquipmentList() {
         </TableContainer>
       </Paper>
       <Pagination
-        count={Math.ceil(data.length / ITEMS_PER_PAGE)}
+        count={pageCount}
         page={currentPage}
         onChange={handlePageChange}
         color="primary"

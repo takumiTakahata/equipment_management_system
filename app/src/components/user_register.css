@@ -43,35 +43,35 @@
 #student_register .MuiButton-root.register_button:hover {
   background-color: #00d12e;
 }
-#student_register .log {
+.popup {
   text-align: center;
   color: black;
 }
-#student_register .log_title {
+.log_title {
   text-align: center;
 }
-#student_register #alert-dialog-slide-description {
+#alert-dialog-slide-description {
   font-size: 20px;
   font-weight: bold;
 }
-#student_register .log_value {
+.log_value {
   font-size: 25px;
 }
-#student_register .MuiDialogActions-root .popup_button {
+.MuiDialogActions-root .popup_button {
   display: flex;
   justify-content: center;
 }
-#student_register .MuiButton-root .popup_return_button {
+.MuiButton-root.popup_return_button {
   margin-right: 10%;
   background-color: #000000;
 }
-#student_register .MuiButton-root .popup_return_button:hover {
+.MuiButton-root.popup_return_button:hover {
   background-color: #000000;
 }
-#student_register .MuiButton-root .popup_register_button {
+.MuiButton-root.popup_register_button {
   margin-left: 10%;
   background-color: #00d12e;
 }
-#student_register .MuiButton-root.popup_register_button:hover {
+.MuiButton-root.popup_register_button:hover {
   background-color: #00d12e;
 }

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { DialogActions, InputLabel, TextField } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
@@ -17,6 +18,10 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import "./user_register.css";
 
+interface Department {
+  id: string;
+  name: string;
+}
 interface FormInputs {
   username: string;
   email: string;
@@ -38,9 +43,12 @@ function UserRegister() {
   const [open, setOpen] = React.useState(false);
   const [username, setName] = React.useState("");
   const [email, setMail] = React.useState("");
-  const [departments, setDepartments] = useState([]);
+  const [departments, setDepartments] = useState<Department[]>([]);
   const [school_year, setSchoolYear] = React.useState("");
   const [course_id, setCourseId] = React.useState("");
+  const [selectedCourseName, setSelectedCourseName] = useState("");
+  const [selectedSchoolYear, setSelectedSchoolYear] = useState("");
+  const navigate = useNavigate();
 
   // 学科情報を取得する
   useEffect(() => {
@@ -70,9 +78,14 @@ function UserRegister() {
   const password = watch("password");
   //エラーじゃないときにしか動作しない
   const onSubmit = (data: FormInputs) => {
+    const selectedDepartment = departments.find(
+      (department) => department.id === data.course_id
+    );
     setOpen(true);
     setName(data.username);
     setMail(data.email);
+    setSelectedCourseName(selectedDepartment ? selectedDepartment.name : "");
+    setSelectedSchoolYear(data.school_year);
     FetchRegister(
       data.username,
       data.email,
@@ -95,6 +108,7 @@ function UserRegister() {
 
   const studentRegister = () => {
     FetchRegister(username, email, password, course_id, school_year);
+    navigate("/user_top");
   };
 
   async function FetchRegister(
@@ -316,27 +330,31 @@ function UserRegister() {
             メールアドレス
           </DialogContentText>
           <p className="popup_text">{email}</p>
-          <DialogContentText id="alert-dialog-slide-description">
-            役割
-          </DialogContentText>
-          <p className="popup_text">常勤</p>
-          <DialogActions className="popup_button">
-            <Button
-              onClick={handleClose}
-              className="popup_return_button"
-              variant="contained"
-            >
-              戻る
-            </Button>
-            <Button
-              onClick={studentRegister}
-              className="popup_register_button"
-              variant="contained"
-            >
-              登録
-            </Button>
-          </DialogActions>
         </DialogContent>
+        <DialogContentText id="alert-dialog-slide-description">
+          学科
+        </DialogContentText>
+        <p className="log_value">{selectedCourseName}</p>
+        <DialogContentText id="alert-dialog-slide-description">
+          学年
+        </DialogContentText>
+        <p className="log_value">{selectedSchoolYear}</p>
+        <DialogActions className="popup_button">
+          <Button
+            onClick={handleClose}
+            className="popup_return_button"
+            variant="contained"
+          >
+            戻る
+          </Button>
+          <Button
+            onClick={studentRegister}
+            className="popup_register_button"
+            variant="contained"
+          >
+            登録
+          </Button>
+        </DialogActions>
       </Dialog>
     </div>
   );
