@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
-import { ErrorMessage } from "@hookform/error-message";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
+import "./login.css";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -80,36 +80,45 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div>
+    <div id="ad_login">
       <h2>Login</h2>
-      <TextField
-        label="メールアドレス"
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        error={!!emailError}
-        helperText={emailError}
-      />
-      {!emailError && <p>※必須（8文字以上 半角英数字）</p>}
+      <div className="ad_login_email">
+        <TextField
+          label="メールアドレス"
+          type="email"
+          className="ad_login_email_text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          error={!!emailError}
+          helperText={emailError}
+        />
+      </div>
 
-      <TextField
-        label="パスワード"
-        type={showPassword ? "text" : "password"}
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        error={!!passwordError}
-        helperText={passwordError}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton onClick={handleClickShowPassword}>
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-      />
-      {!passwordError && <p>※必須（8文字以上 半角英数字）</p>}
+      {!emailError && <p className="ad_login_required_txt">※必須</p>}
+
+      <div className="ad_login_pass">
+        <TextField
+          label="パスワード"
+          type={showPassword ? "text" : "password"}
+          className="ad_login_pass_text"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          error={!!passwordError}
+          helperText={passwordError}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={handleClickShowPassword}>
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+      </div>
+      {!passwordError && (
+        <p className="ad_login_required_txt">※必須（8文字以上 半角英数字）</p>
+      )}
       <Button onClick={handleLogin} variant="outlined">
         Login
       </Button>
