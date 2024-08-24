@@ -29,11 +29,27 @@ interface Equipment {
   active_flag: boolean; // アクティブフラグ
 }
 
+interface Category {
+  id: number;
+  name: string;
+}
+
 const ITEMS_PER_PAGE = 5;
 
 function EquipmentList() {
   const [data, setEquipment] = useState<Equipment[]>([]);
   const buttonRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<number | string>(
+    "すべて"
+  );
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [buttonValue, setButtonValue] = useState<string[]>([]);
+  const [buttonId, setButtonId] = useState<number[]>([]);
+  const [nameSearch, setNameSearch] = useState("");
+  const [searchItems, setSearchItems] = useState<Equipment[]>([]);
+  const [pageCount, setPageCount] = useState(0); // ページ数を管理する状態
+  const [currentPage, setCurrentPage] = useState(1); //currentPageが現在のページ番号
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -59,6 +75,28 @@ function EquipmentList() {
     };
 
     fetchEquipment();
+
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/category/", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch categories");
+        }
+
+        const data = await response.json();
+        setCategories(data);
+      } catch (error) {
+        console.error("An error occurred while fetching categories", error);
+      }
+    };
+
+    fetchCategories();
   }, []);
 
   const loan_status = [
@@ -80,29 +118,6 @@ function EquipmentList() {
     },
   ];
 
-  const category = [
-    {
-      value: "すべて",
-      label: "すべて",
-    },
-    {
-      value: "本",
-      label: "本",
-    },
-    {
-      value: "ディスプレイ",
-      label: "ディスプレイ",
-    },
-  ];
-
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [buttonValue, setButtonValue] = useState<string[]>([]);
-  const [buttonId, setButtonId] = useState<number[]>([]);
-  const [nameSearch, setNameSearch] = useState("");
-  const [searchItems, setSearchItems] = useState<Equipment[]>([]);
-  const [pageCount, setPageCount] = useState(0); // ページ数を管理する状態
-
-  const [currentPage, setCurrentPage] = useState(1); //currentPageが現在のページ番号
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
     value: number
@@ -111,9 +126,15 @@ function EquipmentList() {
   };
 
   const handleSearch = () => {
-    const filterItems = data.filter((item) =>
-      item.name.toLowerCase().includes(nameSearch.toLowerCase())
-    );
+    const filterItems = data.filter((item) => {
+      const matchesName = item.name
+        .toLowerCase()
+        .includes(nameSearch.toLowerCase());
+      const matchesCategory =
+        selectedCategory === "すべて" ||
+        item.categories_id === selectedCategory;
+      return matchesName && matchesCategory;
+    });
     console.log(filterItems);
     setPageCount(
       Math.ceil(
@@ -220,10 +241,16 @@ function EquipmentList() {
           </MenuItem>
         ))}
       </TextField>
-      <TextField select id="outlined-select-currency" defaultValue="すべて">
-        {category.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
+      <TextField
+        select
+        id="outlined-select-category"
+        value={selectedCategory}
+        onChange={(e) => setSelectedCategory(e.target.value)}
+      >
+        <MenuItem value="すべて">すべて</MenuItem>
+        {categories.map((option) => (
+          <MenuItem key={option.id} value={option.id}>
+            {option.name}
           </MenuItem>
         ))}
       </TextField>
