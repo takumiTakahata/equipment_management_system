@@ -27,6 +27,26 @@ const Login: React.FC = () => {
   };
 
   const handleLogin = async () => {
+    setEmailError(null);
+    setPasswordError(null);
+    setError(null);
+
+    let valid = true;
+
+    if (!validateEmail(email)) {
+      setEmailError("メールアドレスの形式が間違っています");
+      valid = false;
+    }
+
+    if (!validatePassword(password)) {
+      setPasswordError(
+        "パスワードは8文字以上で、少なくとも1つの英字と1つの数字を含める必要があります"
+      );
+      valid = false;
+    }
+
+    if (!valid) return;
+
     try {
       const response = await fetch("http://localhost:8000/api/user/login/", {
         method: "POST",
