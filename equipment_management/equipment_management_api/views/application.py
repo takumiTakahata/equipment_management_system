@@ -70,66 +70,95 @@ class ApplicationView(APIView):
 
     # POSTの時の登録処理
     def post(self, request):
-        qr_results = request.data.get('qrResult', [])
-        user_id = request.data.get('userId')
-        loan_date = datetime.now().date()  # 現在の日付を設定
-        return_date = datetime.now().date()
-        # deadline = datetime.now().date()  # 現在の日付を設定
-        loan_authorizer_id = None  # nullを設定
-        return_authorizer_id = None  # nullを設定
+        action = request.data.get('action')
+        if (action == 'loan'):
+          qr_results = request.data.get('qrResult', [])
+          user_id = request.data.get('userId')
+          loan_date = None
+          return_date = None
+          loan_authorizer_id = None  # nullを設定
+          return_authorizer_id = None  # nullを設定
 
-        if not qr_results:
-            return Response({'error': 'qrResult is required'}, status=status.HTTP_400_BAD_REQUEST)
+          if not qr_results:
+              return Response({'error': 'qrResult is required'}, status=status.HTTP_400_BAD_REQUEST)
+          
+          # user_idを使用してnameを取得
+          try:
+              user = User.objects.get(id=user_id)
+              name = user.username
+          except User.DoesNotExist:
+              return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+          
+          success_count = 0
+          errors = []
+          
+          # Google Chatへの送信処理
+          for qr_result in qr_results:
+              try:
+                  qr_result = int(qr_result)
+                  product = Product.objects.get(id=qr_result)
+                  deadline = datetime.now().date() + timedelta(days=product.deadline)
+                  thread_key = self.generate_thread_key()
+              except (ValueError, TypeError):
+                  errors.append({'error': f'Product ID {qr_result} must be an integer'})
+                  continue
+              data = {
+                  'user': user_id,
+                  'thread_key': thread_key,
+                  'loan_date': loan_date,
+                  'return_date': return_date,
+                  'deadline': deadline,
+                  'product': qr_result,
+                  'loan_authorizer_id': loan_authorizer_id,
+                  'return_authorizer_id': return_authorizer_id,
+              }
+              print(data)
+              
+              serializer = ApplicationSerializer(data=data)
+              if serializer.is_valid():
+                  serializer.save()
+                  # Applicationテーブルからthread_keyが一致するレコードのidを取得
+                  application_record = Application.objects.get(thread_key=thread_key)
+                  application_id = application_record.id
+                  self.send_message_to_google_chat(application_id, thread_key, name)
+                  success_count += 1
+              else:
+                  errors.append(serializer.errors)
+          
+          if errors:
+              return Response({'errors': errors}, status=status.HTTP_400_BAD_REQUEST)
+          
+          return Response({'success_count': success_count}, status=status.HTTP_201_CREATED)
         
-        # user_idを使用してnameを取得
-        try:
-            user = User.objects.get(id=user_id)
-            name = user.username
-        except User.DoesNotExist:
-            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
-        
-        success_count = 0
-        errors = []
-        
-        # Google Chatへの送信処理
-        for qr_result in qr_results:
+        elif (action == 'return'):
+          qr_results = request.data.get('qrResult', [])
+          user_id = request.data.get('userId')
+          application_ids = []
+
+          try:
+              user = User.objects.get(id=user_id)
+              name = user.username
+          except User.DoesNotExist:
+              return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+
+          for qr_result in qr_results:
             try:
                 qr_result = int(qr_result)
-                product = Product.objects.get(id=qr_result)
-                print(product.deadline)
-                deadline = datetime.now().date() + timedelta(days=product.deadline)
-                print(deadline)
-                thread_key = self.generate_thread_key()
-            except (ValueError, TypeError):
-                errors.append({'error': f'Product ID {qr_result} must be an integer'})
-                continue
-            data = {
-                'user': user_id,
-                'thread_key': thread_key,
-                'loan_date': loan_date,
-                'return_date': return_date,
-                'deadline': deadline,
-                'product': qr_result,
-                'loan_authorizer_id': loan_authorizer_id,
-                'return_authorizer_id': return_authorizer_id,
-            }
-            print(data)
-            
-            serializer = ApplicationSerializer(data=data)
-            if serializer.is_valid():
-                serializer.save()
-                # Applicationテーブルからthread_keyが一致するレコードのidを取得
-                application_record = Application.objects.get(thread_key=thread_key)
-                application_id = application_record.id
-                self.send_message_to_google_chat(application_id, thread_key, name)
-                success_count += 1
-            else:
-                errors.append(serializer.errors)
-        
-        if errors:
-            return Response({'errors': errors}, status=status.HTTP_400_BAD_REQUEST)
-        
-        return Response({'success_count': success_count}, status=status.HTTP_201_CREATED)
+                applications = Application.objects.filter(
+                    product_id=qr_result,
+                    return_date__isnull=True,
+                    loan_authorizer_id__isnull=False,
+                    user_id=user_id
+                )
+                for application in applications:
+                    application_id = application.id
+                    thread_key = application.thread_key
+                    self.return_message_to_google_chat(application_id, thread_key, name)
+                    application_ids.append(application_id)
+            except Application.DoesNotExist:
+                continue  # 次の qr_result へ
+
+          return Response({"application_ids": application_ids}, status=status.HTTP_200_OK)
     
     def put(self, request, pk=None):
       if pk is None:
@@ -150,45 +179,84 @@ class ApplicationView(APIView):
       if not user_id:
           return Response({"error": "user_id is required"}, status=status.HTTP_400_BAD_REQUEST)
 
-      application.loan_authorizer_id = user_id
-      application.save()
-
-      # 成功したら thread_key を使用して send_loan_approvalmessage_to_google_chat を実行
-      self.send_loan_approvalmessage_to_google_chat(thread_key)
-
-      return Response({"message": "Application updated successfully"}, status=status.HTTP_200_OK)
+      action = request.data.get("action")
+      if action == "loan":
+          application.loan_authorizer_id = user_id
+          application.loan_date = datetime.now().date()
+          application.save()
+          self.send_loan_approvalmessage_to_google_chat(thread_key)
+          return Response({"message": "Application updated successfully for loan"}, status=status.HTTP_200_OK)
+      elif action == "return":
+          application.return_authorizer_id = user_id
+          application.return_date = datetime.now().date()
+          application.save()
+          self.send_return_approvalmessage_to_google_chat(thread_key)
+          return Response({"message": "Application updated successfully for return"}, status=status.HTTP_200_OK)
+      else:
+          return Response({"error": "Invalid action"}, status=status.HTTP_400_BAD_REQUEST)
 
     def generate_thread_key(self):
         return str(uuid.uuid4())
 
     def send_message_to_google_chat(self,id,thread_key,name):
-        key = os.environ.get('GOOGLE_API_KEY')
-        url = "https://chat.googleapis.com/v1/spaces/AAAA_qvmoRo/messages?key={key}".format(key=key)
-        app_message = {
-            "text": "{name}の貸出申請http://localhost:3000/loan_approval/?id={id}".format(id=id,name=name),
-            "thread": {"threadKey": thread_key},
-        }
-        message_headers = {"Content-Type": "application/json; charset=UTF-8"}
-        http_obj = Http()
-        response = http_obj.request(
-            uri=url,
-            method="POST",
-            headers=message_headers,
-            body=dumps(app_message),
-        )
+      key = os.environ.get('GOOGLE_API_KEY')
+      url = "https://chat.googleapis.com/v1/spaces/AAAA_qvmoRo/messages?key={key}".format(key=key)
+      app_message = {
+          "text": "{name}の貸出申請http://localhost:3000/loan_approval/?id={id}".format(id=id,name=name),
+          "thread": {"threadKey": thread_key},
+      }
+      message_headers = {"Content-Type": "application/json; charset=UTF-8"}
+      http_obj = Http()
+      response = http_obj.request(
+          uri=url,
+          method="POST",
+          headers=message_headers,
+          body=dumps(app_message),
+      )
 
     def send_loan_approvalmessage_to_google_chat(self,thread_key):
-        key = os.getenv('GOOGLE_API_KEY')
-        url = "https://chat.googleapis.com/v1/spaces/AAAA_qvmoRo/messages?key={key}".format(key=key)
-        app_message = {
-            "text": "貸出申請の承認完了",
-            "thread": {"threadKey": thread_key},
-        }
-        message_headers = {"Content-Type": "application/json; charset=UTF-8"}
-        http_obj = Http()
-        response = http_obj.request(
-            uri=url,
-            method="POST",
-            headers=message_headers,
-            body=dumps(app_message),
-        )
+      key = os.getenv('GOOGLE_API_KEY')
+      url = "https://chat.googleapis.com/v1/spaces/AAAA_qvmoRo/messages?key={key}".format(key=key)
+      app_message = {
+          "text": "貸出申請の承認完了",
+          "thread": {"threadKey": thread_key},
+      }
+      message_headers = {"Content-Type": "application/json; charset=UTF-8"}
+      http_obj = Http()
+      response = http_obj.request(
+          uri=url,
+          method="POST",
+          headers=message_headers,
+          body=dumps(app_message),
+      )
+
+    def return_message_to_google_chat(self,id,thread_key,name):
+      key = os.environ.get('GOOGLE_API_KEY')
+      url = "https://chat.googleapis.com/v1/spaces/AAAA_qvmoRo/messages?key={key}".format(key=key)
+      app_message = {
+          "text": "{name}の返却申請http://localhost:3000/return_approval/?id={id}".format(id=id,name=name),
+          "thread": {"threadKey": thread_key},
+      }
+      message_headers = {"Content-Type": "application/json; charset=UTF-8"}
+      http_obj = Http()
+      response = http_obj.request(
+          uri=url,
+          method="POST",
+          headers=message_headers,
+          body=dumps(app_message),
+      )
+    def send_return_approvalmessage_to_google_chat(self,thread_key):
+      key = os.getenv('GOOGLE_API_KEY')
+      url = "https://chat.googleapis.com/v1/spaces/AAAA_qvmoRo/messages?key={key}".format(key=key)
+      app_message = {
+          "text": "返却申請の承認完了",
+          "thread": {"threadKey": thread_key},
+      }
+      message_headers = {"Content-Type": "application/json; charset=UTF-8"}
+      http_obj = Http()
+      response = http_obj.request(
+          uri=url,
+          method="POST",
+          headers=message_headers,
+          body=dumps(app_message),
+      )
