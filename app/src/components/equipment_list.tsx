@@ -20,6 +20,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import { useNavigate } from "react-router-dom";
 import "./equipment_list.css";
 import Header from "./header";
+import { useLocation } from "react-router-dom";
 
 interface Equipment {
   id: number; // 備品ID
@@ -37,6 +38,34 @@ interface Category {
 
 const ITEMS_PER_PAGE = 5;
 
+// const SuccessPage = () => {
+//   const location = useLocation();
+
+//   useEffect(() => {
+//     const params = new URLSearchParams(location.search);
+//     const message = params.get("message");
+//     if (message) {
+//       alert(message);
+//     }
+//   }, [location]);
+
+//   return <div>Success Page</div>;
+// };
+
+// const FailurePage = () => {
+//   const location = useLocation();
+
+//   useEffect(() => {
+//     const params = new URLSearchParams(location.search);
+//     const message = params.get("message");
+//     if (message) {
+//       alert(message);
+//     }
+//   }, [location]);
+
+//   return <div>Failure Page</div>;
+// };
+
 function EquipmentList() {
   const [data, setEquipment] = useState<Equipment[]>([]);
   const buttonRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -53,11 +82,21 @@ function EquipmentList() {
   const [pageCount, setPageCount] = useState(0); // ページ数を管理する状態
   const [currentPage, setCurrentPage] = useState(1); //currentPageが現在のページ番号
   const navigate = useNavigate();
+  const [message, setMessage] = useState("");
+  const location = useLocation();
 
   const equipmentRegister = () => {
     navigate("/equipment_register");
   };
   useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const message = params.get("message");
+    if (message) {
+      console.log(message);
+      for (let i = 0; i < 1; i++) {
+        setTimeout(() => alert(message), 100);
+      }
+    }
     const fetchEquipment = async () => {
       try {
         const response = await fetch(
