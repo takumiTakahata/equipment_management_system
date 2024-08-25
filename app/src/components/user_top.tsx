@@ -82,7 +82,7 @@ function UserTop() {
   console.log(applications);
 
   const borrowButton = () => {
-    navigate("/qr_reading");
+    navigate("/return_qr_reading");
   };
 
   return (
