@@ -23,6 +23,10 @@
   color: white;
 }
 
+.MuiButton-root.equipment_delete_button:hover {
+  background-color: #ff0000;
+}
+
 .MuiButton-root.equipment_edit_button {
   margin-top: 3%;
   width: 25%;

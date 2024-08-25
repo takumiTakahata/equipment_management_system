@@ -119,11 +119,14 @@ const EquipmentEdit = () => {
       if (response.ok) {
         const data = await response.json();
         console.log("削除成功:", data);
+        window.location.href = "/equipment_list?message=削除が成功しました！";
       } else {
         console.error("削除失敗:", response.statusText);
+        window.location.href = "/equipment_list?message=削除が失敗しました！";
       }
     } catch (error) {
       console.error("削除失敗:", error);
+      window.location.href = "/equipment_list?message=削除が失敗しました！";
     }
   };
 
@@ -162,13 +165,16 @@ const EquipmentEdit = () => {
       if (!response.ok) {
         const errorText = await response.text();
         console.error("Failed to update equipment:", errorText);
-        throw new Error("Failed to update equipment");
+        // throw new Error("Failed to update equipment");
+        window.location.href = "/equipment_list?message=編集が失敗しました！";
       }
 
       const data = await response.json();
       console.log("Equipment updated successfully:", data);
+      window.location.href = "/equipment_list?message=編集が成功しました！";
     } catch (error) {
       console.error("An error occurred while updating the equipment", error);
+      window.location.href = "/equipment_list?message=編集が失敗しました！";
     }
   };
 
@@ -306,7 +312,19 @@ const EquipmentEdit = () => {
             {lost_status === "false" ? "正常" : "紛失中"}
           </p>
           <DialogContentText>返却期限</DialogContentText>
-          <p className="popup_text">{deadline}日</p>
+          <p className="popup_text">
+            {deadline === "31"
+              ? "1カ月"
+              : deadline === "62"
+              ? "2カ月"
+              : deadline === "93"
+              ? "3カ月"
+              : deadline === "186"
+              ? "6カ月"
+              : deadline === "365"
+              ? "1年"
+              : `${deadline}日`}
+          </p>
         </DialogContent>
         <DialogActions className="popup_button">
           <Button
