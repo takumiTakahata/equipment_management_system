@@ -9,6 +9,7 @@ import { Button } from "@mui/material";
 import Header from "./header";
 import "./no_list.css";
 import { useEffect, useState } from "react";
+import { jwtDecode, JwtPayload } from "jwt-decode";
 
 function createNoList(id: number, name: string, deadline: string) {
   return {
@@ -17,7 +18,19 @@ function createNoList(id: number, name: string, deadline: string) {
     deadline, //返却期限
   };
 }
-
+const getUserIdFromToken = (): string | null => {
+  const token = localStorage.getItem("access_token");
+  if (token) {
+    try {
+      const decoded = jwtDecode<JwtPayload & { user_id?: string }>(token);
+      return decoded.user_id || null;
+    } catch (error) {
+      console.error("Token decoding failed:", error);
+      return null;
+    }
+  }
+  return null;
+};
 const NoList = () => {
   const [rows, setRows] = useState<ReturnType<typeof createNoList>[]>([]);
   const [id, setId] = useState<number[]>([]);
@@ -99,6 +112,7 @@ const NoList = () => {
   }, [missingIds]);
 
   const handleSubmit = async () => {
+    const userId = getUserIdFromToken();
     try {
       const response = await fetch(
         "https://mysite-mczi.onrender.com/api/equipment/",
@@ -116,8 +130,74 @@ const NoList = () => {
       }
       localStorage.removeItem("qrresult");
       console.log("Missing ids updated successfully");
+
+      // 新しいfetchリクエスト
+      const inventoryResponse = await fetch(
+        "https://mysite-mczi.onrender.com/api/inventory/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user_id: userId,
+            delete_flag: false,
+          }),
+        }
+      );
+
+      if (rows.length > 0) {
+        // 今日の日付と同じカラムのidを取得するfetchリクエスト
+        const inventoryByDayResponse = await fetch(
+          "https://mysite-mczi.onrender.com/api/inventory/",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (!inventoryByDayResponse.ok) {
+          throw new Error("Failed to fetch inventory by day");
+        }
+
+        const inventoryByDayData = await inventoryByDayResponse.json();
+        const inventoryIds = inventoryByDayData.inventory_ids;
+        console.log("Inventory IDs for today:", inventoryIds);
+        console.log("Rows:", rows);
+
+        const inventoryListsResponse = await fetch(
+          "https://mysite-mczi.onrender.com/api/inventory_lists/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              inventory_ids: inventoryIds,
+              rows: rows,
+              delete_flag: false,
+            }),
+          }
+        );
+
+        if (!inventoryListsResponse.ok) {
+          throw new Error("Failed to update inventory lists");
+        }
+
+        console.log("Inventory lists updated successfully");
+      }
+
+      if (!inventoryResponse.ok) {
+        throw new Error("Failed to update inventory");
+      }
+      console.log("Inventory updated successfully");
     } catch (error) {
-      console.error("An error occurred while updating missing ids", error);
+      console.error(
+        "An error occurred while updating missing ids or inventory",
+        error
+      );
     }
   };
 
