@@ -15,6 +15,8 @@ import {
   LogoutIcon,
 } from "../images/icon";
 
+import { useNavigate } from "react-router-dom";
+
 function Header() {
   const options = [
     "貸出履歴管理",
@@ -28,6 +30,7 @@ function Header() {
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const navigate = useNavigate();
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -36,31 +39,53 @@ function Header() {
     setAnchorEl(null);
   };
 
+  const handleNavigation = (path: string) => {
+    navigate(path);
+  };
+
   return (
     <div id="header">
       <Toolbar className="toolbar">
         <h1 className="header_title">備品管理システム（仮）</h1>
-        <div className="history">
+        <div
+          className="history"
+          onClick={() => handleNavigation("/teacher_top")}
+        >
           <HistoryIcon /> {/* 貸出履歴管理icon */}
           <p className="header_text">貸出履歴管理</p>
         </div>
-        <div className="equipment_management">
+        <div
+          className="equipment_management"
+          onClick={() => handleNavigation("/equipment_list")}
+        >
           <EquipmentIcon /> {/* 備品管理icon */}
           <p className="header_text">備品管理</p>
         </div>
-        <div className="student_management">
+        <div
+          className="student_management"
+          onClick={() => handleNavigation("/student_list")}
+        >
           <StudentIcon /> {/* 学生管理icon */}
           <p className="header_text">学生管理</p>
         </div>
-        <div className="teacher_management">
+        <div
+          className="teacher_management"
+          onClick={() => handleNavigation("/teacher_list")}
+        >
           <TeacherIcon /> {/* 教員管理のicon */}
           <p className="header_text">教員管理</p>
         </div>
-        <div className="invetory_management">
+        <div
+          className="invetory_management"
+          onClick={() => handleNavigation("/inventory_history")}
+        >
           <InvetoryIcon /> {/*棚卸管理のicon*/}
           <p className="header_text">棚卸管理</p>
         </div>
-        <div className="category_management">
+        <div
+          className="category_management"
+          onClick={() => handleNavigation("/category_list")}
+        >
           <CategoryIcon /> {/*棚卸管理のicon*/}
           <p className="header_text">カテゴリー管理</p>
         </div>
