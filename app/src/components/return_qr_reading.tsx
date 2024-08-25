@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect, useCallback, FC } from "react";
 import "./qr_reading.css";
 import { useNavigate } from "react-router-dom";
 type Props = {};
-const Inventory: FC<Props> = () => {
+const ReturnInventory: FC<Props> = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [result, setResult] = useState("");
@@ -136,4 +136,4 @@ const Inventory: FC<Props> = () => {
     </div>
   );
 };
-export default Inventory;
+export default ReturnInventory;
