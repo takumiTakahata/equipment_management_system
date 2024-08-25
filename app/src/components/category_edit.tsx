@@ -22,7 +22,7 @@ const CategoryEdit = () => {
   const handleSubmit = async () => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/category/${categoryId}/`,
+        `https://mysite-mczi.onrender.com/api/category/${categoryId}/`,
         {
           method: "PUT",
           headers: {
