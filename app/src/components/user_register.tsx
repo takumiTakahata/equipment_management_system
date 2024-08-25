@@ -21,6 +21,7 @@ import "./user_register.css";
 interface Department {
   id: string;
   name: string;
+  course_year: string;
 }
 interface FormInputs {
   username: string;
@@ -52,12 +53,30 @@ function UserRegister() {
 
   // 学科情報を取得する
   useEffect(() => {
-    fetch("https://mysite-mczi.onrender.com/api/department/")
-      .then((response) => response.json())
-      .then((data) => {
+    const fetchDepartments = async () => {
+      try {
+        const response = await fetch(
+          "https://mysite-mczi.onrender.com/api/department/",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch departments");
+        }
+
+        const data = await response.json();
         setDepartments(data);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
+      } catch (error) {
+        console.error("An error occurred while fetching departments", error);
+      }
+    };
+
+    fetchDepartments();
   }, []);
 
   const handleCourseChange = (event: React.ChangeEvent<HTMLInputElement>) => {

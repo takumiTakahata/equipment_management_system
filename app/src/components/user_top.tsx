@@ -30,7 +30,7 @@ function UserTop() {
   const navigate = useNavigate();
 
   const borrowButton = () => {
-    navigate("/qr_reading");
+    navigate("/return_qr_reading");
   };
   return (
     <div id="user_top">

@@ -85,6 +85,9 @@ function EquipmentList() {
   const [message, setMessage] = useState("");
   const location = useLocation();
 
+  const equipmentRegister = () => {
+    navigate("/equipment_register");
+  };
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const message = params.get("message");
@@ -311,7 +314,9 @@ function EquipmentList() {
       <Button variant="outlined" onClick={handleSearch}>
         検索
       </Button>
-      <Button variant="outlined">備品登録</Button>
+      <Button variant="outlined" onClick={equipmentRegister}>
+        備品登録
+      </Button>
       <Button variant="outlined">すべて選択</Button>
       <Paper elevation={0} sx={{ width: "70%", margin: "auto" }}>
         <TableContainer className="tablecontainer">
