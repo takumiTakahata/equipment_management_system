@@ -21,11 +21,13 @@ import TeacherRegister from "../components/teacher_register";
 import CategoryRegister from "../components/category_register";
 import CategoryList from "../components/category_list";
 import CategoryEdit from "../components/category_edit";
+import { Navigate } from "react-router-dom";
 
 function AdminRoute() {
   return (
     <div>
       <Routes>
+        <Route path="/" element={<Navigate to="/admin_login" />} />
         {/* ログイン画面 */}
         <Route path="/admin_login" element={<Login />} />
         {/* 教員TOP画面 */}
