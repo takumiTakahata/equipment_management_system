@@ -4,7 +4,11 @@ import Header from "./header";
 import { TextField, MenuItem } from "@mui/material";
 import Button from "@mui/material/Button";
 import "./equipment_register.css";
-import Box from "@mui/material/Box";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
 
 interface Category {
   id: number;
@@ -17,6 +21,8 @@ const EquipmentRegister = () => {
   const [ISBN, setIsbn] = useState("");
   const [name, setName] = useState("");
   const [deadline, setDeadline] = useState<number | null>(null);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [isBook, setIsBook] = useState(false);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -93,37 +99,8 @@ const EquipmentRegister = () => {
       alert("カテゴリーを選択してください。");
       return;
     }
-
-    const bookName = await fetchBookName(ISBN);
-    console.log(bookName);
-
-    try {
-      const response = await fetch(
-        "https://mysite-mczi.onrender.com/api/equipment/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ISBN,
-            name: bookName,
-            categories_id,
-            deadline,
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Failed to register equipment: ${errorText}`);
-      }
-
-      const data = await response.json();
-      console.log("Equipment registered successfully:", data);
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
+    setIsBook(true);
+    setOpenDialog(true);
   };
 
   const handleSubmitForOther = async (e: React.FormEvent) => {
@@ -132,34 +109,81 @@ const EquipmentRegister = () => {
       alert("カテゴリーを選択してください。");
       return;
     }
-    try {
-      console.log(categories_id, name, deadline);
-      const response = await fetch(
-        "https://mysite-mczi.onrender.com/api/equipment/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ISBN: null,
-            name,
-            categories_id,
-            deadline,
-          }),
+    setIsBook(false);
+    setOpenDialog(true);
+  };
+
+  const handleDialogClose = () => {
+    setOpenDialog(false);
+  };
+
+  const handleDialogConfirm = async () => {
+    setOpenDialog(false);
+    if (isBook) {
+      const bookName = await fetchBookName(ISBN);
+      console.log(bookName);
+
+      try {
+        const response = await fetch(
+          "https://mysite-mczi.onrender.com/api/equipment/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              ISBN,
+              name: bookName,
+              categories_id,
+              deadline,
+            }),
+          }
+        );
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Failed to register equipment: ${errorText}`);
         }
-      );
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Failed to register equipment: ${errorText}`);
+        const data = await response.json();
+        console.log("Equipment registered successfully:", data);
+        window.location.href = "/equipment_list?message=登録が成功しました！";
+      } catch (error) {
+        console.error("An error occurred:", error);
+        window.location.href = "/failure?message=登録に失敗しました。";
       }
+    } else {
+      try {
+        console.log(categories_id, name, deadline);
+        const response = await fetch(
+          "https://mysite-mczi.onrender.com/api/equipment/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              ISBN: null,
+              name,
+              categories_id,
+              deadline,
+            }),
+          }
+        );
 
-      const data = await response.json();
-      console.log("Equipment registered successfully:", data);
-      setName("");
-    } catch (error) {
-      console.error("An error occurred:", error);
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Failed to register equipment: ${errorText}`);
+        }
+
+        const data = await response.json();
+        console.log("Equipment registered successfully:", data);
+        setName("");
+        window.location.href = "/equipment_list?message=登録が成功しました！";
+      } catch (error) {
+        console.error("An error occurred:", error);
+        window.location.href = "/equipment_list?message=登録が失敗しました。";
+      }
     }
   };
 
@@ -280,6 +304,51 @@ const EquipmentRegister = () => {
           </Button>
         </form>
       )}
+      <Dialog
+        open={openDialog}
+        onClose={handleDialogClose}
+        className="equipment_register_popup"
+      >
+        <DialogTitle className="popup_title">
+          入力された項目が正しいか確認してください
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>カテゴリー </DialogContentText>
+          <p className="popup_text">
+            {categories.find((category) => category.id === categories_id)?.name}
+          </p>
+
+          {isBook ? (
+            <>
+              <DialogContentText>ISBN</DialogContentText>
+              <p className="popup_text">{ISBN}</p>
+            </>
+          ) : (
+            <>
+              <DialogContentText>名前</DialogContentText>
+              <p className="popup_text">{name}</p>
+            </>
+          )}
+          <DialogContentText>期限</DialogContentText>
+          <p className="popup_text">{deadline}日</p>
+        </DialogContent>
+        <DialogActions className="popup_button">
+          <Button
+            onClick={handleDialogClose}
+            color="primary"
+            className="popup_equipment_cancel_button"
+          >
+            キャンセル
+          </Button>
+          <Button
+            onClick={handleDialogConfirm}
+            color="primary"
+            className="popup_equipment_register_button"
+          >
+            確認
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

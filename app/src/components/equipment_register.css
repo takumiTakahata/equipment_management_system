@@ -23,3 +23,37 @@
 .MuiButton-root.equipment_register_button:hover {
   background-color: #00d12e;
 }
+
+.equipment_register_popup {
+  text-align: center;
+}
+
+.popup_title,
+.popup_text {
+  font-weight: bold;
+}
+
+.MuiDialogActions-root.popup_button {
+  display: flex;
+  justify-content: center;
+}
+
+.MuiButton-root.popup_equipment_cancel_button {
+  margin-right: 10%;
+  background-color: #000000;
+  color: white;
+}
+
+.MuiButton-root.popup_equipment_cancel_button:hover {
+  background-color: #000000;
+}
+
+.MuiButton-root.popup_equipment_register_button {
+  margin-left: 10%;
+  background-color: #00d12e;
+  color: white;
+}
+
+.MuiButton-root.popup_equipment_register_button:hover {
+  background-color: #00d12e;
+}
