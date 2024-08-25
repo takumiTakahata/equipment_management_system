@@ -29,6 +29,8 @@ function UserRoute() {
         <Route path="/user_top" element={<UserTop />} />
         {/*QR読み込み画面 */}
         <Route path="/qr_reading" element={<QrReading />} />
+        {/*返却用QR読み込み画面 */}
+        <Route path="/return_qr_reading" element={<QrReading />} />
         {/*返却申請画面*/}
         <Route path="/return_request" element={<ReturnRequest />} />
         {/*貸出申請画面*/}
