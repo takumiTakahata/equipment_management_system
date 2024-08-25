@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Header from "./header";
+import { TextField, Button, MenuItem } from "@mui/material";
+import "./student_edit.css";
 
 interface Course {
   id: string;
@@ -120,51 +122,78 @@ function StudentEdit() {
   };
 
   return (
-    <div>
+    <div id="student_edit">
       <Header />
-      <h2>学生編集</h2>
+      <div className="student_edit_flex">
+        <h2 className="student_edit_title">学生編集</h2>
+        <Button
+          onClick={handleDelete}
+          variant="contained"
+          color="secondary"
+          className="student_delete_button"
+        >
+          削除
+        </Button>
+      </div>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>名前:</label>
-          <input
-            type="text"
+        <div className="student_edit_text">
+          <TextField
+            label="名前"
             name="username"
             value={studentData.username}
             onChange={handleChange}
+            fullWidth
+            margin="normal"
           />
         </div>
-        <div>
-          <label>メール:</label>
-          <input
+        <div className="student_edit_text">
+          <TextField
+            label="メール"
             type="email"
             name="email"
             value={studentData.email}
             onChange={handleChange}
+            fullWidth
+            margin="normal"
           />
         </div>
-        <div>
-          <label>学科:</label>
-          <select name="course_id" value={studentData.course_id}>
-            <option value="">選択してください</option>
+        <div className="student_edit_text">
+          <TextField
+            select
+            label="学科"
+            name="course_id"
+            value={studentData.course_id}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+          >
+            <MenuItem value="">選択してください</MenuItem>
             {courses.map((course) => (
-              <option key={course.id} value={course.id}>
+              <MenuItem key={course.id} value={course.id}>
                 {course.name}
-              </option>
+              </MenuItem>
             ))}
-          </select>
+          </TextField>
         </div>
-        <div>
-          <label>学年:</label>
-          <input
-            type="text"
+        <div className="student_edit_text">
+          <TextField
+            label="学年"
             name="school_year"
             value={studentData.school_year}
             onChange={handleChange}
+            fullWidth
+            margin="normal"
           />
         </div>
-        <button type="submit">更新</button>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className="student_edit_button"
+        >
+          更新
+        </Button>
       </form>
-      <button onClick={handleDelete}>削除</button>
     </div>
   );
 }
