@@ -19,6 +19,7 @@ import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useNavigate } from "react-router-dom";
 import "./equipment_list.css";
+import Header from "./header";
 
 interface Equipment {
   id: number; // 備品ID
@@ -230,6 +231,7 @@ function EquipmentList() {
 
   return (
     <div id="equipment_list">
+      <Header />
       <h2>備品一覧</h2>
       <TextField
         select

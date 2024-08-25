@@ -16,6 +16,7 @@ import TableRow from "@mui/material/TableRow";
 import Pagination from "@mui/material/Pagination";
 import { useEffect, useState } from "react";
 import "./teacher_top.css";
+import Header from "./header";
 
 type LoanHistory = {
   loan_date: string; //貸出日
@@ -96,6 +97,7 @@ function TeacherTop() {
   const currentItems = data.slice(startIndex, startIndex + ITEMS_PER_PAGE);
   return (
     <div id="teacher_top">
+      <Header />
       <h2>教員TOP</h2>
       <form action="">
         <FormControl sx={{ width: 100 }}>

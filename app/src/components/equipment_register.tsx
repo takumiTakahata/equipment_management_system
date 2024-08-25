@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Header from "./header";
 
 interface Category {
   id: number;
@@ -160,6 +161,7 @@ const EquipmentRegister = () => {
 
   return (
     <div>
+      <Header />
       {categories_id === 1 ? ( // カテゴリーのidが1番が本になっていると仮定してやっているので、実際のカテゴリーidに合わせて変更してください
         <form onSubmit={handleSubmitForBook}>
           <div>

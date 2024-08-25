@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
+import Header from "./header";
 
 const ViewPDF = () => {
   const location = useLocation();
@@ -7,6 +8,7 @@ const ViewPDF = () => {
 
   return (
     <div>
+      <Header />
       <h1>QRコードPDF</h1>
       {pdfUrl ? (
         <iframe

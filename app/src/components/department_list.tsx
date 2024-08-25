@@ -10,6 +10,7 @@ import {
   Button,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import Header from "./header";
 
 interface department {
   id: number;
@@ -62,6 +63,7 @@ const DepartmentList = () => {
   return (
     <div>
       <h1>Department List</h1>
+      <Header />
       <Button onClick={departmentRegister} variant="outlined">
         学科登録
       </Button>
