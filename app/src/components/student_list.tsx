@@ -1,5 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
 
 interface Course {
   id: number;
@@ -64,7 +73,31 @@ function StudentList() {
   return (
     <div>
       <h2>学生一覧</h2>
-      <ul>
+      <Paper elevation={0} sx={{ width: "70%", margin: "auto" }}>
+        <TableContainer className="tablecontainer">
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="center">名前</TableCell>
+                <TableCell align="center">学科</TableCell>
+                <TableCell align="center">学年</TableCell>
+                <TableCell align="center">メールアドレス</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {students.map((student) => (
+                <TableRow key={student.id}>
+                  <TableCell align="center">{student.username}</TableCell>
+                  <TableCell align="center">{student.course_name}</TableCell>
+                  <TableCell align="center">{student.school_year}</TableCell>
+                  <TableCell align="center">{student.email}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+      {/* <ul>
         {students.map((student) => (
           <Link
             to={`/student_edit/${student.id}`}
@@ -79,7 +112,7 @@ function StudentList() {
             </li>
           </Link>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 }
