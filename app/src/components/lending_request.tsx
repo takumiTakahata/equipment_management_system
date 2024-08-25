@@ -38,6 +38,7 @@ const handleLendingRequest = async () => {
       body: JSON.stringify({
         qrResult,
         userId,
+        action: "loan",
       }),
     });
 

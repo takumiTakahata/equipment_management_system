@@ -102,6 +102,7 @@ function LoanApproval() {
           body: JSON.stringify({
             user_id: userId,
             thread_key: loanData?.thread_key,
+            action: "loan",
           }),
         }
       );
