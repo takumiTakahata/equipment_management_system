@@ -49,8 +49,8 @@ function TeacherList() {
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell className="table_txt">名前</TableCell>
-                <TableCell className="table_txt">メールアドレス</TableCell>
+                <TableCell align="center">名前</TableCell>
+                <TableCell align="center">メールアドレス</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -59,8 +59,8 @@ function TeacherList() {
                   key={teacher.id}
                   onClick={() => handleRowClick(teacher)}
                 >
-                  <TableCell>{teacher.username}</TableCell>
-                  <TableCell>{teacher.email}</TableCell>
+                  <TableCell align="center">{teacher.username}</TableCell>
+                  <TableCell align="center">{teacher.email}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
