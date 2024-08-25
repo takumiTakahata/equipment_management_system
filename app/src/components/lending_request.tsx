@@ -30,17 +30,20 @@ const handleLendingRequest = async () => {
   console.log("qrResult:", qrResult);
   console.log("userId:", userId);
   try {
-    const response = await fetch("http://127.0.0.1:8000/api/application/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        qrResult,
-        userId,
-        action: "loan",
-      }),
-    });
+    const response = await fetch(
+      "https://mysite-mczi.onrender.com/api/application/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          qrResult,
+          userId,
+          action: "loan",
+        }),
+      }
+    );
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -73,7 +76,7 @@ function LendingRequest() {
         const productDetails = await Promise.all(
           qrResult.map(async (id: number) => {
             const response = await fetch(
-              `http://127.0.0.1:8000/api/equipment/${id}/`
+              `https://mysite-mczi.onrender.com/api/equipment/${id}/`
             );
             if (!response.ok) {
               throw new Error(`Failed to fetch product with ID ${id}`);
