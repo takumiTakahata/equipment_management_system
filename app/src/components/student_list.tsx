@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import {
   Table,
   TableBody,
@@ -8,8 +7,13 @@ import {
   TableHead,
   TableRow,
   Paper,
+  TextField,
+  Button,
+  MenuItem,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import SearchIcon from "@mui/icons-material/Search";
+import InputAdornment from "@mui/material/InputAdornment";
 
 interface Course {
   id: number;
@@ -48,6 +52,7 @@ function StudentList() {
           throw new Error("Failed to fetch courses");
         }
         const coursesData = await coursesResponse.json();
+        setCourses(coursesData);
 
         // コースIDとコース名の対応表を作成
         const courseMap = new Map(
@@ -76,9 +81,40 @@ function StudentList() {
     navigate(`/student_edit/${student.id}`);
   };
 
+  const uniqueSchoolYears = Array.from(
+    new Set(students.map((student) => student.school_year).filter(Boolean))
+  );
+
   return (
     <div>
       <h2>学生一覧</h2>
+      <TextField select id="outlined-select-currency" defaultValue="学科">
+        <MenuItem value="学科">学科</MenuItem>
+        {courses.map((course) => (
+          <MenuItem key={course.id} value={course.name}>
+            {course.name}
+          </MenuItem>
+        ))}
+      </TextField>
+      <TextField select id="outlined-select-currency" defaultValue="学年">
+        <MenuItem value="学年">学年</MenuItem>
+        {uniqueSchoolYears.map((year) => (
+          <MenuItem key={year} value={year}>
+            {year}
+          </MenuItem>
+        ))}
+      </TextField>
+      <TextField
+        placeholder="名前"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
+      />
+      <Button variant="outlined">検索</Button>
       <Paper elevation={0} sx={{ width: "70%", margin: "auto" }}>
         <TableContainer className="tablecontainer">
           <Table aria-label="simple table">
