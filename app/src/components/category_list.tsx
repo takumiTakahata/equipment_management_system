@@ -21,6 +21,10 @@ const CategoryList = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const navigate = useNavigate();
 
+  const categoryRegister = () => {
+    navigate("/category_register");
+  };
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -60,7 +64,9 @@ const CategoryList = () => {
     <div>
       <h1>Category List</h1>
       <Header />
-      <Button variant="outlined">カテゴリー登録</Button>
+      <Button variant="outlined" onClick={categoryRegister}>
+        カテゴリー登録
+      </Button>
       <Paper elevation={0} sx={{ width: "70%", margin: "auto" }}>
         <TableContainer className="tablecontainer">
           <Table aria-label="simple table">
