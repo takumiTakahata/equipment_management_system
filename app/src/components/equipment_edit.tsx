@@ -50,12 +50,15 @@ const EquipmentEdit = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/category/", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch(
+          "https://mysite-mczi.onrender.com/api/category/",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch categories");
@@ -102,7 +105,7 @@ const EquipmentEdit = () => {
   const handleDelete = async () => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/equipment/${equipmentId}/`,
+        `https://mysite-mczi.onrender.com/api/equipment/${equipmentId}/`,
         {
           method: "DELETE",
         }
@@ -131,7 +134,7 @@ const EquipmentEdit = () => {
       console.log("Sending request with body:", requestBody);
 
       const response = await fetch(
-        `http://127.0.0.1:8000/api/equipment/${equipmentId}/`,
+        `https://mysite-mczi.onrender.com/api/equipment/${equipmentId}/`,
         {
           method: "PUT",
           headers: {

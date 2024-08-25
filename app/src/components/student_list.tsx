@@ -38,7 +38,9 @@ function StudentList() {
     // 学生情報を取得
     const fetchStudentsAndCourses = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/student/");
+        const response = await fetch(
+          "https://mysite-mczi.onrender.com/api/student/"
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch students");
         }
@@ -46,7 +48,7 @@ function StudentList() {
 
         // コース情報を取得
         const coursesResponse = await fetch(
-          "http://127.0.0.1:8000/api/department/"
+          "https://mysite-mczi.onrender.com/api/department/"
         );
         if (!coursesResponse.ok) {
           throw new Error("Failed to fetch courses");

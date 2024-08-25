@@ -1,6 +1,7 @@
 import React from "react";
 import { ListItem } from "@mui/material";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -26,6 +27,11 @@ function renderRow(props: ListChildComponentProps) {
 }
 
 function UserTop() {
+  const navigate = useNavigate();
+
+  const borrowButton = () => {
+    navigate("/qr_reading");
+  };
   return (
     <div id="user_top">
       <p className="title">借りている物一覧</p>
@@ -51,7 +57,12 @@ function UserTop() {
         </Box>
       </div>
       <div className="button">
-        <Button className="return_button" variant="contained" color="primary">
+        <Button
+          className="return_button"
+          variant="contained"
+          color="primary"
+          onClick={borrowButton}
+        >
           返却申請へ
         </Button>
       </div>

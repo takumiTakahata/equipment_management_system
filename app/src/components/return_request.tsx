@@ -29,17 +29,20 @@ const handleLendingRequest = async () => {
 
   console.log("qrResult:", qrResult);
   try {
-    const response = await fetch("http://127.0.0.1:8000/api/application/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        qrResult,
-        userId,
-        action: "return",
-      }),
-    });
+    const response = await fetch(
+      "https://mysite-mczi.onrender.com/api/application/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          qrResult,
+          userId,
+          action: "return",
+        }),
+      }
+    );
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -72,7 +75,7 @@ function ReturnRequest() {
         const productDetails = await Promise.all(
           qrResult.map(async (id: number) => {
             const response = await fetch(
-              `http://127.0.0.1:8000/api/equipment/${id}/`
+              `https://mysite-mczi.onrender.com/api/equipment/${id}/`
             );
             if (!response.ok) {
               throw new Error(`Failed to fetch product with ID ${id}`);
@@ -118,6 +121,14 @@ function ReturnRequest() {
     );
   }
 
+  const handleClose = () => {
+    localStorage.removeItem("qrresult");
+    navigate("/user_top");
+  };
+  const continueReading = () => {
+    navigate("/qr_reading");
+  };
+
   return (
     <div id="return_request">
       <p className="title">
@@ -153,12 +164,21 @@ function ReturnRequest() {
         </Button>
       </div>
       <div className="button">
-        <Button className="continue_button" variant="contained" color="primary">
+        <Button
+          className="continue_button"
+          variant="contained"
+          color="primary"
+          onClick={continueReading}
+        >
           続けて読み込む
         </Button>
       </div>
       <div className="button">
-        <Button className="cancel_button" variant="contained">
+        <Button
+          className="cancel_button"
+          variant="contained"
+          onClick={handleClose}
+        >
           キャンセル
         </Button>
       </div>

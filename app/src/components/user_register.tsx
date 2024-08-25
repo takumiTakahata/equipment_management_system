@@ -52,7 +52,7 @@ function UserRegister() {
 
   // 学科情報を取得する
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/department/")
+    fetch("https://mysite-mczi.onrender.com/api/department/")
       .then((response) => response.json())
       .then((data) => {
         setDepartments(data);
@@ -108,7 +108,7 @@ function UserRegister() {
 
   const studentRegister = () => {
     FetchRegister(username, email, password, course_id, school_year);
-    navigate("/user_top");
+    navigate("/user_login");
   };
 
   async function FetchRegister(
@@ -119,19 +119,22 @@ function UserRegister() {
     school_year: string
   ): Promise<void> {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/student/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          email,
-          password,
-          course_id,
-          school_year,
-        }),
-      });
+      const response = await fetch(
+        `https://mysite-mczi.onrender.com/api/student/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username,
+            email,
+            password,
+            course_id,
+            school_year,
+          }),
+        }
+      );
 
       const data = await response.json();
       console.log(data);
