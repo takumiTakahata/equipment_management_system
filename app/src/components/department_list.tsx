@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Button,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 interface department {
   id: number;
@@ -8,6 +18,7 @@ interface department {
 }
 const DepartmentList = () => {
   const [departments, setDepartments] = useState<department[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDepartments = async () => {
@@ -33,25 +44,47 @@ const DepartmentList = () => {
     fetchDepartments(); // Call fetchDepartments when component mounts
   }, []); // Empty dependency array ensures this effect runs only once on mount
 
+  const handleRowClick = (department: department) => {
+    navigate(
+      `/department_edit?id=${department.id}&name=${encodeURIComponent(
+        department.name
+      )}&years=${department.course_year}`
+    );
+  };
+
+  const departmentRegister = () => {
+    navigate("/department_register");
+  };
+
   return (
     <div>
       <h1>Department List</h1>
-      <ul>
-        {departments.map((department) => (
-          <li key={department.id}>
-            <Link
-              to={`/department_edit?id=${
-                department.id
-              }&name=${encodeURIComponent(department.name)}&years=${
-                department.course_year
-              }`}
-            >
-              {department.name}
-              {department.course_year}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <Button onClick={departmentRegister} variant="outlined">
+        学科登録
+      </Button>
+      <Paper elevation={0} sx={{ width: "70%", margin: "auto" }}>
+        <TableContainer className="tablecontainer">
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="center">学科名</TableCell>
+                <TableCell align="center">学年</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {departments.map((department) => (
+                <TableRow
+                  key={department.id}
+                  onClick={() => handleRowClick(department)}
+                >
+                  <TableCell align="center">{department.name}</TableCell>
+                  <TableCell align="center">{department.course_year}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
     </div>
   );
 };
