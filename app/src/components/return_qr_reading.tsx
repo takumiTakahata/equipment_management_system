@@ -1,8 +1,6 @@
 import jsQR from "jsqr";
 import React, { useRef, useState, useEffect, useCallback, FC } from "react";
 import "./qr_reading.css";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import { useNavigate } from "react-router-dom";
 type Props = {};
 const Inventory: FC<Props> = () => {
