@@ -6,6 +6,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
+import "./user_login.css";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -132,10 +133,14 @@ const Login: React.FC = () => {
       {error && <p>{error}</p>}
 
       <div className="trans_user_regiseter">
-        <Link to="/user_register">新規登録はこちら</Link>
+        <Link to="/user_register" className="trans_button">
+          新規登録はこちら
+        </Link>
       </div>
       <div className="trans_password_change">
-        <Link to="/user_password_change">パスワードを忘れた方はこちら</Link>
+        <Link to="/user_password_change" className="trans_button">
+          パスワードを忘れた方はこちら
+        </Link>
       </div>
     </div>
   );

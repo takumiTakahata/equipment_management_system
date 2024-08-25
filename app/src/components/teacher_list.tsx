@@ -1,5 +1,14 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 interface Teacher {
   id: number;
@@ -9,6 +18,7 @@ interface Teacher {
 
 function TeacherList() {
   const [teachers, setTeachers] = useState<Teacher[]>([]);
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchTeachers = async () => {
       try {
@@ -27,23 +37,36 @@ function TeacherList() {
     fetchTeachers();
   }, []);
 
+  const handleRowClick = (teacher: Teacher) => {
+    navigate(`/teacher_edit/${teacher.id}`);
+  };
+
   return (
     <div>
       <h2>教員一覧</h2>
-      <ul>
-        {teachers.map((teacher) => (
-          <Link
-            to={`/teacher_edit/${teacher.id}`}
-            key={teacher.id}
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <li>
-              <div>ユーザー名: {teacher.username}</div>
-              <div>メールアドレス: {teacher.email}</div>
-            </li>
-          </Link>
-        ))}
-      </ul>
+      <Paper elevation={0} sx={{ width: "70%", margin: "auto" }}>
+        <TableContainer className="tablecontainer">
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="center">名前</TableCell>
+                <TableCell align="center">メールアドレス</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {teachers.map((teacher) => (
+                <TableRow
+                  key={teacher.id}
+                  onClick={() => handleRowClick(teacher)}
+                >
+                  <TableCell align="center">{teacher.username}</TableCell>
+                  <TableCell align="center">{teacher.email}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
     </div>
   );
 }

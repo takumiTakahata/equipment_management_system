@@ -1,0 +1,39 @@
+#user_login {
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+#user_login .page_title {
+  margin-top: 20%;
+}
+#user_login .ad_login_required_txt {
+  color: #ff0000;
+  font-size: 16px;
+  margin-bottom: 10%;
+}
+
+#user_login .user_login_email,
+#user_login .user_login_pass {
+  margin-top: 7%;
+  margin-bottom: 0.5%;
+}
+
+#user_login .user_login_email_text,
+#user_login .user_login_pass_text {
+  width: 75%;
+}
+
+#user_login .MuiButton-root.user_login_button {
+  margin-top: 5%;
+  background-color: #627cff;
+  color: white;
+}
+
+#user_login .trans_user_regiseter,
+#user_login .trans_password_change {
+  margin-top: 10%;
+}
+#user_login .trans_button {
+  font-size: 20px;
+  text-decoration: none;
+  color: #5987ff;
+}
