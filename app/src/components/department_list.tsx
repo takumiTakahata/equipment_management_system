@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import {
   Table,
   TableBody,
@@ -9,6 +8,7 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 interface department {
   id: number;
@@ -17,6 +17,7 @@ interface department {
 }
 const DepartmentList = () => {
   const [departments, setDepartments] = useState<department[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDepartments = async () => {
@@ -42,6 +43,14 @@ const DepartmentList = () => {
     fetchDepartments(); // Call fetchDepartments when component mounts
   }, []); // Empty dependency array ensures this effect runs only once on mount
 
+  const handleRowClick = (department: department) => {
+    navigate(
+      `/department_edit?id=${department.id}&name=${encodeURIComponent(
+        department.name
+      )}&years=${department.course_year}`
+    );
+  };
+
   return (
     <div>
       <h1>Department List</h1>
@@ -56,7 +65,10 @@ const DepartmentList = () => {
             </TableHead>
             <TableBody>
               {departments.map((department) => (
-                <TableRow key={department.id}>
+                <TableRow
+                  key={department.id}
+                  onClick={() => handleRowClick(department)}
+                >
                   <TableCell align="center">{department.name}</TableCell>
                   <TableCell align="center">{department.course_year}</TableCell>
                 </TableRow>
@@ -65,22 +77,6 @@ const DepartmentList = () => {
           </Table>
         </TableContainer>
       </Paper>
-      {/* <ul>
-        {departments.map((department) => (
-          <li key={department.id}>
-            <Link
-              to={`/department_edit?id=${
-                department.id
-              }&name=${encodeURIComponent(department.name)}&years=${
-                department.course_year
-              }`}
-            >
-              {department.name}
-              {department.course_year}
-            </Link>
-          </li>
-        ))}
-      </ul> */}
     </div>
   );
 };
