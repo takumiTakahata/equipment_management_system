@@ -87,11 +87,14 @@ function StudentEdit() {
       if (response.ok) {
         const data = await response.json();
         console.log("削除成功:", data);
+        window.location.href = "/student_list?message=削除が成功しました！";
       } else {
         console.error("削除失敗:", response.statusText);
+        window.location.href = "/student_list?message=削除が失敗しました！";
       }
     } catch (error) {
       console.error("削除失敗:", error);
+      window.location.href = "/student_list?message=削除が失敗しました！";
     }
     setOpenDeleteDialog(false);
   };
@@ -121,11 +124,14 @@ function StudentEdit() {
       if (response.ok) {
         const data = await response.json();
         console.log("更新成功:", data);
+        window.location.href = "/student_list?message=編集が成功しました！";
       } else {
         console.error("更新失敗:", response.statusText);
+        window.location.href = "/student_list?message=編集が失敗しました！";
       }
     } catch (error) {
       console.error("更新失敗:", error);
+      window.location.href = "/student_list?message=編集が失敗しました！";
     }
     setOpenEditDialog(false);
   };
