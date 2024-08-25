@@ -32,7 +32,9 @@ function StudentEdit() {
   // 学生情報を取得する関数
   const fetchStudentData = async (id: string) => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/student/${id}/`);
+      const response = await fetch(
+        `https://mysite-mczi.onrender.com/api/student/${id}/`
+      );
       if (response.ok) {
         const data = await response.json();
         setStudentData(data);
@@ -48,7 +50,9 @@ function StudentEdit() {
   // コース一覧を取得する関数
   const fetchCourses = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/department/");
+      const response = await fetch(
+        "https://mysite-mczi.onrender.com/api/department/"
+      );
       if (response.ok) {
         const data: Course[] = await response.json();
         setCourses(data);
@@ -65,7 +69,7 @@ function StudentEdit() {
   const handleDelete = async () => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/teacher/${studentId}/`,
+        `https://mysite-mczi.onrender.com/api/teacher/${studentId}/`,
         {
           method: "DELETE",
         }
@@ -94,7 +98,7 @@ function StudentEdit() {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/student/${studentId}/`,
+        `https://mysite-mczi.onrender.com/api/student/${studentId}/`,
         {
           method: "PUT",
           headers: {
