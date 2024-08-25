@@ -9,6 +9,7 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 interface Course {
   id: number;
@@ -27,6 +28,7 @@ interface Student {
 function StudentList() {
   const [students, setStudents] = useState<Student[]>([]);
   const [courses, setCourses] = useState<Course[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // 学生情報を取得
@@ -70,6 +72,10 @@ function StudentList() {
     fetchStudentsAndCourses();
   }, []);
 
+  const handleRowClick = (student: Student) => {
+    navigate(`/student_edit/${student.id}`);
+  };
+
   return (
     <div>
       <h2>学生一覧</h2>
@@ -86,7 +92,10 @@ function StudentList() {
             </TableHead>
             <TableBody>
               {students.map((student) => (
-                <TableRow key={student.id}>
+                <TableRow
+                  key={student.id}
+                  onClick={() => handleRowClick(student)}
+                >
                   <TableCell align="center">{student.username}</TableCell>
                   <TableCell align="center">{student.course_name}</TableCell>
                   <TableCell align="center">{student.school_year}</TableCell>
@@ -97,22 +106,6 @@ function StudentList() {
           </Table>
         </TableContainer>
       </Paper>
-      {/* <ul>
-        {students.map((student) => (
-          <Link
-            to={`/student_edit/${student.id}`}
-            key={student.id}
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <li>
-              <div>ユーザー名: {student.username}</div>
-              <p>学科: {student.course_name}</p>
-              <p>学年: {student.school_year}</p>
-              <div>メールアドレス: {student.email}</div>
-            </li>
-          </Link>
-        ))}
-      </ul> */}
     </div>
   );
 }
