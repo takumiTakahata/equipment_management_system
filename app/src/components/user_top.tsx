@@ -57,7 +57,7 @@ function UserTop() {
 
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/api/user_top/${userId}/`,
+          `https://mysite-mczi.onrender.com/api/user_top/${userId}/`,
           {
             method: "GET",
             headers: {
