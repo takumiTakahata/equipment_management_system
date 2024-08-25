@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect, useCallback, FC } from "react";
 import "./inventory.css";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
+import { useNavigate } from "react-router-dom";
 
 type Props = {};
 const Inventory: FC<Props> = () => {
@@ -17,6 +18,7 @@ const Inventory: FC<Props> = () => {
   const [error, setError] = useState("");
   const isInitialMount = useRef(true); // 初回実行を制御するためのuseRef
   const [open, setOpen] = useState(true);
+  const navigate = useNavigate();
 
   const scanQrCode = useCallback(() => {
     setOpen(true);
@@ -51,9 +53,13 @@ const Inventory: FC<Props> = () => {
   }, [qrresult]);
 
   const handleClose = () => {
-    localStorage.removeItem("qrresult");
     setQrresult([]);
     setOpen(false);
+    navigate("/no_list");
+  };
+
+  const handleCancel = () => {
+    localStorage.removeItem("qrresult");
   };
 
   const continueRead = () => {
@@ -130,6 +136,7 @@ const Inventory: FC<Props> = () => {
           <Dialog open={open} onClose={handleClose}>
             <DialogActions>
               <button onClick={continueRead}>続けて読む</button>
+              <button onClick={handleCancel}>キャンセル</button>
               <button onClick={handleClose}>終了する</button>
             </DialogActions>
           </Dialog>
