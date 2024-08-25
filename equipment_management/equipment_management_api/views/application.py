@@ -161,39 +161,50 @@ class ApplicationView(APIView):
           return Response({"application_ids": application_ids}, status=status.HTTP_200_OK)
     
     def put(self, request, pk=None):
-      if pk is None:
-          pk = request.data.get("pk")
-          if pk is None:
-              return Response({"error": "pk is required"}, status=status.HTTP_400_BAD_REQUEST)
+        if pk is None:
+            pk = request.data.get("pk")
+            if pk is None:
+                return Response({"error": "pk is required"}, status=status.HTTP_400_BAD_REQUEST)
 
-      thread_key = request.data.get("thread_key")
-      if thread_key is None:
-          return Response({"error": "thread_key is required"}, status=status.HTTP_400_BAD_REQUEST)
+        thread_key = request.data.get("thread_key")
+        if thread_key is None:
+            return Response({"error": "thread_key is required"}, status=status.HTTP_400_BAD_REQUEST)
 
-      try:
-          application = Application.objects.get(pk=pk)
-      except Application.DoesNotExist:
-          return Response({"error": "Application not found"}, status=status.HTTP_404_NOT_FOUND)
+        try:
+            application = Application.objects.get(pk=pk)
+        except Application.DoesNotExist:
+            return Response({"error": "Application not found"}, status=status.HTTP_404_NOT_FOUND)
 
-      user_id = request.data.get("user_id")
-      if not user_id:
-          return Response({"error": "user_id is required"}, status=status.HTTP_400_BAD_REQUEST)
+        user_id = request.data.get("user_id")
+        if not user_id:
+            return Response({"error": "user_id is required"}, status=status.HTTP_400_BAD_REQUEST)
 
-      action = request.data.get("action")
-      if action == "loan":
-          application.loan_authorizer_id = user_id
-          application.loan_date = datetime.now().date()
-          application.save()
-          self.send_loan_approvalmessage_to_google_chat(thread_key)
-          return Response({"message": "Application updated successfully for loan"}, status=status.HTTP_200_OK)
-      elif action == "return":
-          application.return_authorizer_id = user_id
-          application.return_date = datetime.now().date()
-          application.save()
-          self.send_return_approvalmessage_to_google_chat(thread_key)
-          return Response({"message": "Application updated successfully for return"}, status=status.HTTP_200_OK)
-      else:
-          return Response({"error": "Invalid action"}, status=status.HTTP_400_BAD_REQUEST)
+        action = request.data.get("action")
+        product_id = application.product_id  # applicationからproduct_idを取得
+
+        try:
+            product = Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        if action == "loan":
+            application.loan_authorizer_id = user_id
+            application.loan_date = datetime.now().date()
+            product.active_flag = False  # active_flagをFalseに設定
+            application.save()
+            product.save()
+            self.send_loan_approvalmessage_to_google_chat(thread_key)
+            return Response({"message": "Application updated successfully for loan"}, status=status.HTTP_200_OK)
+        elif action == "return":
+            application.return_authorizer_id = user_id
+            application.return_date = datetime.now().date()
+            product.active_flag = True  # active_flagをTrueに設定
+            application.save()
+            product.save()
+            self.send_return_approvalmessage_to_google_chat(thread_key)
+            return Response({"message": "Application updated successfully for return"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"error": "Invalid action"}, status=status.HTTP_400_BAD_REQUEST)
 
     def generate_thread_key(self):
         return str(uuid.uuid4())
