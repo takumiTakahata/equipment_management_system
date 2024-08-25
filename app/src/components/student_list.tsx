@@ -14,6 +14,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
+import Header from "./header";
 
 interface Course {
   id: number;
@@ -89,6 +90,7 @@ function StudentList() {
 
   return (
     <div>
+      <Header />
       <h2>学生一覧</h2>
       <TextField select id="outlined-select-currency" defaultValue="学科">
         <MenuItem value="学科">学科</MenuItem>

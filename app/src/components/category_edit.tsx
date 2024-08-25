@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import Header from "./header";
 
 const CategoryEdit = () => {
   const location = useLocation();
@@ -45,6 +46,7 @@ const CategoryEdit = () => {
   return (
     <div>
       <h2>カテゴリー編集</h2>
+      <Header />
       <form onSubmit={handleSubmit}>
         <div>
           <label>名前: </label>

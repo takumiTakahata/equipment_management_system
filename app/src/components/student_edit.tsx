@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Header from "./header";
 
 interface Course {
   id: string;
@@ -120,6 +121,7 @@ function StudentEdit() {
 
   return (
     <div>
+      <Header />
       <h2>学生編集</h2>
       <form onSubmit={handleSubmit}>
         <div>

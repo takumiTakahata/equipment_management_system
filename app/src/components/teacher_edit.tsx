@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Header from "./header";
 
 function TeacherEdit() {
   // URLパラメータからidを取得
@@ -90,6 +91,7 @@ function TeacherEdit() {
 
   return (
     <div>
+      <Header />
       <h2>教員編集</h2>
       <form onSubmit={handleSubmit}>
         <div>
