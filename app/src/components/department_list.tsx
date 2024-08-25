@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
 
 interface department {
   id: number;
@@ -36,7 +45,27 @@ const DepartmentList = () => {
   return (
     <div>
       <h1>Department List</h1>
-      <ul>
+      <Paper elevation={0} sx={{ width: "70%", margin: "auto" }}>
+        <TableContainer className="tablecontainer">
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="center">学科名</TableCell>
+                <TableCell align="center">学年</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {departments.map((department) => (
+                <TableRow key={department.id}>
+                  <TableCell align="center">{department.name}</TableCell>
+                  <TableCell align="center">{department.course_year}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+      {/* <ul>
         {departments.map((department) => (
           <li key={department.id}>
             <Link
@@ -51,7 +80,7 @@ const DepartmentList = () => {
             </Link>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 };
