@@ -10,6 +10,42 @@ from httplib2 import Http
 from datetime import datetime, timedelta
 from ..models import User,Product,Course
 
+class UserApplicationView(APIView):
+    def get(self, request,user_id):
+        print('通過')
+        # Userからデータを取得
+        try:
+            user = User.objects.get(id=user_id)
+        except User.DoesNotExist:
+            return Response({'error': 'User not found'}, status=404)
+        
+        username = user.username
+
+        # 追加のApplicationデータを取得する条件をチェック
+        additional_applications = Application.objects.filter(
+            user_id=user_id,
+            return_date__isnull=True,
+            return_authorizer_id__isnull=True,
+            loan_date__isnull=False
+        ).values('product_id', 'deadline')
+
+        additional_data = []
+        for app in additional_applications:
+            product_id = app['product_id']
+            deadline = app['deadline']
+            try:
+                product = Product.objects.get(id=product_id)
+                product_name = product.name
+            except Product.DoesNotExist:
+                product_name = 'Unknown'
+            
+            additional_data.append({
+                'username': username,
+                'product_name': product_name,
+                'deadline': deadline
+            })
+
+        return Response(additional_data)
 class ApplicationView(APIView):
     # GETの時の一覧表示処理
     def get(self, request):
@@ -213,7 +249,7 @@ class ApplicationView(APIView):
       key = os.environ.get('GOOGLE_API_KEY')
       url = "https://chat.googleapis.com/v1/spaces/AAAA_qvmoRo/messages?key={key}".format(key=key)
       app_message = {
-          "text": "{name}の貸出申請https://mysite-mczi.onrender.com/loan_approval/?id={id}".format(id=id,name=name),
+          "text": "{name}の貸出申請https://equipment-management-app.vercel.app/loan_approval/?id={id}".format(id=id,name=name),
           "thread": {"threadKey": thread_key},
       }
       message_headers = {"Content-Type": "application/json; charset=UTF-8"}
@@ -245,7 +281,7 @@ class ApplicationView(APIView):
       key = os.environ.get('GOOGLE_API_KEY')
       url = "https://chat.googleapis.com/v1/spaces/AAAA_qvmoRo/messages?key={key}".format(key=key)
       app_message = {
-          "text": "{name}の返却申請https://mysite-mczi.onrender.com/return_approval/?id={id}".format(id=id,name=name),
+          "text": "{name}の返却申請https://equipment-management-app.vercel.app/return_approval/?id={id}".format(id=id,name=name),
           "thread": {"threadKey": thread_key},
       }
       message_headers = {"Content-Type": "application/json; charset=UTF-8"}
