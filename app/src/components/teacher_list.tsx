@@ -9,6 +9,7 @@ import {
   Paper,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import Header from "./header";
 
 interface Teacher {
   id: number;
@@ -45,6 +46,7 @@ function TeacherList() {
 
   return (
     <div>
+      <Header />
       <h2>教員一覧</h2>
       <Paper elevation={0} sx={{ width: "70%", margin: "auto" }}>
         <TableContainer className="tablecontainer">

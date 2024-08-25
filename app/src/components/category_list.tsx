@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import {
   Table,
   TableBody,
@@ -11,6 +10,8 @@ import {
   Button,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import Header from "./header";
+
 interface Category {
   id: number;
   name: string;
@@ -58,6 +59,7 @@ const CategoryList = () => {
   return (
     <div>
       <h1>Category List</h1>
+      <Header />
       <Button variant="outlined">カテゴリー登録</Button>
       <Paper elevation={0} sx={{ width: "70%", margin: "auto" }}>
         <TableContainer className="tablecontainer">

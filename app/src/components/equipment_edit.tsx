@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import Header from "./header";
 
 interface Category {
   id: number;
@@ -160,6 +161,7 @@ const EquipmentEdit = () => {
   return (
     <div>
       <h2>備品編集</h2>
+      <Header />
       <form onSubmit={handleSubmit}>
         <div>
           <label>備品名: </label>
