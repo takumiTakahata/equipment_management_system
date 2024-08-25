@@ -31,7 +31,7 @@ const DepartmentEdit = () => {
   const handleDelete = async () => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/department/${departmentId}/`,
+        `https://mysite-mczi.onrender.com/api/department/${departmentId}/`,
         {
           method: "DELETE",
         }
@@ -51,7 +51,7 @@ const DepartmentEdit = () => {
     event.preventDefault();
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/department/${departmentId}/`,
+        `https://mysite-mczi.onrender.com/api/department/${departmentId}/`,
         {
           method: "PUT",
           headers: {
