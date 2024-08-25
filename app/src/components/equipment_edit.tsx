@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "./header";
-
+import { TextField, Button, MenuItem } from "@mui/material";
+import "./equipment_edit.css";
 interface Category {
   id: number;
   name: string;
@@ -79,27 +80,23 @@ const EquipmentEdit = () => {
     setName(event.target.value);
   };
 
-  const handleCategoryChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCategory(event.target.value);
   };
 
   const handleActiveFlagChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setActiveFlag(event.target.value);
   };
 
   const handleLostStatusChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setLostStatus(event.target.value);
   };
 
-  const handleDeadlineChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleDeadlineChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDeadline(event.target.value);
   };
 
@@ -159,53 +156,98 @@ const EquipmentEdit = () => {
   };
 
   return (
-    <div>
-      <h2>備品編集</h2>
+    <div id="equipment_edit">
       <Header />
+      <div className="equipment_edit_flex">
+        <h2 className="equipment_edit_title">備品編集</h2>
+        <Button
+          onClick={handleDelete}
+          variant="contained"
+          color="secondary"
+          className="equipment_delete_button"
+        >
+          削除
+        </Button>
+      </div>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>備品名: </label>
-          <input type="text" value={name} onChange={handleNameChange} />
+        <div className="equipment_edit_text">
+          <TextField
+            label="備品名"
+            value={name}
+            onChange={handleNameChange}
+            fullWidth
+          />
         </div>
-        <div>
-          <label>カテゴリー: </label>
-          <select value={categories_id} onChange={handleCategoryChange}>
-            <option value="" disabled>
+        <div className="equipment_edit_text">
+          <TextField
+            select
+            label="カテゴリー"
+            value={categories_id}
+            onChange={handleCategoryChange}
+            fullWidth
+            margin="normal"
+          >
+            <MenuItem value="" disabled>
               選択してください
-            </option>
+            </MenuItem>
             {categories.map((cat) => (
-              <option key={cat.id} value={cat.id}>
+              <MenuItem key={cat.id} value={cat.id}>
                 {cat.name}
-              </option>
+              </MenuItem>
             ))}
-          </select>
+          </TextField>
         </div>
-        <div>
-          <label>ステータス: </label>
-          <select value={active_flag} onChange={handleActiveFlagChange}>
-            <option value="true">貸出可</option>
-            <option value="false">貸出中</option>
-          </select>
-
-          <label>貸出状態: </label>
-          <select value={lost_status} onChange={handleLostStatusChange}>
-            <option value="false">正常</option>
-            <option value="true">紛失中</option>
-          </select>
+        <div className="equipment_edit_text">
+          <TextField
+            select
+            label="ステータス"
+            value={active_flag}
+            onChange={handleActiveFlagChange}
+            fullWidth
+            margin="normal"
+          >
+            <MenuItem value="true">貸出可</MenuItem>
+            <MenuItem value="false">貸出中</MenuItem>
+          </TextField>
         </div>
-        <div>
-          <label>返却期限: </label>
-          <select value={deadline} onChange={handleDeadlineChange}>
-            <option value="31">1カ月</option>
-            <option value="62">2カ月</option>
-            <option value="93">3カ月</option>
-            <option value="186">6カ月</option>
-            <option value="365">1年</option>
-          </select>
+        <div className="equipment_edit_text">
+          <TextField
+            select
+            label="貸出状態"
+            value={lost_status}
+            onChange={handleLostStatusChange}
+            fullWidth
+            margin="normal"
+          >
+            <MenuItem value="false">正常</MenuItem>
+            <MenuItem value="true">紛失中</MenuItem>
+          </TextField>
         </div>
-        <button type="submit">編集</button>
+        <div className="equipment_edit_text">
+          <TextField
+            select
+            label="返却期限"
+            value={deadline}
+            onChange={handleDeadlineChange}
+            fullWidth
+            margin="normal"
+          >
+            <MenuItem value="31">1カ月</MenuItem>
+            <MenuItem value="62">2カ月</MenuItem>
+            <MenuItem value="93">3カ月</MenuItem>
+            <MenuItem value="186">6カ月</MenuItem>
+            <MenuItem value="365">1年</MenuItem>
+          </TextField>
+        </div>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className="equipment_edit_button"
+        >
+          編集
+        </Button>
       </form>
-      <button onClick={handleDelete}>削除</button>
     </div>
   );
 };
