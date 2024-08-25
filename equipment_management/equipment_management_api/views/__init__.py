@@ -7,3 +7,4 @@ from .student import StudentView
 from .equipment import EquipmentView
 from .qr import qr_code_view
 from .application import ApplicationView
+from .history import HistoryView
