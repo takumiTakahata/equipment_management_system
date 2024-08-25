@@ -21,7 +21,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 
       if (!token) {
         // トークンがない場合、ログインページにリダイレクト
-        navigate("/user_login");
+        navigate("/admin_login");
         return;
       }
 
@@ -41,12 +41,12 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
             setHasPermission(true);
           } else {
             setHasPermission(false);
-            navigate("/no_access"); // 権限がない場合のリダイレクト先
+            navigate("/admin_login"); // 権限がない場合のリダイレクト先
             return;
           }
         } catch (error) {
           console.error("Error fetching user data:", error);
-          navigate("/error"); // エラー発生時のリダイレクト先
+          navigate("/admin_login"); // エラー発生時のリダイレクト先
           return;
         }
       } else {
