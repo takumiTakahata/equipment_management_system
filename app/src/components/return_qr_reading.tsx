@@ -40,7 +40,7 @@ const Inventory: FC<Props> = () => {
             setQrresult(newQrresult);
             setResult(qrCodeData.data);
             // setQrresult([]);
-            navigate("/lending_request");
+            navigate("/return_request");
             return;
           } else {
             console.log("読めません");
