@@ -1,0 +1,25 @@
+.register_pulldown {
+  width: 25%;
+  margin-left: 37.5%;
+  margin-top: 5%;
+  margin-bottom: 1%;
+}
+
+.equipment_register_text {
+  width: 25%;
+  margin-left: 37.5%;
+  margin-top: 5%;
+  margin-bottom: 1%;
+}
+
+.MuiButton-root.equipment_register_button {
+  margin-top: 3%;
+  width: 25%;
+  margin-left: 37.5%;
+  background-color: #00d12e;
+  color: white;
+}
+
+.MuiButton-root.equipment_register_button:hover {
+  background-color: #00d12e;
+}

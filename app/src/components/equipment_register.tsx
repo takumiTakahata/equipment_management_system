@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "./header";
+import { TextField, MenuItem } from "@mui/material";
+import Button from "@mui/material/Button";
+import "./equipment_register.css";
+import Box from "@mui/material/Box";
 
 interface Category {
   id: number;
@@ -41,7 +45,7 @@ const EquipmentRegister = () => {
     fetchCategories();
   }, []);
 
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
     setcategories_id(value);
   };
@@ -50,7 +54,7 @@ const EquipmentRegister = () => {
     const value = e.target.value;
     setIsbn(value);
   };
-  // isbnから本の名前を取得
+
   const fetchBookName = async (isbn: string) => {
     const url = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`;
     console.log("Request URL:", url);
@@ -79,10 +83,10 @@ const EquipmentRegister = () => {
     setName(e.target.value);
   };
 
-  const handleDeadlineChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleDeadlineChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDeadline(Number(e.target.value));
   };
-  // 本の時の登録用fetch
+
   const handleSubmitForBook = async (e: React.FormEvent) => {
     e.preventDefault();
     if (categories_id === null) {
@@ -121,7 +125,7 @@ const EquipmentRegister = () => {
       console.error("An error occurred:", error);
     }
   };
-  // 本以外の登録用fetch
+
   const handleSubmitForOther = async (e: React.FormEvent) => {
     e.preventDefault();
     if (categories_id === null) {
@@ -160,101 +164,120 @@ const EquipmentRegister = () => {
   };
 
   return (
-    <div>
+    <div id="equipment_register">
       <Header />
-      {categories_id === 1 ? ( // カテゴリーのidが1番が本になっていると仮定してやっているので、実際のカテゴリーidに合わせて変更してください
+      {categories_id === 1 ? (
         <form onSubmit={handleSubmitForBook}>
-          <div>
-            <label htmlFor="category">カテゴリー</label>
-            <select
-              id="category"
+          <div className="register_pulldown">
+            <TextField
+              select
+              label="カテゴリー"
               value={categories_id ?? ""}
               onChange={handleCategoryChange}
+              fullWidth
             >
-              <option value="" disabled>
+              <MenuItem value="" disabled>
                 選択してください
-              </option>
+              </MenuItem>
               {categories.map((category) => (
-                <option key={category.id} value={category.id}>
+                <MenuItem key={category.id} value={category.id}>
                   {category.name}
-                </option>
+                </MenuItem>
               ))}
-            </select>
+            </TextField>
           </div>
-          <div>
-            <label htmlFor="isbn">ISBN</label>
-            <input
+          <div className="equipment_register_text">
+            <TextField
+              label="ISBN"
               type="text"
               id="isbn"
               value={ISBN}
               onChange={handleIsbnChange}
+              fullWidth
             />
           </div>
-          <div>
-            <label htmlFor="deadline">期限</label>
-            <select
-              id="deadline"
+          <div className="register_pulldown">
+            <TextField
+              select
+              label="期限"
               value={deadline ?? ""}
               onChange={handleDeadlineChange}
+              fullWidth
             >
-              <option value="" disabled>
+              <MenuItem value="" disabled>
                 選択してください
-              </option>
-              <option value={31}>1カ月</option>
-              <option value={62}>2カ月</option>
-              <option value={93}>3カ月</option>
-              <option value={186}>6カ月</option>
-              <option value={365}>1年</option>
-            </select>
+              </MenuItem>
+              <MenuItem value={31}>1カ月</MenuItem>
+              <MenuItem value={62}>2カ月</MenuItem>
+              <MenuItem value={93}>3カ月</MenuItem>
+              <MenuItem value={186}>6カ月</MenuItem>
+              <MenuItem value={365}>1年</MenuItem>
+            </TextField>
           </div>
-          <button type="submit">登録</button>
+          <Button
+            type="submit"
+            variant="outlined"
+            className="equipment_register_button"
+          >
+            登録
+          </Button>
         </form>
       ) : (
         <form onSubmit={handleSubmitForOther}>
-          <div>
-            <label htmlFor="category">カテゴリー</label>
-            <select
-              id="category"
+          <div className="register_pulldown">
+            <TextField
+              select
+              label="カテゴリー"
               value={categories_id ?? ""}
               onChange={handleCategoryChange}
+              fullWidth
             >
-              <option value="" disabled>
+              <MenuItem value="" disabled>
                 選択してください
-              </option>
+              </MenuItem>
               {categories.map((category) => (
-                <option key={category.id} value={category.id}>
+                <MenuItem key={category.id} value={category.id}>
                   {category.name}
-                </option>
+                </MenuItem>
               ))}
-            </select>
+            </TextField>
           </div>
-          <div>
-            <label htmlFor="name">名前</label>
-            <input
+          <div className="equipment_register_text">
+            <TextField
+              label="名前"
               type="text"
               id="name"
               value={name}
               onChange={handleNameChange}
+              fullWidth
             />
           </div>
-          <div>
-            <label htmlFor="deadline">期限</label>
-            <select
-              id="deadline"
+          <div className="register_pulldown">
+            <TextField
+              select
+              label="期限"
               value={deadline ?? ""}
               onChange={handleDeadlineChange}
+              fullWidth
+              className="register_pulldown"
             >
-              <option value="" disabled>
+              <MenuItem value="" disabled>
                 選択してください
-              </option>
-              <option value={31}>1カ月</option>
-              <option value={62}>2カ月</option>
-              <option value={93}>3カ月</option>
-              <option value={186}>6カ月</option>
-              <option value={365}>1年</option>
-            </select>
+              </MenuItem>
+              <MenuItem value={31}>1カ月</MenuItem>
+              <MenuItem value={62}>2カ月</MenuItem>
+              <MenuItem value={93}>3カ月</MenuItem>
+              <MenuItem value={186}>6カ月</MenuItem>
+              <MenuItem value={365}>1年</MenuItem>
+            </TextField>
           </div>
-          <button type="submit">登録</button>
+          <Button
+            type="submit"
+            variant="outlined"
+            className="equipment_register_button"
+          >
+            登録
+          </Button>
         </form>
       )}
     </div>
