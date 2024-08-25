@@ -130,10 +130,14 @@ const Login: React.FC = () => {
       {error && <p>{error}</p>}
 
       <div className="trans_user_regiseter">
-        <Link to="/user_register">新規登録はこちら</Link>
+        <Link to="/user_register" className="tran_button">
+          新規登録はこちら
+        </Link>
       </div>
       <div className="trans_password_change">
-        <Link to="/user_password_change">パスワードを忘れた方はこちら</Link>
+        <Link to="/user_password_change" className="tran_button">
+          パスワードを忘れた方はこちら
+        </Link>
       </div>
     </div>
   );
