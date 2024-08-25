@@ -22,10 +22,10 @@ const Login: React.FC = () => {
     return emailRegex.test(email);
   };
 
-  // const validatePassword = (password: string): boolean => {
-  //   const passwordRegex = /^(?=.[A-Z]|[a-z]|[0-9])(?=.\d)[A-Za-z0-9]{8,}$/;
-  //   return passwordRegex.test(password);
-  // };
+  const validatePassword = (password: string): boolean => {
+    const passwordRegex = /^(?=.*[A-Z]|[a-z])(?=.*\d)[A-Za-z0-9]{8,}$/;
+    return passwordRegex.test(password);
+  };
 
   const handleLogin = async () => {
     setEmailError(null);
@@ -39,12 +39,12 @@ const Login: React.FC = () => {
       valid = false;
     }
 
-    // if (!validatePassword(password)) {
-    //   setPasswordError(
-    //     "パスワードは8文字以上で、少なくとも1つの英字と1つの数字を含める必要があります"
-    //   );
-    //   valid = false;
-    // }
+    if (!validatePassword(password)) {
+      setPasswordError(
+        "パスワードは8文字以上で、少なくとも1つの英字と1つの数字を含める必要があります"
+      );
+      valid = false;
+    }
 
     if (!valid) return;
 
@@ -97,7 +97,7 @@ const Login: React.FC = () => {
         />
       </div>
 
-      {!emailError && <p className="ad_login_required_txt">※必須</p>}
+      {!emailError && <p className="user_login_required_txt">※必須</p>}
 
       <div className="user_login_pass">
         <TextField
@@ -120,7 +120,7 @@ const Login: React.FC = () => {
         />
       </div>
       {!passwordError && (
-        <p className="ad_login_required_txt">※必須（8文字以上 半角英数字）</p>
+        <p className="user_login_required_txt">※必須（8文字以上 半角英数字）</p>
       )}
 
       <Button
