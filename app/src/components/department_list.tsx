@@ -7,6 +7,7 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Button,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
@@ -51,9 +52,16 @@ const DepartmentList = () => {
     );
   };
 
+  const departmentRegister = () => {
+    navigate("/department_register");
+  };
+
   return (
     <div>
       <h1>Department List</h1>
+      <Button onClick={departmentRegister} variant="outlined">
+        学科登録
+      </Button>
       <Paper elevation={0} sx={{ width: "70%", margin: "auto" }}>
         <TableContainer className="tablecontainer">
           <Table aria-label="simple table">
