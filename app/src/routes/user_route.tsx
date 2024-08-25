@@ -11,6 +11,7 @@ import QrReading from "../components/qr_reading";
 import ReturnRequest from "../components/return_request";
 import LendingRequest from "../components/lending_request";
 import ProtectedRoute from "./ProtectedRoute";
+import ReturnInventory from "../components/return_qr_reading";
 
 function UserRoute() {
   return (
@@ -43,14 +44,9 @@ function UserRoute() {
           }
         />
         {/*QR読み込み画面 */}
-        <Route
-          path="/qr_reading"
-          element={
-            <ProtectedRoute>
-              <QrReading />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/qr_reading" element={<QrReading />} />
+        {/*返却用QR読み込み画面 */}
+        <Route path="/return_qr_reading" element={<ReturnInventory />} />
         {/*返却申請画面*/}
         <Route
           path="/return_request"

@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "./header";
+import { TextField, MenuItem } from "@mui/material";
+import Button from "@mui/material/Button";
+import "./equipment_register.css";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
 
 interface Category {
   id: number;
@@ -13,6 +21,8 @@ const EquipmentRegister = () => {
   const [ISBN, setIsbn] = useState("");
   const [name, setName] = useState("");
   const [deadline, setDeadline] = useState<number | null>(null);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [isBook, setIsBook] = useState(false);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -41,7 +51,7 @@ const EquipmentRegister = () => {
     fetchCategories();
   }, []);
 
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
     setcategories_id(value);
   };
@@ -50,7 +60,7 @@ const EquipmentRegister = () => {
     const value = e.target.value;
     setIsbn(value);
   };
-  // isbnから本の名前を取得
+
   const fetchBookName = async (isbn: string) => {
     const url = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`;
     console.log("Request URL:", url);
@@ -79,184 +89,266 @@ const EquipmentRegister = () => {
     setName(e.target.value);
   };
 
-  const handleDeadlineChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleDeadlineChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDeadline(Number(e.target.value));
   };
-  // 本の時の登録用fetch
+
   const handleSubmitForBook = async (e: React.FormEvent) => {
     e.preventDefault();
     if (categories_id === null) {
       alert("カテゴリーを選択してください。");
       return;
     }
-
-    const bookName = await fetchBookName(ISBN);
-    console.log(bookName);
-
-    try {
-      const response = await fetch(
-        "https://mysite-mczi.onrender.com/api/equipment/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ISBN,
-            name: bookName,
-            categories_id,
-            deadline,
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Failed to register equipment: ${errorText}`);
-      }
-
-      const data = await response.json();
-      console.log("Equipment registered successfully:", data);
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
+    setIsBook(true);
+    setOpenDialog(true);
   };
-  // 本以外の登録用fetch
+
   const handleSubmitForOther = async (e: React.FormEvent) => {
     e.preventDefault();
     if (categories_id === null) {
       alert("カテゴリーを選択してください。");
       return;
     }
-    try {
-      console.log(categories_id, name, deadline);
-      const response = await fetch(
-        "https://mysite-mczi.onrender.com/api/equipment/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ISBN: null,
-            name,
-            categories_id,
-            deadline,
-          }),
+    setIsBook(false);
+    setOpenDialog(true);
+  };
+
+  const handleDialogClose = () => {
+    setOpenDialog(false);
+  };
+
+  const handleDialogConfirm = async () => {
+    setOpenDialog(false);
+    if (isBook) {
+      const bookName = await fetchBookName(ISBN);
+      console.log(bookName);
+
+      try {
+        const response = await fetch(
+          "https://mysite-mczi.onrender.com/api/equipment/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              ISBN,
+              name: bookName,
+              categories_id,
+              deadline,
+            }),
+          }
+        );
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Failed to register equipment: ${errorText}`);
         }
-      );
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Failed to register equipment: ${errorText}`);
+        const data = await response.json();
+        console.log("Equipment registered successfully:", data);
+        window.location.href = "/equipment_list?message=登録が成功しました！";
+      } catch (error) {
+        console.error("An error occurred:", error);
+        window.location.href = "/failure?message=登録に失敗しました。";
       }
+    } else {
+      try {
+        console.log(categories_id, name, deadline);
+        const response = await fetch(
+          "https://mysite-mczi.onrender.com/api/equipment/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              ISBN: null,
+              name,
+              categories_id,
+              deadline,
+            }),
+          }
+        );
 
-      const data = await response.json();
-      console.log("Equipment registered successfully:", data);
-      setName("");
-    } catch (error) {
-      console.error("An error occurred:", error);
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Failed to register equipment: ${errorText}`);
+        }
+
+        const data = await response.json();
+        console.log("Equipment registered successfully:", data);
+        setName("");
+        window.location.href = "/equipment_list?message=登録が成功しました！";
+      } catch (error) {
+        console.error("An error occurred:", error);
+        window.location.href = "/equipment_list?message=登録が失敗しました。";
+      }
     }
   };
 
   return (
-    <div>
+    <div id="equipment_register">
       <Header />
-      {categories_id === 1 ? ( // カテゴリーのidが1番が本になっていると仮定してやっているので、実際のカテゴリーidに合わせて変更してください
+      {categories_id === 1 ? (
         <form onSubmit={handleSubmitForBook}>
-          <div>
-            <label htmlFor="category">カテゴリー</label>
-            <select
-              id="category"
+          <div className="register_pulldown">
+            <TextField
+              select
+              label="カテゴリー"
               value={categories_id ?? ""}
               onChange={handleCategoryChange}
+              fullWidth
             >
-              <option value="" disabled>
+              <MenuItem value="" disabled>
                 選択してください
-              </option>
+              </MenuItem>
               {categories.map((category) => (
-                <option key={category.id} value={category.id}>
+                <MenuItem key={category.id} value={category.id}>
                   {category.name}
-                </option>
+                </MenuItem>
               ))}
-            </select>
+            </TextField>
           </div>
-          <div>
-            <label htmlFor="isbn">ISBN</label>
-            <input
+          <div className="equipment_register_text">
+            <TextField
+              label="ISBN"
               type="text"
               id="isbn"
               value={ISBN}
               onChange={handleIsbnChange}
+              fullWidth
             />
           </div>
-          <div>
-            <label htmlFor="deadline">期限</label>
-            <select
-              id="deadline"
+          <div className="register_pulldown">
+            <TextField
+              select
+              label="期限"
               value={deadline ?? ""}
               onChange={handleDeadlineChange}
+              fullWidth
             >
-              <option value="" disabled>
+              <MenuItem value="" disabled>
                 選択してください
-              </option>
-              <option value={31}>1カ月</option>
-              <option value={62}>2カ月</option>
-              <option value={93}>3カ月</option>
-              <option value={186}>6カ月</option>
-              <option value={365}>1年</option>
-            </select>
+              </MenuItem>
+              <MenuItem value={31}>1カ月</MenuItem>
+              <MenuItem value={62}>2カ月</MenuItem>
+              <MenuItem value={93}>3カ月</MenuItem>
+              <MenuItem value={186}>6カ月</MenuItem>
+              <MenuItem value={365}>1年</MenuItem>
+            </TextField>
           </div>
-          <button type="submit">登録</button>
+          <Button
+            type="submit"
+            variant="outlined"
+            className="equipment_register_button"
+          >
+            登録
+          </Button>
         </form>
       ) : (
         <form onSubmit={handleSubmitForOther}>
-          <div>
-            <label htmlFor="category">カテゴリー</label>
-            <select
-              id="category"
+          <div className="register_pulldown">
+            <TextField
+              select
+              label="カテゴリー"
               value={categories_id ?? ""}
               onChange={handleCategoryChange}
+              fullWidth
             >
-              <option value="" disabled>
+              <MenuItem value="" disabled>
                 選択してください
-              </option>
+              </MenuItem>
               {categories.map((category) => (
-                <option key={category.id} value={category.id}>
+                <MenuItem key={category.id} value={category.id}>
                   {category.name}
-                </option>
+                </MenuItem>
               ))}
-            </select>
+            </TextField>
           </div>
-          <div>
-            <label htmlFor="name">名前</label>
-            <input
+          <div className="equipment_register_text">
+            <TextField
+              label="名前"
               type="text"
               id="name"
               value={name}
               onChange={handleNameChange}
+              fullWidth
             />
           </div>
-          <div>
-            <label htmlFor="deadline">期限</label>
-            <select
-              id="deadline"
+          <div className="register_pulldown">
+            <TextField
+              select
+              label="期限"
               value={deadline ?? ""}
               onChange={handleDeadlineChange}
+              fullWidth
+              className="register_pulldown"
             >
-              <option value="" disabled>
+              <MenuItem value="" disabled>
                 選択してください
-              </option>
-              <option value={31}>1カ月</option>
-              <option value={62}>2カ月</option>
-              <option value={93}>3カ月</option>
-              <option value={186}>6カ月</option>
-              <option value={365}>1年</option>
-            </select>
+              </MenuItem>
+              <MenuItem value={31}>1カ月</MenuItem>
+              <MenuItem value={62}>2カ月</MenuItem>
+              <MenuItem value={93}>3カ月</MenuItem>
+              <MenuItem value={186}>6カ月</MenuItem>
+              <MenuItem value={365}>1年</MenuItem>
+            </TextField>
           </div>
-          <button type="submit">登録</button>
+          <Button
+            type="submit"
+            variant="outlined"
+            className="equipment_register_button"
+          >
+            登録
+          </Button>
         </form>
       )}
+      <Dialog
+        open={openDialog}
+        onClose={handleDialogClose}
+        className="equipment_register_popup"
+      >
+        <DialogTitle className="popup_title">
+          入力された項目が正しいか確認してください
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>カテゴリー </DialogContentText>
+          <p className="popup_text">
+            {categories.find((category) => category.id === categories_id)?.name}
+          </p>
+
+          {isBook ? (
+            <>
+              <DialogContentText>ISBN</DialogContentText>
+              <p className="popup_text">{ISBN}</p>
+            </>
+          ) : (
+            <>
+              <DialogContentText>名前</DialogContentText>
+              <p className="popup_text">{name}</p>
+            </>
+          )}
+          <DialogContentText>期限</DialogContentText>
+          <p className="popup_text">{deadline}日</p>
+        </DialogContent>
+        <DialogActions className="popup_button">
+          <Button
+            onClick={handleDialogClose}
+            color="primary"
+            className="popup_equipment_cancel_button"
+          >
+            キャンセル
+          </Button>
+          <Button
+            onClick={handleDialogConfirm}
+            color="primary"
+            className="popup_equipment_register_button"
+          >
+            確認
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
