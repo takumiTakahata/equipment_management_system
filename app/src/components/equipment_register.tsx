@@ -142,7 +142,8 @@ const EquipmentRegister = () => {
 
         if (!response.ok) {
           const errorText = await response.text();
-          throw new Error(`Failed to register equipment: ${errorText}`);
+          // throw new Error(`Failed to register equipment: ${errorText}`);
+          window.location.href = "/equipment_list?message=登録が失敗しました！";
         }
 
         const data = await response.json();
@@ -330,7 +331,19 @@ const EquipmentRegister = () => {
             </>
           )}
           <DialogContentText>期限</DialogContentText>
-          <p className="popup_text">{deadline}日</p>
+          <p className="popup_text">
+            {deadline === 31
+              ? "1カ月"
+              : deadline === 62
+              ? "2カ月"
+              : deadline === 93
+              ? "3カ月"
+              : deadline === 186
+              ? "6カ月"
+              : deadline === 365
+              ? "1年"
+              : `${deadline}日`}
+          </p>
         </DialogContent>
         <DialogActions className="popup_button">
           <Button

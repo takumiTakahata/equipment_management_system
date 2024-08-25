@@ -11,7 +11,7 @@ class TeacherView(APIView):
   def get(self, request, pk=None):
     if pk:
       try:
-        teacher = Teacher.objects.filter(pk=pk, delete_flag=False,admin_flag=True)
+        teacher = Teacher.objects.get(pk=pk, delete_flag=False,admin_flag=True)
         serializer = TeacherSerializer(teacher)
         return Response(serializer.data)
       except Teacher.DoesNotExist:

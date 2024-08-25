@@ -1,0 +1,79 @@
+.student_edit_text {
+  margin-top: 3%;
+  margin-left: 37.5%;
+  width: 25%;
+}
+
+.student_edit_flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.student_edit_title {
+  flex-grow: 1;
+  margin-left: 45%;
+}
+
+.MuiButton-root.student_delete_button {
+  margin-left: auto;
+  width: 10%;
+  background-color: #ff0000;
+  height: 30px;
+  color: white;
+}
+
+.MuiButton-root.student_delete_button:hover {
+  background-color: #ff0000;
+}
+
+.MuiButton-root.student_edit_button {
+  margin-top: 3%;
+  width: 25%;
+  margin-left: 37.5%;
+  background-color: #00d12e;
+  color: white;
+}
+
+.MuiButton-root.student_edit_button:hover {
+  background-color: #00d12e;
+}
+
+.student_edit_popup,
+.student_delete_popup {
+  text-align: center;
+}
+
+.popup_title,
+.popup_text {
+  font-weight: bold;
+}
+
+.MuiDialogActions-root.popup_button {
+  display: flex;
+  justify-content: center;
+}
+
+.MuiButton-root.popup_student_edit_cancel_button,
+.MuiButton-root.popup_student_delete_cancel_button {
+  margin-right: 10%;
+  background-color: #000000;
+  color: white;
+}
+
+.MuiButton-root.popup_student_edit_cancel_button:hover,
+.MuiButton-root.popup_student_delete_cancel_button:hover {
+  background-color: #000000;
+}
+
+.MuiButton-root.popup_student_edit_button,
+.MuiButton-root.popup_student_delete_button {
+  margin-left: 10%;
+  background-color: #00d12e;
+  color: white;
+}
+
+.MuiButton-root.popup_student_edit_button:hover,
+.MuiButton-root.popup_student_delete_button:hover {
+  background-color: #00d12e;
+}

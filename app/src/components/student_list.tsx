@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
 import Header from "./header";
+import { useLocation } from "react-router-dom";
 
 interface Course {
   id: number;
@@ -34,8 +35,16 @@ function StudentList() {
   const [students, setStudents] = useState<Student[]>([]);
   const [courses, setCourses] = useState<Course[]>([]);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const message = params.get("message");
+    if (message) {
+      console.log(message);
+      setTimeout(() => alert(message), 100);
+    }
+
     // 学生情報を取得
     const fetchStudentsAndCourses = async () => {
       try {
