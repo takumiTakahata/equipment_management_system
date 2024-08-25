@@ -7,3 +7,5 @@ from .equipment_serializer import EquipmentSerializer
 from .application_serializer import ApplicationSerializer
 from .student_serializer import UserSerializer
 from .department_serializer import CourseSerializer
+from .inventory_serializer import InventorySerializer
+

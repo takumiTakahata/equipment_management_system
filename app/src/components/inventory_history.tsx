@@ -1,40 +1,78 @@
-import { Button } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from "@mui/material";
 import Header from "./header";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { Accordion } from "@mui/material";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
+
+interface InventoryHistorItem {
+  date: string;
+  lost_property: string[];
+  implementer: string;
+}
 
 function createInventoryHistory(
   date: string,
   lost_property: string[],
   implementer: string
-) {
+): InventoryHistorItem {
   return {
     date,
     lost_property,
     implementer,
   };
 }
-const data: [string, string[], string][] = [
-  ["2021/01/11", ["ITパスポート", "基本情報"], "高橋たろう"],
-  ["2021/03/03", ["基本情報"], "伊藤たろう"],
-  ["2021/12/11", [], "佐々木たろう"],
-];
-
-const rows = data.map((item) => {
-  return createInventoryHistory(...item);
-});
 
 function InventoryHistory() {
+  const [data, setData] = useState<InventoryHistorItem[]>([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchInventory = fetch(
+      "https://mysite-mczi.onrender.com/api/inventory/"
+    ).then((response) => response.json());
+
+    const fetchInventoryList = fetch(
+      "https://mysite-mczi.onrender.com/api/inventory_lists/"
+    ).then((response) => response.json());
+
+    Promise.all([fetchInventory, fetchInventoryList])
+      .then(([inventoryData, inventoryListData]) => {
+        console.log("Inventory Data:", inventoryData);
+        console.log("Inventory List Data:", inventoryListData);
+
+        const mergedData = [
+          ...inventoryListData.map(
+            (item: {
+              day: string;
+              product_names: string[];
+              borrower: string;
+            }) =>
+              createInventoryHistory(
+                item.day,
+                item.product_names,
+                item.borrower
+              )
+          ),
+        ];
+        console.log("Merged Data:", mergedData); // 追加
+        setData(mergedData);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
   const Inventory = () => {
     navigate("/inventory");
   };
@@ -56,8 +94,8 @@ function InventoryHistory() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((item) => (
-              <TableRow>
+            {data.map((item: InventoryHistorItem) => (
+              <TableRow key={item.date}>
                 <TableCell component="th" scope="row">
                   {item.date}
                 </TableCell>
@@ -65,8 +103,10 @@ function InventoryHistory() {
                   {item.lost_property.length > 0 ? (
                     <Accordion>
                       <AccordionSummary>紛失物あり</AccordionSummary>
-                      {item.lost_property.map((content) => (
-                        <AccordionDetails>{content}</AccordionDetails>
+                      {item.lost_property.map((content: string) => (
+                        <AccordionDetails key={content}>
+                          {content}
+                        </AccordionDetails>
                       ))}
                     </Accordion>
                   ) : (

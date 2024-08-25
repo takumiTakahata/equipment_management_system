@@ -9,3 +9,5 @@ from .qr import qr_code_view
 from .application import ApplicationView
 from .history import HistoryView
 from .application import UserApplicationView
+from .inventory_list import InventoryListView
+from .inventory import InventoryView
