@@ -49,13 +49,16 @@ const Login: React.FC = () => {
     if (!valid) return;
 
     try {
-      const response = await fetch("http://localhost:8000/api/admin/login/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+        "https://mysite-mczi.onrender.com/api/admin/login/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();

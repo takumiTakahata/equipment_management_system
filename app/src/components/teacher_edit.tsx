@@ -21,7 +21,9 @@ function TeacherEdit() {
   // 教員情報を取得する関数
   const fetchTeacherData = async (id: string) => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/teacher/${id}/`);
+      const response = await fetch(
+        `https://mysite-mczi.onrender.com/api/teacher/${id}/`
+      );
       if (response.ok) {
         const data = await response.json();
         setTeacherData(data);
@@ -37,7 +39,7 @@ function TeacherEdit() {
   const handleDelete = async () => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/teacher/${teacherId}/`,
+        `https://mysite-mczi.onrender.com/api/teacher/${teacherId}/`,
         {
           method: "DELETE",
         }
@@ -66,7 +68,7 @@ function TeacherEdit() {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/teacher/${teacherId}/`,
+        `https://mysite-mczi.onrender.com/api/teacher/${teacherId}/`,
         {
           method: "PUT",
           headers: {

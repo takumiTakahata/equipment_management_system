@@ -67,12 +67,15 @@ function TeacherTop() {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/history/", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch(
+          "https://mysite-mczi.onrender.com/api/history/",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch history");

@@ -202,7 +202,7 @@ class ApplicationView(APIView):
       key = os.environ.get('GOOGLE_API_KEY')
       url = "https://chat.googleapis.com/v1/spaces/AAAA_qvmoRo/messages?key={key}".format(key=key)
       app_message = {
-          "text": "{name}の貸出申請http://localhost:3000/loan_approval/?id={id}".format(id=id,name=name),
+          "text": "{name}の貸出申請https://mysite-mczi.onrender.com/loan_approval/?id={id}".format(id=id,name=name),
           "thread": {"threadKey": thread_key},
       }
       message_headers = {"Content-Type": "application/json; charset=UTF-8"}
@@ -234,7 +234,7 @@ class ApplicationView(APIView):
       key = os.environ.get('GOOGLE_API_KEY')
       url = "https://chat.googleapis.com/v1/spaces/AAAA_qvmoRo/messages?key={key}".format(key=key)
       app_message = {
-          "text": "{name}の返却申請http://localhost:3000/return_approval/?id={id}".format(id=id,name=name),
+          "text": "{name}の返却申請https://mysite-mczi.onrender.com/return_approval/?id={id}".format(id=id,name=name),
           "thread": {"threadKey": thread_key},
       }
       message_headers = {"Content-Type": "application/json; charset=UTF-8"}
