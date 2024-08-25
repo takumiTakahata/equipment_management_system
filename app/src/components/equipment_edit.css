@@ -34,3 +34,42 @@
 .MuiButton-root.equipment_edit_button:hover {
   background-color: #00d12e;
 }
+
+.equipment_edit_popup,
+.equipment_delete_popup {
+  text-align: center;
+}
+
+.popup_title,
+.popup_text {
+  font-weight: bold;
+}
+
+.MuiDialogActions-root.popup_button {
+  display: flex;
+  justify-content: center;
+}
+
+.MuiButton-root.popup_equipment_edit_cancel_button,
+.MuiButton-root.popup_equipment_delete_cancel_button {
+  margin-right: 10%;
+  background-color: #000000;
+  color: white;
+}
+
+.MuiButton-root.popup_equipment_edit_cancel_button:hover,
+.MuiButton-root.popup_equipment_delete_cancel_button:hover {
+  background-color: #000000;
+}
+
+.MuiButton-root.popup_equipment_edit_button,
+.MuiButton-root.popup_equipment_delete_button {
+  margin-left: 10%;
+  background-color: #00d12e;
+  color: white;
+}
+
+.MuiButton-root.popup_equipment_edit_button:hover,
+.MuiButton-root.popup_equipment_delete_button:hover {
+  background-color: #00d12e;
+}

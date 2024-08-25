@@ -3,6 +3,12 @@ import { useLocation } from "react-router-dom";
 import Header from "./header";
 import { TextField, Button, MenuItem } from "@mui/material";
 import "./equipment_edit.css";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
+
 interface Category {
   id: number;
   name: string;
@@ -24,6 +30,8 @@ const EquipmentEdit = () => {
   const [lost_status, setLostStatus] = useState("false");
   const [deadline, setDeadline] = useState(equipmentDeadline || "");
   const [categories, setCategories] = useState<Category[]>([]);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   useEffect(() => {
     if (equipmentName) {
@@ -121,6 +129,15 @@ const EquipmentEdit = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    setOpenDialog(true);
+  };
+
+  const handleDialogClose = () => {
+    setOpenDialog(false);
+  };
+
+  const handleDialogConfirm = async () => {
+    setOpenDialog(false);
     try {
       const requestBody = {
         name,
@@ -155,13 +172,26 @@ const EquipmentEdit = () => {
     }
   };
 
+  const handleDeleteDialogOpen = () => {
+    setOpenDeleteDialog(true);
+  };
+
+  const handleDeleteDialogClose = () => {
+    setOpenDeleteDialog(false);
+  };
+
+  const handleDeleteDialogConfirm = async () => {
+    setOpenDeleteDialog(false);
+    await handleDelete();
+  };
+
   return (
     <div id="equipment_edit">
       <Header />
       <div className="equipment_edit_flex">
         <h2 className="equipment_edit_title">備品編集</h2>
         <Button
-          onClick={handleDelete}
+          onClick={handleDeleteDialogOpen}
           variant="contained"
           color="secondary"
           className="equipment_delete_button"
@@ -248,6 +278,77 @@ const EquipmentEdit = () => {
           編集
         </Button>
       </form>
+      <Dialog
+        open={openDialog}
+        onClose={handleDialogClose}
+        className="equipment_edit_popup"
+      >
+        <DialogTitle className="popup_title">
+          入力された項目が正しいか確認してください
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>備品名</DialogContentText>
+          <p className="popup_text">{name}</p>
+          <DialogContentText>カテゴリー: </DialogContentText>
+          <p className="popup_text">
+            {
+              categories.find(
+                (category) => category.id === Number(categories_id)
+              )?.name
+            }
+          </p>
+          <DialogContentText>ステータス</DialogContentText>
+          <p className="popup_text">
+            {active_flag === "true" ? "貸出可" : "貸出中"}
+          </p>
+          <DialogContentText>貸出状態</DialogContentText>
+          <p className="popup_text">
+            {lost_status === "false" ? "正常" : "紛失中"}
+          </p>
+          <DialogContentText>返却期限</DialogContentText>
+          <p className="popup_text">{deadline}日</p>
+        </DialogContent>
+        <DialogActions className="popup_button">
+          <Button
+            onClick={handleDialogClose}
+            color="primary"
+            className="popup_equipment_edit_cancel_button"
+          >
+            キャンセル
+          </Button>
+          <Button
+            onClick={handleDialogConfirm}
+            color="primary"
+            className="popup_equipment_edit_button"
+          >
+            確認
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={openDeleteDialog}
+        onClose={handleDeleteDialogClose}
+        className="equipment_delete_popup"
+      >
+        <DialogTitle className="popup_title">削除確認</DialogTitle>
+        <p className="popup_text">本当にこの備品を削除しますか？</p>
+        <DialogActions className="popup_button">
+          <Button
+            onClick={handleDeleteDialogClose}
+            color="primary"
+            className="popup_equipment_delete_cancel_button"
+          >
+            キャンセル
+          </Button>
+          <Button
+            onClick={handleDeleteDialogConfirm}
+            color="secondary"
+            className="popup_equipment_delete_button"
+          >
+            確認
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
