@@ -1,5 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
 
 interface Teacher {
   id: number;
@@ -30,7 +39,27 @@ function TeacherList() {
   return (
     <div>
       <h2>教員一覧</h2>
-      <ul>
+      <Paper elevation={0} sx={{ width: "70%", margin: "auto" }}>
+        <TableContainer className="tablecontainer">
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell className="table_txt">名前</TableCell>
+                <TableCell className="table_txt">メールアドレス</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {teachers.map((teacher) => (
+                <TableRow key={teacher.id}>
+                  <TableCell>{teacher.username}</TableCell>
+                  <TableCell>{teacher.email}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+      {/* <ul>
         {teachers.map((teacher) => (
           <Link
             to={`/teacher_edit/${teacher.id}`}
@@ -43,7 +72,7 @@ function TeacherList() {
             </li>
           </Link>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 }
