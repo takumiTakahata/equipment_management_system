@@ -1,4 +1,5 @@
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import Header from "./header";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -33,11 +34,18 @@ const rows = data.map((item) => {
 });
 
 function InventoryHistory() {
+  const navigate = useNavigate();
+  const Inventory = () => {
+    navigate("/inventory");
+  };
+
   return (
     <div id="iventory_history">
       <Header />
       <h2>棚卸履歴</h2>
-      <Button variant="outlined">棚卸</Button>
+      <Button variant="outlined" onClick={Inventory}>
+        棚卸
+      </Button>
       <TableContainer component={Paper} className="tablecontainer">
         <Table aria-label="simple table">
           <TableHead>
