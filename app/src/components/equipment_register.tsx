@@ -16,12 +16,15 @@ const EquipmentRegister = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/category/", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch(
+          "https://mysite-mczi.onrender.com/api/category/",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch categories");
@@ -90,18 +93,21 @@ const EquipmentRegister = () => {
     console.log(bookName);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/equipment/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ISBN,
-          name: bookName,
-          categories_id,
-          deadline,
-        }),
-      });
+      const response = await fetch(
+        "https://mysite-mczi.onrender.com/api/equipment/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ISBN,
+            name: bookName,
+            categories_id,
+            deadline,
+          }),
+        }
+      );
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -123,18 +129,21 @@ const EquipmentRegister = () => {
     }
     try {
       console.log(categories_id, name, deadline);
-      const response = await fetch("http://127.0.0.1:8000/api/equipment/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ISBN: null,
-          name,
-          categories_id,
-          deadline,
-        }),
-      });
+      const response = await fetch(
+        "https://mysite-mczi.onrender.com/api/equipment/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ISBN: null,
+            name,
+            categories_id,
+            deadline,
+          }),
+        }
+      );
 
       if (!response.ok) {
         const errorText = await response.text();

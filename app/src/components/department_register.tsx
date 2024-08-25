@@ -44,17 +44,20 @@ function DepartmentRegister() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/department/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: departmentName,
-          course_year: years,
-          delete_flag: false,
-        }),
-      });
+      const response = await fetch(
+        "https://mysite-mczi.onrender.com/api/department/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: departmentName,
+            course_year: years,
+            delete_flag: false,
+          }),
+        }
+      );
 
       if (!response.ok) {
         const errorText = await response.text();
