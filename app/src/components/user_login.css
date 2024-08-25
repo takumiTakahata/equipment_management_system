@@ -1,5 +1,6 @@
 #user_login {
   text-align: center;
+  font-family: "Roboto", sans-serif;
 }
 #user_login .page_title {
   margin-top: 20%;
@@ -25,4 +26,14 @@
   margin-top: 5%;
   background-color: #627cff;
   color: white;
+}
+
+#user_login .trans_user_regiseter,
+#user_login .trans_password_change {
+  margin-top: 10%;
+}
+#user_login .tran_button {
+  font-size: 20px;
+  text-decoration: none;
+  color: #5987ff;
 }
