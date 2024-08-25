@@ -62,7 +62,6 @@ const CategoryList = () => {
 
   return (
     <div>
-      <h1>Category List</h1>
       <Header />
       <Button variant="outlined" onClick={categoryRegister}>
         カテゴリー登録
