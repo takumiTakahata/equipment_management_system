@@ -10,29 +10,61 @@ import UserRegister from "../components/user_register";
 import QrReading from "../components/qr_reading";
 import ReturnRequest from "../components/return_request";
 import LendingRequest from "../components/lending_request";
+import ProtectedRoute from "./ProtectedRoute";
+import ReturnInventory from "../components/return_qr_reading";
 
 function UserRoute() {
   return (
     <div>
       <Routes>
-        {/* ユーザー登録画面*/}
-        <Route path="/user_register" element={<UserRegister />} />
         {/* ユーザーログイン画面*/}
         <Route path="/user_login" element={<UserLogin />} />
+        {/* ユーザー登録画面*/}
+        <Route path="/user_register" element={<UserRegister />} />
         {/*ユーザーパスワード変更メール送信画面 */}
         <Route path="/user_password_reset" element={<UserPasswordReset />} />
         {/*ユーザーパスワード変更画面 */}
         <Route path="/user_password_change" element={<UserPasswordChange />} />
         {/*備品一覧*/}
-        <Route path="/product_list" element={<ProductList />} />
+        <Route
+          path="/product_list"
+          element={
+            <ProtectedRoute>
+              <ProductList />
+            </ProtectedRoute>
+          }
+        />
         {/* ユーザートップ画面 */}
-        <Route path="/user_top" element={<UserTop />} />
+        <Route
+          path="/user_top"
+          element={
+            <ProtectedRoute>
+              <UserTop />
+            </ProtectedRoute>
+          }
+        />
         {/*QR読み込み画面 */}
         <Route path="/qr_reading" element={<QrReading />} />
+        {/*返却用QR読み込み画面 */}
+        <Route path="/return_qr_reading" element={<ReturnInventory />} />
         {/*返却申請画面*/}
-        <Route path="/return_request" element={<ReturnRequest />} />
+        <Route
+          path="/return_request"
+          element={
+            <ProtectedRoute>
+              <ReturnRequest />
+            </ProtectedRoute>
+          }
+        />
         {/*貸出申請画面*/}
-        <Route path="/lending_request" element={<LendingRequest />} />
+        <Route
+          path="/lending_request"
+          element={
+            <ProtectedRoute>
+              <LendingRequest />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </div>
   );

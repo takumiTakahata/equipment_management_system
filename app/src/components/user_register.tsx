@@ -21,6 +21,7 @@ import "./user_register.css";
 interface Department {
   id: string;
   name: string;
+  course_year: string;
 }
 interface FormInputs {
   username: string;
@@ -48,25 +49,62 @@ function UserRegister() {
   const [course_id, setCourseId] = React.useState("");
   const [selectedCourseName, setSelectedCourseName] = useState("");
   const [selectedSchoolYear, setSelectedSchoolYear] = useState("");
+  const [selectedDepartment, setSelectedDepartment] =
+    useState<Department | null>(null);
+  const [schoolYears, setSchoolYears] = useState<string[]>([]);
   const navigate = useNavigate();
 
   // 学科情報を取得する
   useEffect(() => {
-    fetch("https://mysite-mczi.onrender.com/api/department/")
-      .then((response) => response.json())
-      .then((data) => {
+    const fetchDepartments = async () => {
+      try {
+        const response = await fetch(
+          "https://mysite-mczi.onrender.com/api/department/",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch departments");
+        }
+
+        const data = await response.json();
         setDepartments(data);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
+      } catch (error) {
+        console.error("An error occurred while fetching departments", error);
+      }
+    };
+
+    fetchDepartments();
   }, []);
 
   const handleCourseChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCourseId(event.target.value);
+    const selectedCourseId = event.target.value;
+    const selectedDepartment = departments.find(
+      (department) => department.id === selectedCourseId
+    );
+    setSelectedDepartment(selectedDepartment || null);
+
+    // 選択された学科に応じて学年の選択肢を更新する
+    if (selectedDepartment) {
+      const years = Array.from(
+        { length: parseInt(selectedDepartment.course_year, 10) },
+        (_, i) => `${i + 1}年`
+      );
+      setSchoolYears(years);
+    } else {
+      setSchoolYears([]);
+    }
   };
+
   const handleSchoolYearChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setSchoolYear(event.target.value);
+    setSelectedSchoolYear(event.target.value);
   };
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const {
@@ -279,12 +317,16 @@ function UserRegister() {
                 label="学科"
                 className="curse_input_text"
                 variant="outlined"
+                value={selectedDepartment ? selectedDepartment.id : ""}
                 {...register("course_id", {
                   required: "学科を選択してください",
                 })}
+                onChange={handleCourseChange}
               >
-                {departments.map((department: any) => (
-                  <MenuItem value={department.id}>{department.name}</MenuItem>
+                {departments.map((department) => (
+                  <MenuItem key={department.id} value={department.id}>
+                    {department.name}
+                  </MenuItem>
                 ))}
               </TextField>
             </div>
@@ -298,14 +340,17 @@ function UserRegister() {
                 label="学年"
                 className="school_year_input_text"
                 variant="outlined"
+                value={selectedSchoolYear}
                 {...register("school_year", {
                   required: "学年を選択してください",
                 })}
+                onChange={handleSchoolYearChange}
               >
-                <MenuItem value="1">1年</MenuItem>
-                <MenuItem value="2">2年</MenuItem>
-                <MenuItem value="3">3年</MenuItem>
-                <MenuItem value="4">4年</MenuItem>
+                {schoolYears.map((year) => (
+                  <MenuItem key={year} value={year}>
+                    {year}
+                  </MenuItem>
+                ))}
               </TextField>
             </div>
           </div>

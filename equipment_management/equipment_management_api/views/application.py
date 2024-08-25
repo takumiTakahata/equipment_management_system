@@ -10,6 +10,42 @@ from httplib2 import Http
 from datetime import datetime, timedelta
 from ..models import User,Product,Course
 
+class UserApplicationView(APIView):
+    def get(self, request,user_id):
+        print('通過')
+        # Userからデータを取得
+        try:
+            user = User.objects.get(id=user_id)
+        except User.DoesNotExist:
+            return Response({'error': 'User not found'}, status=404)
+        
+        username = user.username
+
+        # 追加のApplicationデータを取得する条件をチェック
+        additional_applications = Application.objects.filter(
+            user_id=user_id,
+            return_date__isnull=True,
+            return_authorizer_id__isnull=True,
+            loan_date__isnull=False
+        ).values('product_id', 'deadline')
+
+        additional_data = []
+        for app in additional_applications:
+            product_id = app['product_id']
+            deadline = app['deadline']
+            try:
+                product = Product.objects.get(id=product_id)
+                product_name = product.name
+            except Product.DoesNotExist:
+                product_name = 'Unknown'
+            
+            additional_data.append({
+                'username': username,
+                'product_name': product_name,
+                'deadline': deadline
+            })
+
+        return Response(additional_data)
 class ApplicationView(APIView):
     # GETの時の一覧表示処理
     def get(self, request):
@@ -161,39 +197,50 @@ class ApplicationView(APIView):
           return Response({"application_ids": application_ids}, status=status.HTTP_200_OK)
     
     def put(self, request, pk=None):
-      if pk is None:
-          pk = request.data.get("pk")
-          if pk is None:
-              return Response({"error": "pk is required"}, status=status.HTTP_400_BAD_REQUEST)
+        if pk is None:
+            pk = request.data.get("pk")
+            if pk is None:
+                return Response({"error": "pk is required"}, status=status.HTTP_400_BAD_REQUEST)
 
-      thread_key = request.data.get("thread_key")
-      if thread_key is None:
-          return Response({"error": "thread_key is required"}, status=status.HTTP_400_BAD_REQUEST)
+        thread_key = request.data.get("thread_key")
+        if thread_key is None:
+            return Response({"error": "thread_key is required"}, status=status.HTTP_400_BAD_REQUEST)
 
-      try:
-          application = Application.objects.get(pk=pk)
-      except Application.DoesNotExist:
-          return Response({"error": "Application not found"}, status=status.HTTP_404_NOT_FOUND)
+        try:
+            application = Application.objects.get(pk=pk)
+        except Application.DoesNotExist:
+            return Response({"error": "Application not found"}, status=status.HTTP_404_NOT_FOUND)
 
-      user_id = request.data.get("user_id")
-      if not user_id:
-          return Response({"error": "user_id is required"}, status=status.HTTP_400_BAD_REQUEST)
+        user_id = request.data.get("user_id")
+        if not user_id:
+            return Response({"error": "user_id is required"}, status=status.HTTP_400_BAD_REQUEST)
 
-      action = request.data.get("action")
-      if action == "loan":
-          application.loan_authorizer_id = user_id
-          application.loan_date = datetime.now().date()
-          application.save()
-          self.send_loan_approvalmessage_to_google_chat(thread_key)
-          return Response({"message": "Application updated successfully for loan"}, status=status.HTTP_200_OK)
-      elif action == "return":
-          application.return_authorizer_id = user_id
-          application.return_date = datetime.now().date()
-          application.save()
-          self.send_return_approvalmessage_to_google_chat(thread_key)
-          return Response({"message": "Application updated successfully for return"}, status=status.HTTP_200_OK)
-      else:
-          return Response({"error": "Invalid action"}, status=status.HTTP_400_BAD_REQUEST)
+        action = request.data.get("action")
+        product_id = application.product_id  # applicationからproduct_idを取得
+
+        try:
+            product = Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        if action == "loan":
+            application.loan_authorizer_id = user_id
+            application.loan_date = datetime.now().date()
+            product.active_flag = False  # active_flagをFalseに設定
+            application.save()
+            product.save()
+            self.send_loan_approvalmessage_to_google_chat(thread_key)
+            return Response({"message": "Application updated successfully for loan"}, status=status.HTTP_200_OK)
+        elif action == "return":
+            application.return_authorizer_id = user_id
+            application.return_date = datetime.now().date()
+            product.active_flag = True  # active_flagをTrueに設定
+            application.save()
+            product.save()
+            self.send_return_approvalmessage_to_google_chat(thread_key)
+            return Response({"message": "Application updated successfully for return"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"error": "Invalid action"}, status=status.HTTP_400_BAD_REQUEST)
 
     def generate_thread_key(self):
         return str(uuid.uuid4())
@@ -202,7 +249,7 @@ class ApplicationView(APIView):
       key = os.environ.get('GOOGLE_API_KEY')
       url = "https://chat.googleapis.com/v1/spaces/AAAA_qvmoRo/messages?key={key}".format(key=key)
       app_message = {
-          "text": "{name}の貸出申請https://mysite-mczi.onrender.com/loan_approval/?id={id}".format(id=id,name=name),
+          "text": "{name}の貸出申請https://equipment-management-app.vercel.app/loan_approval/?id={id}".format(id=id,name=name),
           "thread": {"threadKey": thread_key},
       }
       message_headers = {"Content-Type": "application/json; charset=UTF-8"}
@@ -234,7 +281,7 @@ class ApplicationView(APIView):
       key = os.environ.get('GOOGLE_API_KEY')
       url = "https://chat.googleapis.com/v1/spaces/AAAA_qvmoRo/messages?key={key}".format(key=key)
       app_message = {
-          "text": "{name}の返却申請https://mysite-mczi.onrender.com/return_approval/?id={id}".format(id=id,name=name),
+          "text": "{name}の返却申請https://equipment-management-app.vercel.app/return_approval/?id={id}".format(id=id,name=name),
           "thread": {"threadKey": thread_key},
       }
       message_headers = {"Content-Type": "application/json; charset=UTF-8"}
