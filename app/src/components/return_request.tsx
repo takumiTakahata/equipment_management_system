@@ -121,6 +121,14 @@ function ReturnRequest() {
     );
   }
 
+  const handleClose = () => {
+    localStorage.removeItem("qrresult");
+    navigate("/user_top");
+  };
+  const continueReading = () => {
+    navigate("/qr_reading");
+  };
+
   return (
     <div id="return_request">
       <p className="title">
@@ -156,12 +164,21 @@ function ReturnRequest() {
         </Button>
       </div>
       <div className="button">
-        <Button className="continue_button" variant="contained" color="primary">
+        <Button
+          className="continue_button"
+          variant="contained"
+          color="primary"
+          onClick={continueReading}
+        >
           続けて読み込む
         </Button>
       </div>
       <div className="button">
-        <Button className="cancel_button" variant="contained">
+        <Button
+          className="cancel_button"
+          variant="contained"
+          onClick={handleClose}
+        >
           キャンセル
         </Button>
       </div>
