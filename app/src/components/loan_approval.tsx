@@ -32,7 +32,7 @@ function LoanApproval() {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/loan_approval/?id=${id}`,
+        `https://mysite-mczi.onrender.com/api/loan_approval/?id=${id}`,
         {
           method: "GET",
           headers: {
@@ -93,7 +93,7 @@ function LoanApproval() {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/application/${applicationId}/`,
+        `https://mysite-mczi.onrender.com/api/application/${applicationId}/`,
         {
           method: "PUT",
           headers: {
