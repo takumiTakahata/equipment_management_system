@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from datetime import timedelta
 
-load_dotenv('.env')
+# load_dotenv('.env')
 
 """
 Django settings for equipment_mana''gement project.
@@ -100,7 +100,6 @@ DATABASES = {
         "PORT": os.getenv('SUPABASE_PORT'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

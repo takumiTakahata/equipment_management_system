@@ -22,10 +22,10 @@ const Login: React.FC = () => {
     return emailRegex.test(email);
   };
 
-  const validatePassword = (password: string): boolean => {
-    const passwordRegex = /^(?=.[A-Z]|[a-z]|[0-9])(?=.\d)[A-Za-z0-9]{8,}$/;
-    return passwordRegex.test(password);
-  };
+  // const validatePassword = (password: string): boolean => {
+  //   const passwordRegex = /^(?=.[A-Z]|[a-z]|[0-9])(?=.\d)[A-Za-z0-9]{8,}$/;
+  //   return passwordRegex.test(password);
+  // };
 
   const handleLogin = async () => {
     setEmailError(null);
@@ -39,23 +39,26 @@ const Login: React.FC = () => {
       valid = false;
     }
 
-    if (!validatePassword(password)) {
-      setPasswordError(
-        "パスワードは8文字以上で、少なくとも1つの英字と1つの数字を含める必要があります"
-      );
-      valid = false;
-    }
+    // if (!validatePassword(password)) {
+    //   setPasswordError(
+    //     "パスワードは8文字以上で、少なくとも1つの英字と1つの数字を含める必要があります"
+    //   );
+    //   valid = false;
+    // }
 
     if (!valid) return;
 
     try {
-      const response = await fetch("http://localhost:8000/api/user/login/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+        "https://mysite-mczi.onrender.com/api/user/login/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
