@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import {
   Table,
   TableBody,
@@ -9,6 +8,7 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 interface Teacher {
   id: number;
@@ -18,6 +18,7 @@ interface Teacher {
 
 function TeacherList() {
   const [teachers, setTeachers] = useState<Teacher[]>([]);
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchTeachers = async () => {
       try {
@@ -36,6 +37,10 @@ function TeacherList() {
     fetchTeachers();
   }, []);
 
+  const handleRowClick = (teacher: Teacher) => {
+    navigate(`/teacher_edit/${teacher.id}`);
+  };
+
   return (
     <div>
       <h2>教員一覧</h2>
@@ -50,7 +55,10 @@ function TeacherList() {
             </TableHead>
             <TableBody>
               {teachers.map((teacher) => (
-                <TableRow key={teacher.id}>
+                <TableRow
+                  key={teacher.id}
+                  onClick={() => handleRowClick(teacher)}
+                >
                   <TableCell>{teacher.username}</TableCell>
                   <TableCell>{teacher.email}</TableCell>
                 </TableRow>
@@ -59,20 +67,6 @@ function TeacherList() {
           </Table>
         </TableContainer>
       </Paper>
-      {/* <ul>
-        {teachers.map((teacher) => (
-          <Link
-            to={`/teacher_edit/${teacher.id}`}
-            key={teacher.id}
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <li>
-              <div>ユーザー名: {teacher.username}</div>
-              <div>メールアドレス: {teacher.email}</div>
-            </li>
-          </Link>
-        ))}
-      </ul> */}
     </div>
   );
 }
