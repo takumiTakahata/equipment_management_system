@@ -54,6 +54,9 @@ function EquipmentList() {
   const [currentPage, setCurrentPage] = useState(1); //currentPageが現在のページ番号
   const navigate = useNavigate();
 
+  const equipmentRegister = () => {
+    navigate("/equipment_register");
+  };
   useEffect(() => {
     const fetchEquipment = async () => {
       try {
@@ -272,7 +275,9 @@ function EquipmentList() {
       <Button variant="outlined" onClick={handleSearch}>
         検索
       </Button>
-      <Button variant="outlined">備品登録</Button>
+      <Button variant="outlined" onClick={equipmentRegister}>
+        備品登録
+      </Button>
       <Button variant="outlined">すべて選択</Button>
       <Paper elevation={0} sx={{ width: "70%", margin: "auto" }}>
         <TableContainer className="tablecontainer">
