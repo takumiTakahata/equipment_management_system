@@ -108,7 +108,7 @@ function UserRegister() {
 
   const studentRegister = () => {
     FetchRegister(username, email, password, course_id, school_year);
-    navigate("/user_top");
+    navigate("/user_login");
   };
 
   async function FetchRegister(
