@@ -17,6 +17,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import "./user_register.css";
+import { School } from "@mui/icons-material";
 
 interface Department {
   id: string;
@@ -45,13 +46,13 @@ function UserRegister() {
   const [username, setName] = React.useState("");
   const [email, setMail] = React.useState("");
   const [departments, setDepartments] = useState<Department[]>([]);
-  const [school_year, setSchoolYear] = React.useState("");
+  const [school_year, setSchoolYear] = React.useState(0);
   const [course_id, setCourseId] = React.useState("");
   const [selectedCourseName, setSelectedCourseName] = useState("");
   const [selectedSchoolYear, setSelectedSchoolYear] = useState("");
   const [selectedDepartment, setSelectedDepartment] =
     useState<Department | null>(null);
-  const [schoolYears, setSchoolYears] = useState<string[]>([]);
+  const [schoolYears, setSchoolYears] = useState<number[]>([]);
   const navigate = useNavigate();
 
   // 学科情報を取得する
@@ -93,7 +94,7 @@ function UserRegister() {
     if (selectedDepartment) {
       const years = Array.from(
         { length: parseInt(selectedDepartment.course_year, 10) },
-        (_, i) => `${i + 1}年`
+        (_, i) => i + 1
       );
       setSchoolYears(years);
     } else {
@@ -124,16 +125,10 @@ function UserRegister() {
     setMail(data.email);
     setSelectedCourseName(selectedDepartment ? selectedDepartment.name : "");
     setSelectedSchoolYear(data.school_year);
-    FetchRegister(
-      data.username,
-      data.email,
-      data.password,
-      data.course_id,
-      data.school_year
-    );
+    setSchoolYear(Number(data.school_year));
+    setCourseId(data.course_id);
   };
   const onError = (errors: Object) => {
-    console.log(errors);
     if (Object.keys(errors).length > 0) {
       setErrorFlg(true);
     } else {
@@ -154,7 +149,7 @@ function UserRegister() {
     email: string,
     password: string,
     course_id: string,
-    school_year: string
+    school_year: number
   ): Promise<void> {
     try {
       const response = await fetch(
@@ -169,13 +164,12 @@ function UserRegister() {
             email,
             password,
             course_id,
-            school_year,
+            school_year: school_year,
           }),
         }
       );
 
       const data = await response.json();
-      console.log(data);
     } catch (error) {
       console.error("Login error:", error);
     }
