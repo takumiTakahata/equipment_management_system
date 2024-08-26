@@ -62,8 +62,8 @@ const DepartmentList = () => {
 
   return (
     <div>
-      <h1>Department List</h1>
       <Header />
+      <h1>Department List</h1>
       <Button onClick={departmentRegister} variant="outlined">
         学科登録
       </Button>

@@ -45,8 +45,8 @@ const CategoryEdit = () => {
 
   return (
     <div>
-      <h2>カテゴリー編集</h2>
       <Header />
+      <h2>カテゴリー編集</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label>名前: </label>
