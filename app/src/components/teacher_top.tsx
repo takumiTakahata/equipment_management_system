@@ -140,7 +140,7 @@ function TeacherTop() {
             {currentItems.map((item) => (
               <TableRow key={`${item.loan_date}-${item.product_id}`}>
                 <TableCell>
-                  {item.loan_date ? (
+                  {item.return_date ? (
                     <div className="red_circle">済</div>
                   ) : (
                     <div className="green_circle">未</div>
