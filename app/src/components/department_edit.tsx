@@ -74,8 +74,8 @@ const DepartmentEdit = () => {
 
   return (
     <div>
-      <h2>学科編集</h2>
       <Header />
+      <h2>学科編集</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label>学科名: </label>
