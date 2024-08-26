@@ -60,6 +60,7 @@ const Inventory: FC<Props> = () => {
 
   const handleCancel = () => {
     localStorage.removeItem("qrresult");
+    navigate("/inventory_history");
   };
 
   const continueRead = () => {

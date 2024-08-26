@@ -10,6 +10,7 @@ import Header from "./header";
 import "./no_list.css";
 import { useEffect, useState } from "react";
 import { jwtDecode, JwtPayload } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 function createNoList(id: number, name: string, deadline: string) {
   return {
@@ -35,6 +36,7 @@ const NoList = () => {
   const [rows, setRows] = useState<ReturnType<typeof createNoList>[]>([]);
   const [id, setId] = useState<number[]>([]);
   const [missingIds, setMissingIds] = useState<number[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetch_equipment_id = async () => {
@@ -193,6 +195,7 @@ const NoList = () => {
         throw new Error("Failed to update inventory");
       }
       console.log("Inventory updated successfully");
+      navigate("/inventory_history");
     } catch (error) {
       console.error(
         "An error occurred while updating missing ids or inventory",
