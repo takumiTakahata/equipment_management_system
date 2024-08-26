@@ -43,6 +43,14 @@ function Header() {
     navigate(path);
   };
 
+  const logOut = () => {
+    // ローカルストレージからトークンを削除
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    // 指定されたパスにリダイレクト
+    navigate("/admin_login");
+  };
+
   return (
     <div id="header">
       <Toolbar className="toolbar">
@@ -90,7 +98,7 @@ function Header() {
           <p className="header_text">カテゴリー管理</p>
         </div>
 
-        <div className="logout">
+        <div className="logout" onClick={logOut}>
           <LogoutIcon /> {/* ログアウトのicon */}
           <p className="header_text">ログアウト</p>
         </div>

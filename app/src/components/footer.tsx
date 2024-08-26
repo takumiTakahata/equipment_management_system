@@ -27,7 +27,10 @@ export default function Footer() {
     navigate("/user_top");
   };
   const logOut = () => {
-    navigate("");
+    // ローカルストレージからトークンを削除
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    navigate("/user_login");
   };
   return (
     <div>
