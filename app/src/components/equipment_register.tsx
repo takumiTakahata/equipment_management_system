@@ -62,7 +62,7 @@ const EquipmentRegister = () => {
   };
 
   const fetchBookName = async (isbn: string) => {
-    const url = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`;
+    const url = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}&key=AIzaSyCgBnAp52sYqD5-AerkzyRci_Tg3_S9JVk`;
     console.log("Request URL:", url);
 
     try {
