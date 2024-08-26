@@ -89,6 +89,7 @@ function LendingRequest() {
           })
         );
         setProducts(productDetails);
+        navigate("/user_top");
       } catch (error) {
         console.error("Failed to fetch product details:", error);
       }
