@@ -21,6 +21,7 @@ interface LoanApprovalData {
 
 function ReturnApproval() {
   const [loanData, setLoanData] = useState<LoanApprovalData | null>(null);
+  const navigate = useNavigate();
 
   const fetchLoanApproval = async () => {
     const urlParams = new URLSearchParams(window.location.search);
