@@ -4,6 +4,7 @@ import "../components/loan_approval.css";
 import Header from "./header";
 import { jwtDecode, JwtPayload } from "jwt-decode";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface LoanApprovalData {
   application_id: string;
@@ -20,6 +21,7 @@ interface LoanApprovalData {
 
 function ReturnApproval() {
   const [loanData, setLoanData] = useState<LoanApprovalData | null>(null);
+  const navigate = useNavigate();
 
   const fetchLoanApproval = async () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -115,6 +117,7 @@ function ReturnApproval() {
 
       const data = await response.json();
       console.log("Approval successful:", data);
+      navigate("/teacher_top");
     } catch (error) {
       console.error("Approval request failed:", error);
     }
