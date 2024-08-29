@@ -52,6 +52,7 @@ const handleLendingRequest = async () => {
 
     const data = await response.json();
     localStorage.removeItem("qrresult");
+    window.location.href = "/user_top";
   } catch (error) {
     console.error("Lending request failed:", error);
   }
@@ -88,7 +89,6 @@ function ReturnRequest() {
           })
         );
         setProducts(productDetails);
-        navigate("/user_top");
       } catch (error) {
         console.error("Failed to fetch product details:", error);
       }
