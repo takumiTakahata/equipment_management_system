@@ -53,6 +53,7 @@ const handleLendingRequest = async () => {
 
     const data = await response.json();
     localStorage.removeItem("qrresult");
+    window.location.href = "/user_top";
   } catch (error) {
     console.error("Lending request failed:", error);
   }
@@ -71,7 +72,6 @@ function LendingRequest() {
     const fetchProducts = async () => {
       const qrResult = JSON.parse(localStorage.getItem("qrresult") || "[]");
       const userId = getUserIdFromToken();
-
       try {
         const productDetails = await Promise.all(
           qrResult.map(async (id: number) => {
@@ -89,7 +89,6 @@ function LendingRequest() {
           })
         );
         setProducts(productDetails);
-        navigate("/user_top");
       } catch (error) {
         console.error("Failed to fetch product details:", error);
       }
@@ -97,6 +96,7 @@ function LendingRequest() {
 
     fetchProducts();
   }, []);
+
   function renderRow(props: ListChildComponentProps) {
     const { index, style } = props;
     const item = data[index];
