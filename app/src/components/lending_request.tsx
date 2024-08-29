@@ -53,6 +53,7 @@ const handleLendingRequest = async () => {
 
     const data = await response.json();
     localStorage.removeItem("qrresult");
+    console.log("貸出完了");
     window.location.href = "/user_top";
   } catch (error) {
     console.error("Lending request failed:", error);
