@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Header from "./header";
 import { TextField, MenuItem } from "@mui/material";
 import Button from "@mui/material/Button";
@@ -61,24 +60,18 @@ const EquipmentRegister = () => {
     setIsbn(value);
   };
 
-  const fetchBookName = async (isbn: string) => {
-    const url = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}&key=AIzaSyCgBnAp52sYqD5-AerkzyRci_Tg3_S9JVk`;
-    console.log("Request URL:", url);
+  const fetchBookName = async (isbn: number) => {
+    const url = `https://mysite-mczi.onrender.com/api/book/${isbn}/`;
 
     try {
-      const response = await axios.get(url);
-      console.log("Response data:", response.data);
-      if (response.data.totalItems === 0) {
-        throw new Error("本が見つかりませんでした");
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log("Response data:", data);
+      if (data.error) {
+        throw new Error(data.error);
       }
-      const bookData = response.data.items[0].volumeInfo;
-      console.log(bookData);
-      console.log(bookData.title);
-      if (bookData && bookData.title) {
-        return bookData.title;
-      } else {
-        throw new Error("本が見つかりませんでした");
-      }
+
+      return data;
     } catch (error) {
       console.error("APIリクエスト中にエラーが発生しました:", error);
       return "エラーが発生しました";
@@ -120,8 +113,9 @@ const EquipmentRegister = () => {
   const handleDialogConfirm = async () => {
     setOpenDialog(false);
     if (isBook) {
-      const bookName = await fetchBookName(ISBN);
-      console.log(bookName);
+      const isbn = Number(ISBN);
+      const bookName = await fetchBookName(isbn);
+      console.log(bookName.title);
 
       try {
         const response = await fetch(
@@ -133,7 +127,7 @@ const EquipmentRegister = () => {
             },
             body: JSON.stringify({
               ISBN,
-              name: bookName,
+              name: bookName.title,
               categories_id,
               deadline,
             }),
@@ -142,7 +136,6 @@ const EquipmentRegister = () => {
 
         if (!response.ok) {
           const errorText = await response.text();
-          // throw new Error(`Failed to register equipment: ${errorText}`);
           window.location.href = "/equipment_list?message=登録が失敗しました！";
         }
 
