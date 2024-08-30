@@ -63,6 +63,17 @@
   align-items: center;
   justify-content: center;
 }
+#product_list .red_circle {
+  margin-left: 8%;
+  display: flex;
+  width: 75px;
+  height: 75px;
+  background-color: #ed6666;
+  border-radius: 50%;
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+}
 #product_list .limit {
   text-align: left;
   margin-left: 2%;

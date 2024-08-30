@@ -48,8 +48,8 @@ function renderRow({ index, style, data }: ListChildComponentProps) {
           <p className="name">{equipment.name}</p>
           <p className="limit">貸出期限:{formatDeadline(equipment.deadline)}</p>
         </div>
-        <div className="green_circle">
-          <p>{equipment.active_flag ? "貸出可" : "貸出不可"}</p>
+        <div className={equipment.active_flag ? "green_circle" : "red_circle"}>
+          <p>{equipment.active_flag ? "貸出可" : "貸出中"}</p>
         </div>
       </ListItemButton>
     </ListItem>
