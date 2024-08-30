@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import UserLoginView,AdminLoginView,CategoryView,TeacherView,StudentView,DepartmentView,EquipmentView,qr_code_view,ApplicationView,HistoryView,UserApplicationView,InventoryView,InventoryListView
+from .views import UserLoginView,AdminLoginView,CategoryView,TeacherView,StudentView,DepartmentView,EquipmentView,qr_code_view,ApplicationView,HistoryView,UserApplicationView,InventoryView,InventoryListView,BookView
 
 router = DefaultRouter()
 # router.register(r'users', views.UserViewSet)
@@ -28,4 +28,5 @@ urlpatterns = [
     path('history/', HistoryView.as_view()),
     path('inventory/', InventoryView.as_view()),
     path('inventory_lists/', InventoryListView.as_view()),
+    path('book/<int:isbn>/', BookView.as_view()),
 ]
