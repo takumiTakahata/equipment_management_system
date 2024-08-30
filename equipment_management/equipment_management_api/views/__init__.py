@@ -11,3 +11,4 @@ from .history import HistoryView
 from .application import UserApplicationView
 from .inventory_list import InventoryListView
 from .inventory import InventoryView
+from .book import BookView

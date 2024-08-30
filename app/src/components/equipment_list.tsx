@@ -63,8 +63,7 @@ function EquipmentList() {
     const params = new URLSearchParams(location.search);
     const message = params.get("message");
     if (message) {
-      console.log(message);
-      setTimeout(() => alert(message), 100);
+      alert(message);
     }
     const fetchEquipment = async () => {
       try {
