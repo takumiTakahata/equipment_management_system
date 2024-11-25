@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-class BookAPIView:
+class BookView:
     def get(self, request, isbn):
         if not isbn:
             return JsonResponse({'error': 'ISBNが提供されていません'}, status=400)
