@@ -16,6 +16,7 @@ interface Equipment {
   categories_id: number; // カテゴリーID
   name: string; // 備品名
   deadline: string; // 返却期限
+  lost_status: boolean;
   active_flag: boolean; // アクティブフラグ
 }
 
@@ -40,6 +41,9 @@ function formatDeadline(deadline: string | number): string {
 function renderRow({ index, style, data }: ListChildComponentProps) {
   const equipment = data[index];
 
+  if (equipment.lost_status) {
+    return null;
+  }
   return (
     <ListItem style={style} key={index} component="div" disablePadding>
       <ListItemButton className="list_button">
